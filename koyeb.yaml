@@ -4,7 +4,7 @@ definition:
   docker:
     dockerfile: rag-service/Dockerfile
     context: rag-service
-  instance_type: nano
+  instance_type: small
   regions:
     - par
   ports:
