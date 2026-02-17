@@ -15,19 +15,28 @@ export class ChatService {
       'RAG_SERVICE_URL',
       'http://localhost:8000',
     );
+    console.log(`ChatService initialized with RAG_SERVICE_URL: ${this.ragServiceUrl}`);
   }
 
   async chat(message: string): Promise<string> {
+    const url = `${this.ragServiceUrl}/chat`;
+    console.log(`Forwarding chat request to: ${url}`);
     try {
       const response = await firstValueFrom(
         this.httpService.post<{ reply: string }>(
-          `${this.ragServiceUrl}/chat`,
+          url,
           { message },
           { timeout: 30000 },
         ),
       );
       return response.data.reply;
     } catch (error: any) {
+      console.error('RAG service error:', {
+        url,
+        status: error?.response?.status,
+        data: error?.response?.data,
+        message: error?.message,
+      });
       const status =
         error?.response?.status ?? HttpStatus.INTERNAL_SERVER_ERROR;
       const detail =
