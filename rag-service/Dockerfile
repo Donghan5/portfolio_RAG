@@ -8,10 +8,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-
-# Install CPU-only PyTorch first to avoid pulling ~2GB of CUDA binaries
-RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu --no-cache-dir
-
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .

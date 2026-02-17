@@ -1,18 +1,21 @@
-from sentence_transformers import SentenceTransformer
+import httpx
 
-from app.config import EMBEDDING_MODEL
+from app.config import EMBEDDING_MODEL, HF_API_TOKEN
 
-_model: SentenceTransformer | None = None
-
-
-def get_model() -> SentenceTransformer:
-    global _model
-    if _model is None:
-        _model = SentenceTransformer(EMBEDDING_MODEL)
-    return _model
+_API_URL = f"https://api-inference.huggingface.co/pipeline/feature-extraction/{EMBEDDING_MODEL}"
 
 
 def generate_embedding(text: str) -> list[float]:
-    model = get_model()
-    embedding = model.encode(text, normalize_embeddings=True)
-    return embedding.tolist()
+    """Generate embedding using the Hugging Face Inference API (free tier)."""
+    headers = {}
+    if HF_API_TOKEN:
+        headers["Authorization"] = f"Bearer {HF_API_TOKEN}"
+
+    response = httpx.post(
+        _API_URL,
+        json={"inputs": text, "options": {"wait_for_model": True}},
+        headers=headers,
+        timeout=30.0,
+    )
+    response.raise_for_status()
+    return response.json()
