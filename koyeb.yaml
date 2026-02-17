@@ -19,7 +19,7 @@ definition:
   health_checks:
     - port: 8000
       protocol: http
-      path: /docs
+      path: /
   env:
     - key: GROQ_API_KEY
       value: ""
