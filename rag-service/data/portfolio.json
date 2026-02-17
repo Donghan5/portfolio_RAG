@@ -1,0 +1,114 @@
+[
+  {
+    "category": "personal",
+    "content": "Donghan Kim is a Computer Science student at 42 Paris, pursuing a Master's degree (RNCP Level 7) in Computer Science. He is passionate about AI/ML and enjoys solving complex problems, learning new technologies, and building robust, scalable systems that bridge the gap between development and operations."
+  },
+  {
+    "category": "contact",
+    "content": "Donghan Kim's GitHub is https://github.com/Donghan5. His LinkedIn is https://www.linkedin.com/in/donghan-kim01. His email is donghank@student.42.fr."
+  },
+  {
+    "category": "skills",
+    "content": "Donghan Kim's tech stack includes: C, C++, Python, Go, TypeScript, React, Bash, Linux, Docker, Git, TailwindCSS, Machine Learning, Deep Learning, Kafka, Redis, Nest.js, Node.js, and Socket.io."
+  },
+  {
+    "category": "skills_languages",
+    "content": "Donghan Kim is proficient in systems programming languages (C, C++, Assembly) and modern application languages (Python, Go, TypeScript). He has strong experience with both low-level and high-level programming."
+  },
+  {
+    "category": "skills_devops",
+    "content": "Donghan Kim has DevOps skills including Docker containerization, Kubernetes orchestration, CI/CD pipelines, Nginx configuration, and Linux system administration."
+  },
+  {
+    "category": "skills_ai",
+    "content": "Donghan Kim has AI/ML skills including Machine Learning, Deep Learning, linear regression, multilayer perceptrons (neural networks), and is working towards implementing Transformers from scratch."
+  },
+  {
+    "category": "experience",
+    "content": "Donghan Kim is currently a CS student at 42 Paris (2024 - Present), pursuing RNCP Level 7 (Master's equivalent) in Computer Science. He developed foundational skills through project-based learning, including low-level programming in C/C++, system administration (Born2beRoot), and deploying containerized applications with Docker (Inception)."
+  },
+  {
+    "category": "experience",
+    "content": "Donghan Kim served as a Sergeant in the Republic of Korea Army (2020 - 2022). He was responsible for training and leading a team of soldiers in the field, maintaining equipment and facilities, and ensuring safety and security. He participated in demining operations."
+  },
+  {
+    "category": "project",
+    "content": "Weather app: A weather application built with React and TypeScript, using the OpenWeatherMap API to fetch real-time weather data. Features include current weather, 5-day forecast, and search functionality for specific locations. Tech stack: React, TypeScript, TailwindCSS, OpenWeatherMap API. GitHub: https://github.com/Donghan5/weather_app"
+  },
+  {
+    "category": "project",
+    "content": "E-commerce API: A RESTful API for an e-commerce platform built with Typescript and Go using the Gin framework. Features include user authentication, product management, order processing, and payment integration. Uses PostgreSQL for data storage and Docker for containerization. Tech stack: Go, TypeScript (nest.js), PostgreSQL, Docker. GitHub: https://github.com/Donghan5/ecommerce_api"
+  },
+  {
+    "category": "project",
+    "content": "weather_api: A weather API service that provides current weather data and forecasts. Implements 2 servers with Go and Typescript (Nest.js), using Redis for caching. Tech stack: Go, Typescript (nest.js), Redis. GitHub: https://github.com/Donghan5/weather_api"
+  },
+  {
+    "category": "project",
+    "content": "chatapp: A full-stack chat application with real-time messaging, user authentication, and group chats. Deployed using Kubernetes with a CI/CD pipeline. Tech stack: React, Typescript, Node.js, PostgreSQL, Kafka, K8s. GitHub: https://github.com/Donghan5/chatapp"
+  },
+  {
+    "category": "project",
+    "content": "ft_linear_regression: Implemented basic linear regression from scratch using Python and Numpy. This is a machine learning project from 42 Paris. GitHub: https://github.com/Donghan5/ft_linear_regression"
+  },
+  {
+    "category": "project",
+    "content": "multilayer-perceptron: Implemented a Multilayer Perceptron (MLP) neural network from scratch using Python, Numpy, and Pandas. This is a deep learning project from 42 Paris. GitHub: https://github.com/Donghan5/multilayer_perceptron"
+  },
+  {
+    "category": "project",
+    "content": "learning_kafka: Understanding of Kafka concepts and data-pipeline through hands-on projects, with a goal of understanding fundamental principles. Tech stack: Kafka, Data Engineering, Python. GitHub: https://github.com/Donghan5/learning_kafka"
+  },
+  {
+    "category": "project",
+    "content": "Understanding of ML: Understanding of Machine Learning concepts and algorithms through hands-on projects, with a goal of implementing Transformers. Tech stack: Python, C++, C, ML. GitHub: https://github.com/Donghan5/Understanding_of_ML"
+  },
+  {
+    "category": "project",
+    "content": "libasm: A low-level programming library written in Assembly, focusing on Unix system calls and interfacing. Tech stack: Assembly, Low-Level. GitHub: https://github.com/Donghan5/libasm"
+  },
+  {
+    "category": "project",
+    "content": "ft_transcendence: Developed a full-stack web application featuring real-time multiplayer Pong, chat, and user profiles. Tech stack: TypeScript, Full-Stack, Web App. GitHub: https://github.com/Donghan5/ft_transcendence"
+  },
+  {
+    "category": "project",
+    "content": "Inception: Set up a multi-container infrastructure using Docker and docker-compose, including services like Nginx, WordPress, and MariaDB. This project demonstrates Docker and system administration skills. Tech stack: Docker, System Admin, Nginx. GitHub: https://github.com/Donghan5/inception"
+  },
+  {
+    "category": "project",
+    "content": "webserv: Developed a simple HTTP server in C++ that handles GET and POST requests, demonstrating understanding of web protocols and networking. Tech stack: C++, Networking, HTTP. GitHub: https://github.com/Donghan5/webserv"
+  },
+  {
+    "category": "project",
+    "content": "CPP Modules: Completed a series of C++ modules (00-09) to master object-oriented programming concepts and practices at 42 Paris. Tech stack: C++, OOP. GitHub: https://github.com/Donghan5/CPP_Modules"
+  },
+  {
+    "category": "project",
+    "content": "miniRT: Implemented a ray tracing engine in C to render 3D scenes with various geometric objects and lighting effects. This project demonstrates graphics programming. Tech stack: C, Graphics, Ray Tracing. GitHub: https://github.com/Donghan5/miniRT"
+  },
+  {
+    "category": "project",
+    "content": "minishell: Developed a simple UNIX shell implementation with command parsing, execution, and basic job control features. Tech stack: C, System Programming, Shell. GitHub: https://github.com/Donghan5/minishell"
+  },
+  {
+    "category": "project",
+    "content": "Philosophers: Solved the dining philosophers problem using C threads and mutexes to prevent deadlocks and ensure fair resource access. Tech stack: C, Multithreading, Concurrency. GitHub: https://github.com/Donghan5/philosopher"
+  },
+  {
+    "category": "project",
+    "content": "push_swap: Created an efficient algorithm to sort a stack of numbers with limited operations, optimizing for the fewest moves. Tech stack: C, Algorithm, Sorting. GitHub: https://github.com/Donghan5/push_swap"
+  },
+  {
+    "category": "project",
+    "content": "ft_printf: Implemented a custom printf function in C to handle formatted output with variable argument lists. Tech stack: C, Library, Formatting. GitHub: https://github.com/Donghan5/ft_printf"
+  },
+  {
+    "category": "project",
+    "content": "get_next_line: Implemented a function to read a line from a file descriptor, handling multiple files and dynamic memory allocation. Tech stack: C, File I/O, Buffering. GitHub: https://github.com/Donghan5/get_next_line"
+  },
+  {
+    "category": "project",
+    "content": "Libft: Developed a custom C library with essential functions to enhance programming efficiency and code reusability. Tech stack: C, Library, Utilities. GitHub: https://github.com/Donghan5/Libft"
+  }
+]

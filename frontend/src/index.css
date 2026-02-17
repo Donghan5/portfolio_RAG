@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+@theme {
+  --color-bg: #0a0f1a;
+  --color-bg-card: #111827;
+  --color-bg-card-hover: #1e293b;
+  --color-bg-surface: #0f172a;
+  --color-primary: #34d399;
+  --color-primary-dim: #059669;
+  --color-text-main: #f1f5f9;
+  --color-text-muted: #64748b;
+  --color-text-subtle: #475569;
+  --color-border: #1e293b;
+  --color-border-bright: #334155;
+  --color-glow: rgba(52, 211, 153, 0.15);
+  --color-glow-strong: rgba(52, 211, 153, 0.3);
+
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 64px;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle dot grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glow animation for command palette */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px var(--color-glow), 0 0 60px rgba(52, 211, 153, 0.05); }
+  50% { box-shadow: 0 0 30px var(--color-glow-strong), 0 0 80px rgba(52, 211, 153, 0.1); }
+}
+
+.glow-border {
+  box-shadow: 0 0 20px var(--color-glow), 0 0 60px rgba(52, 211, 153, 0.05);
+}
+
+.glow-border-active {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-bright);
+  border-radius: 4px;
+}
+
+/* Hidden scrollbar for glass panels */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
