@@ -4,7 +4,7 @@ services:
     runtime: node
     rootDir: api-gateway
     plan: free
-    buildCommand: npm install && npm run build
+    buildCommand: npm install -g @nestjs/cli && npm install && npm run build
     startCommand: npm run start:prod
     envVars:
       - key: NODE_ENV
