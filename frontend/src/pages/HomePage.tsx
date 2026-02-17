@@ -1,5 +1,3 @@
-import CommandPalette from '../components/CommandPalette';
-
 export default function HomePage() {
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-6 relative">
@@ -19,8 +17,6 @@ export default function HomePage() {
           CS student at 42 Paris · Software Engineer
         </p>
       </div>
-
-      <CommandPalette />
 
       <p className="relative z-10 mt-6 text-text-subtle/50 text-xs font-mono tracking-wide">
         To use chat, press <kbd className="px-1.5 py-0.5 rounded bg-border/50 border border-border-bright/30 text-text-muted text-[11px]">Ctrl + K</kbd>

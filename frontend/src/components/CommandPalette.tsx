@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 interface Message {
   role: 'user' | 'assistant';
   content: string;
+  error?: boolean;
 }
 
 export default function CommandPalette() {
@@ -32,37 +33,78 @@ export default function CommandPalette() {
     return () => window.removeEventListener('keydown', handler);
   }, [isExpanded]);
 
-  const handleSend = useCallback(async () => {
-    const trimmed = input.trim();
-    if (!trimmed || isLoading) return;
-
-    const userMessage: Message = { role: 'user', content: trimmed };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput('');
+  const sendMessage = useCallback(async (text: string) => {
     setIsExpanded(true);
     setIsLoading(true);
 
     try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 30000);
+
       const response = await fetch(
         `${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/api/chat`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: trimmed }),
+          body: JSON.stringify({ message: text }),
+          signal: controller.signal,
         }
       );
-      if (!response.ok) throw new Error('Failed');
+      clearTimeout(timeout);
+
+      if (!response.ok) {
+        const status = response.status;
+        const errorMsg = status >= 500
+          ? 'Server error — the AI service may be down. Please try again.'
+          : status === 429
+            ? 'Too many requests — please wait a moment and try again.'
+            : `Request failed (${status}). Please try again.`;
+        throw new Error(errorMsg);
+      }
+
       const data = await response.json();
       setMessages((prev) => [...prev, { role: 'assistant', content: data.reply }]);
-    } catch {
-      setMessages((prev) => [
-        ...prev,
-        { role: 'assistant', content: 'AI service is currently offline. Please try again later.' },
-      ]);
+    } catch (err) {
+      let errorMsg: string;
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        errorMsg = 'Request timed out — the AI service is taking too long. Please try again.';
+      } else if (err instanceof TypeError) {
+        errorMsg = 'Network error — could not reach the server. Check your connection and try again.';
+      } else if (err instanceof Error) {
+        errorMsg = err.message;
+      } else {
+        errorMsg = 'Something went wrong. Please try again.';
+      }
+      setMessages((prev) => [...prev, { role: 'assistant', content: errorMsg, error: true }]);
     } finally {
       setIsLoading(false);
     }
-  }, [input, isLoading]);
+  }, []);
+
+  const handleSend = useCallback(async () => {
+    const trimmed = input.trim();
+    if (!trimmed || isLoading) return;
+
+    setMessages((prev) => [...prev, { role: 'user', content: trimmed }]);
+    setInput('');
+    sendMessage(trimmed);
+  }, [input, isLoading, sendMessage]);
+
+  const handleRetry = useCallback((messageIndex: number) => {
+    // Find the user message before this error
+    let userText = '';
+    for (let i = messageIndex - 1; i >= 0; i--) {
+      if (messages[i].role === 'user') {
+        userText = messages[i].content;
+        break;
+      }
+    }
+    if (!userText) return;
+
+    // Remove the error message and resend
+    setMessages((prev) => prev.filter((_, i) => i !== messageIndex));
+    sendMessage(userText);
+  }, [messages, sendMessage]);
 
   return (
     <div className="w-full max-w-[640px] mx-auto relative z-10">
@@ -84,8 +126,9 @@ export default function CommandPalette() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             onFocus={() => messages.length > 0 && setIsExpanded(true)}
-            placeholder="Ask AI about Donghan... (⌘K or Ctrl+K to focus)"
-            className="flex-1 bg-transparent text-text-main text-[15px] outline-none placeholder:text-text-subtle font-light tracking-wide"
+            disabled={isLoading}
+            placeholder={isLoading ? 'Thinking...' : 'Ask AI about Donghan... (⌘K or Ctrl+K to focus)'}
+            className="flex-1 bg-transparent text-text-main text-[15px] outline-none placeholder:text-text-subtle font-light tracking-wide disabled:opacity-50"
           />
           {!isExpanded && (
             <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-border/50 text-text-subtle text-xs font-mono border border-border-bright/30">
@@ -114,18 +157,31 @@ export default function CommandPalette() {
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {msg.role === 'assistant' && (
-                  <div className="w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center mr-3 mt-0.5 shrink-0">
-                    <i className="fas fa-sparkles text-primary text-[10px]" />
+                  <div className={`w-6 h-6 rounded-md flex items-center justify-center mr-3 mt-0.5 shrink-0 ${msg.error ? 'bg-red-500/10' : 'bg-primary/10'}`}>
+                    <i className={`fas ${msg.error ? 'fa-exclamation-triangle text-red-400' : 'fa-sparkles text-primary'} text-[10px]`} />
                   </div>
                 )}
-                <div
-                  className={`max-w-[85%] text-[14px] leading-relaxed ${
-                    msg.role === 'user'
-                      ? 'text-text-muted font-mono text-[13px] bg-border/30 px-3 py-2 rounded-xl'
-                      : 'text-text-main'
-                  }`}
-                >
-                  {msg.content}
+                <div className="flex flex-col">
+                  <div
+                    className={`max-w-[85%] text-[14px] leading-relaxed ${
+                      msg.role === 'user'
+                        ? 'text-text-muted font-mono text-[13px] bg-border/30 px-3 py-2 rounded-xl'
+                        : msg.error
+                          ? 'text-red-400/80'
+                          : 'text-text-main'
+                    }`}
+                  >
+                    {msg.content}
+                  </div>
+                  {msg.error && (
+                    <button
+                      onClick={() => handleRetry(i)}
+                      disabled={isLoading}
+                      className="mt-2 text-[12px] font-mono text-primary/70 hover:text-primary transition-colors cursor-pointer bg-transparent border border-primary/20 rounded-md px-2 py-1 w-fit disabled:opacity-40"
+                    >
+                      <i className="fas fa-redo text-[10px] mr-1" /> Retry
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
