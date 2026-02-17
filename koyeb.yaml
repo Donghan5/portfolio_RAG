@@ -25,5 +25,5 @@ definition:
       value: ""
     - key: SUPABASE_URL
       value: ""
-    - key: SUPABASE_SERVICE_KEY
+    - key: SUPABASE_KEY
       value: ""
