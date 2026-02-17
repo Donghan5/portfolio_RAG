@@ -9,6 +9,7 @@ click==8.3.1
 cryptography==46.0.5
 deprecation==2.1.0
 distro==1.9.0
+fastembed
 fastapi==0.129.0
 groq==1.0.0
 h11==0.16.0
