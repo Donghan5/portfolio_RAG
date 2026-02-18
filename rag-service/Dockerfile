@@ -9,8 +9,10 @@ RUN apt-get update && \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Pin cache to /app so it survives into the runtime layer (not /tmp which is wiped on Render)
+ENV FASTEMBED_CACHE_PATH=/app/fastembed_cache
+
 # Pre-download the embedding model during build so it's baked into the image
-# and doesn't consume runtime memory for downloads
 RUN python -c "from fastembed import TextEmbedding; TextEmbedding(model_name='BAAI/bge-small-en-v1.5')"
 
 COPY . .
