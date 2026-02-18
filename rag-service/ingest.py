@@ -15,7 +15,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+from app.services.embedding import init_model  # noqa: E402
 from app.services.vector_store import insert_document  # noqa: E402
+
+init_model()
 
 
 def load_portfolio_data() -> list[dict]:

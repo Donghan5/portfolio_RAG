@@ -38,3 +38,14 @@ async def search_similar(
 ) -> list[dict]:
     """Embed the query and perform vector similarity search in Supabase."""
     return await asyncio.to_thread(_search_sync, query, threshold, count)
+
+
+def insert_document(content: str, metadata: dict) -> None:
+    """Embed content and insert it into the documents table."""
+    embedding = generate_embedding(content)
+    client = get_supabase()
+    client.table("documents").insert({
+        "content": content,
+        "metadata": metadata,
+        "embedding": embedding,
+    }).execute()

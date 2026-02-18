@@ -12,7 +12,7 @@ SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")
 FRONTEND_URL = os.getenv("FRONTEND_URL", "https://donghank.website")
 
 # --- Models ---
-GROQ_MODEL = "llama3-70b-8192"
+GROQ_MODEL = "llama-3.3-70b-versatile"
 EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
 
 # --- Vector Search ---
