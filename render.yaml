@@ -13,4 +13,4 @@ services:
       - key: SUPABASE_KEY
         sync: false
       - key: FRONTEND_URL
-        value: "https://donghank.website,https://portfolio-rag-six.vercel.app"
+        value: "https://donghank.website,https://www.donghank.website,https://portfolio-rag-six.vercel.app"
