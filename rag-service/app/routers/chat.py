@@ -25,7 +25,7 @@ async def chat(request: ChatRequest):
         raise HTTPException(status_code=400, detail="Message cannot be empty")
 
     try:
-        results = search_similar(request.message)
+        results = await search_similar(request.message)
     except Exception as e:
         logger.error(f"Vector search failed: {e}")
         raise HTTPException(status_code=500, detail=f"Vector search error: {str(e)}")
@@ -38,7 +38,7 @@ async def chat(request: ChatRequest):
         )
 
     try:
-        reply = generate_response(request.message, context_chunks)
+        reply = await generate_response(request.message, context_chunks)
     except Exception as e:
         logger.error(f"LLM generation failed: {e}")
         raise HTTPException(status_code=500, detail=f"LLM error: {str(e)}")

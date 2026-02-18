@@ -1,15 +1,16 @@
 services:
   - type: web
-    name: portfolio-api-gateway
-    runtime: node
-    rootDir: api-gateway
+    name: portfolio-rag-backend
+    runtime: docker
+    rootDir: rag-service
+    dockerfilePath: ./Dockerfile
     plan: free
-    buildCommand: npm install -g @nestjs/cli && npm install && npm run build
-    startCommand: npm run start:prod
     envVars:
-      - key: NODE_ENV
-        value: production
-      - key: RAG_SERVICE_URL
+      - key: GROQ_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
         sync: false
       - key: FRONTEND_URL
-        sync: false
+        value: "https://donghank.website,https://portfolio-rag-six.vercel.app"
