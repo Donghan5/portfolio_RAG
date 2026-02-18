@@ -18,6 +18,12 @@ export default function CommandPalette() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  // Warm up the backend on mount to avoid cold-start timeouts on Render Free tier
+  useEffect(() => {
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+    fetch(`${apiUrl}/health`, { method: 'GET' }).catch(() => {});
+  }, []);
+
   // ⌘K / Ctrl+K shortcut
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -39,7 +45,7 @@ export default function CommandPalette() {
 
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 30000);
+      const timeout = setTimeout(() => controller.abort(), 60000);
 
       const response = await fetch(
         `${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/api/chat`,
