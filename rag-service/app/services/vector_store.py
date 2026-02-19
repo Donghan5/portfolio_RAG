@@ -27,7 +27,7 @@ def _search_sync(query: str, threshold: float, count: int) -> list[dict]:
             "match_threshold": threshold,
             "match_count": count,
         },
-    ).execute(timeout=10)
+    ).execute()
     return response.data or []
 
 
