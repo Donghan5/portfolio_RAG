@@ -32,6 +32,10 @@
     "content": "Donghan Kim served as a Sergeant in the Republic of Korea Army (2020 - 2022). He was responsible for training and leading a team of soldiers in the field, maintaining equipment and facilities, and ensuring safety and security. He participated in demining operations."
   },
   {
+    "category": "project_summary",
+    "content": "Donghan Kim's projects include: chatapp (real-time chat with React, Node.js, Kafka, K8s), E-commerce API (Go, Nest.js, PostgreSQL, Docker), Weather app (React, TypeScript, OpenWeatherMap), weather_api (Go, Nest.js, Redis), ft_transcendence (full-stack multiplayer Pong), multilayer-perceptron (neural network from scratch), ft_linear_regression (ML from scratch), miniRT (ray tracing in C), webserv (HTTP server in C++), minishell (UNIX shell in C), Philosophers (multithreading in C), Inception (Docker infrastructure), and more."
+  },
+  {
     "category": "project",
     "content": "Weather app: A weather application built with React and TypeScript, using the OpenWeatherMap API to fetch real-time weather data. Features include current weather, 5-day forecast, and search functionality for specific locations. Tech stack: React, TypeScript, TailwindCSS, OpenWeatherMap API. GitHub: https://github.com/Donghan5/weather_app"
   },

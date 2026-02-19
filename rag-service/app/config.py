@@ -16,5 +16,5 @@ GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
 
 # --- Vector Search ---
-MATCH_THRESHOLD = 0.3
-MATCH_COUNT = 5
+MATCH_THRESHOLD = 0.2
+MATCH_COUNT = 8
