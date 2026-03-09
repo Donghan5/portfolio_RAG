@@ -7,7 +7,7 @@ interface Message {
 }
 
 export default function CommandPalette() {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -24,23 +24,29 @@ export default function CommandPalette() {
     fetch(`${apiUrl}/health`, { method: 'GET' }).catch(() => {});
   }, []);
 
+  // Focus input when chat opens
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => inputRef.current?.focus(), 150);
+    }
+  }, [isOpen]);
+
   // ⌘K / Ctrl+K shortcut
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
-        inputRef.current?.focus();
+        setIsOpen(true);
       }
-      if (e.key === 'Escape' && isExpanded) {
-        setIsExpanded(false);
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
       }
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [isExpanded]);
+  }, [isOpen]);
 
   const sendMessage = useCallback(async (text: string) => {
-    setIsExpanded(true);
     setIsLoading(true);
 
     try {
@@ -97,7 +103,6 @@ export default function CommandPalette() {
   }, [input, isLoading, sendMessage]);
 
   const handleRetry = useCallback((messageIndex: number) => {
-    // Find the user message before this error
     let userText = '';
     for (let i = messageIndex - 1; i >= 0; i--) {
       if (messages[i].role === 'user') {
@@ -107,59 +112,53 @@ export default function CommandPalette() {
     }
     if (!userText) return;
 
-    // Remove the error message and resend
     setMessages((prev) => prev.filter((_, i) => i !== messageIndex));
     sendMessage(userText);
   }, [messages, sendMessage]);
 
   return (
-    <div className="w-full max-w-[640px] mx-auto relative z-10">
-      {/* Main palette container */}
+    <>
+      {/* Chat window */}
       <div
-        className={`bg-bg-surface/80 backdrop-blur-xl border rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${
-          isExpanded
-            ? 'border-primary/30 glow-border-active'
-            : 'border-border-bright/50 glow-border hover:border-primary/20'
-        }`}
-      >
-        {/* Input row */}
-        <div className="flex items-center gap-3 px-5 py-4">
-          <i className="fas fa-terminal text-primary text-sm opacity-60" />
-          <input
-            ref={inputRef}
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            onFocus={() => messages.length > 0 && setIsExpanded(true)}
-            disabled={isLoading}
-            placeholder={isLoading ? 'Thinking...' : 'Ask AI about Donghan... (⌘K or Ctrl+K to focus)'}
-            className="flex-1 bg-transparent text-text-main text-[15px] outline-none placeholder:text-text-subtle font-light tracking-wide disabled:opacity-50"
-          />
-          {!isExpanded && (
-            <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-border/50 text-text-subtle text-xs font-mono border border-border-bright/30">
-              ⌘K
-            </kbd>
-          )}
-          {input.trim() && (
-            <button
-              onClick={handleSend}
-              disabled={isLoading}
-              className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center hover:bg-primary/20 transition-colors duration-200 cursor-pointer border-none disabled:opacity-40"
-            >
-              <i className="fas fa-arrow-up text-xs" />
-            </button>
-          )}
-        </div>
-
-        {/* Expanded results area */}
-        <div
-          className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            isExpanded ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
+        className={`fixed z-50
+          left-0 right-0 bottom-20 h-[calc(100vh-80px)]
+          md:left-auto md:right-4 md:w-96 md:h-[500px]
+          transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
+          ${isOpen
+            ? 'opacity-100 translate-y-0 pointer-events-auto'
+            : 'opacity-0 translate-y-4 pointer-events-none'
           }`}
-        >
-          <div className="border-t border-border/50" />
-          <div className="overflow-y-auto max-h-[360px] p-5 space-y-4">
+      >
+        <div className="flex flex-col h-full mx-2 md:mx-0 bg-bg-surface/90 backdrop-blur-xl border border-primary/30 rounded-2xl overflow-hidden glow-border-active">
+          {/* Header */}
+          <div className="flex items-center justify-between px-5 py-3 border-b border-border/50 shrink-0">
+            <div className="flex items-center gap-2">
+              <i className="fas fa-terminal text-primary text-sm opacity-60" />
+              <span className="text-text-subtle text-[11px] font-mono">Ask AI about Donghan</span>
+            </div>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-text-subtle hover:text-text-muted transition-colors cursor-pointer bg-transparent border-none text-sm leading-none"
+            >
+              <i className="fas fa-times" />
+            </button>
+          </div>
+
+          {/* Messages area - scrollable */}
+          <div className="flex-1 overflow-y-auto p-5 space-y-4">
+            {messages.length === 0 && (
+              <div className="flex flex-col items-center justify-center h-full text-center gap-3 py-8">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <i className="fas fa-sparkles text-primary text-sm" />
+                </div>
+                <p className="text-text-subtle text-[13px] font-mono leading-relaxed">
+                  Ask me anything about Donghan's<br />experience, projects, or skills.
+                </p>
+                <kbd className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-border/50 text-text-subtle text-xs font-mono border border-border-bright/30">
+                  ⌘K
+                </kbd>
+              </div>
+            )}
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {msg.role === 'assistant' && (
@@ -167,9 +166,9 @@ export default function CommandPalette() {
                     <i className={`fas ${msg.error ? 'fa-exclamation-triangle text-red-400' : 'fa-sparkles text-primary'} text-[10px]`} />
                   </div>
                 )}
-                <div className="flex flex-col">
+                <div className="flex flex-col max-w-[85%]">
                   <div
-                    className={`max-w-[85%] text-[14px] leading-relaxed ${
+                    className={`text-[14px] leading-relaxed ${
                       msg.role === 'user'
                         ? 'text-text-muted font-mono text-[13px] bg-border/30 px-3 py-2 rounded-xl'
                         : msg.error
@@ -206,23 +205,56 @@ export default function CommandPalette() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Footer actions */}
-          <div className="flex items-center justify-between px-5 py-3 border-t border-border/30">
-            <span className="text-text-subtle text-[11px] font-mono">
-              Powered by Llama 3
-            </span>
-            <button
-              onClick={() => {
-                setMessages([]);
-                setIsExpanded(false);
-              }}
-              className="text-text-subtle text-[11px] font-mono hover:text-text-muted transition-colors cursor-pointer bg-transparent border-none"
-            >
-              Clear · Esc
-            </button>
+          {/* Input — always at bottom */}
+          <div className="border-t border-border/50 shrink-0">
+            <div className="flex items-center gap-3 px-5 py-4">
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                disabled={isLoading}
+                placeholder={isLoading ? 'Thinking...' : 'Type your question...'}
+                className="flex-1 bg-transparent text-text-main text-[15px] outline-none placeholder:text-text-subtle font-light tracking-wide disabled:opacity-50"
+              />
+              <button
+                onClick={handleSend}
+                disabled={isLoading || !input.trim()}
+                className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center hover:bg-primary/20 transition-colors duration-200 cursor-pointer border-none disabled:opacity-40"
+              >
+                <i className="fas fa-arrow-up text-xs" />
+              </button>
+            </div>
+            <div className="flex items-center justify-between px-5 pb-3">
+              <span className="text-text-subtle text-[11px] font-mono">Powered by Llama 3</span>
+              {messages.length > 0 && (
+                <button
+                  onClick={() => setMessages([])}
+                  className="text-text-subtle text-[11px] font-mono hover:text-text-muted transition-colors cursor-pointer bg-transparent border-none"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Floating toggle button */}
+      <button
+        onClick={() => setIsOpen((prev) => !prev)}
+        className={`fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full shadow-lg
+          flex items-center justify-center
+          transition-all duration-300 cursor-pointer border-none
+          ${isOpen
+            ? 'bg-primary text-bg scale-95'
+            : 'bg-bg-surface/90 backdrop-blur-xl border border-primary/30 text-primary hover:bg-primary/10'
+          }`}
+        aria-label={isOpen ? 'Close chat' : 'Open chat'}
+      >
+        <i className={`fas transition-all duration-300 text-lg ${isOpen ? 'fa-times' : 'fa-comments'}`} />
+      </button>
+    </>
   );
 }

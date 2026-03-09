@@ -18,9 +18,7 @@ export default function App() {
           <Route path="/projects" element={<ProjectsPage />} />
         </Routes>
       </main>
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-full max-w-[640px] px-4 z-50">
-        <CommandPalette />
-      </div>
+      <CommandPalette />
     </BrowserRouter>
   );
 }
