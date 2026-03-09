@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import FRONTEND_URL
 from app.routers.chat import router as chat_router
+from app.routers.health import router as health_router
 from app.services.embedding import init_model
 
 logging.basicConfig(level=logging.INFO)
@@ -41,6 +42,7 @@ app.add_middleware(
 
 # Mount chat router under /api to match frontend expectations
 app.include_router(chat_router, prefix="/api")
+app.include_router(health_router)
 
 
 @app.get("/")
