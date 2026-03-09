@@ -121,8 +121,10 @@ export default function CommandPalette() {
       {/* Chat window */}
       <div
         className={`fixed z-50
-          left-0 right-0 bottom-20 h-[calc(100vh-80px)]
-          md:left-auto md:right-4 md:w-96 md:h-[500px]
+          left-0 right-0
+          bottom-[calc(80px+env(safe-area-inset-bottom,0px))]
+          h-[calc(100dvh-80px-env(safe-area-inset-bottom,0px))]
+          md:left-auto md:right-4 md:bottom-20 md:w-96 md:h-[500px]
           transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
           ${isOpen
             ? 'opacity-100 translate-y-0 pointer-events-auto'
@@ -145,7 +147,7 @@ export default function CommandPalette() {
           </div>
 
           {/* Messages area - scrollable */}
-          <div className="flex-1 overflow-y-auto p-5 space-y-4">
+          <div className="flex-1 overflow-y-auto overscroll-contain p-5 space-y-4">
             {messages.length === 0 && (
               <div className="flex flex-col items-center justify-center h-full text-center gap-3 py-8">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -154,7 +156,7 @@ export default function CommandPalette() {
                 <p className="text-text-subtle text-[13px] font-mono leading-relaxed">
                   Ask me anything about Donghan's<br />experience, projects, or skills.
                 </p>
-                <kbd className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-border/50 text-text-subtle text-xs font-mono border border-border-bright/30">
+                <kbd className="hidden md:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-border/50 text-text-subtle text-xs font-mono border border-border-bright/30">
                   ⌘K
                 </kbd>
               </div>
@@ -216,7 +218,7 @@ export default function CommandPalette() {
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 disabled={isLoading}
                 placeholder={isLoading ? 'Thinking...' : 'Type your question...'}
-                className="flex-1 bg-transparent text-text-main text-[15px] outline-none placeholder:text-text-subtle font-light tracking-wide disabled:opacity-50"
+                className="flex-1 bg-transparent text-text-main text-base md:text-[15px] outline-none placeholder:text-text-subtle font-light tracking-wide disabled:opacity-50"
               />
               <button
                 onClick={handleSend}
@@ -244,7 +246,8 @@ export default function CommandPalette() {
       {/* Floating toggle button */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className={`fixed bottom-4 right-4 z-50 w-14 h-14 rounded-full shadow-lg
+        style={{ bottom: 'calc(1rem + env(safe-area-inset-bottom, 0px))' }}
+        className={`fixed right-4 z-50 w-14 h-14 rounded-full shadow-lg
           flex items-center justify-center
           transition-all duration-300 cursor-pointer border-none
           ${isOpen
