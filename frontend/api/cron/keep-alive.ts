@@ -1,14 +1,19 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 /**
- * Vercel Cron Job — keeps Supabase Free tier alive by triggering a lightweight
- * query every 5 days (schedule: "0 0 */5 * *" in vercel.json).
+ * Vercel Cron Job — keeps Supabase Free tier alive every 3 days.
  *
- * Vercel automatically injects Authorization: Bearer <CRON_SECRET> on cron
- * invocations. Set CRON_SECRET in the Vercel project environment variables.
+ * Two-layer strategy:
+ *  1. Direct Supabase REST ping (primary) — bypasses any sleeping intermediate service.
+ *  2. API gateway health check (secondary) — wakes up downstream services as a bonus.
+ *
+ * Required env vars in Vercel project settings:
+ *   SUPABASE_URL        e.g. https://xxxx.supabase.co
+ *   SUPABASE_ANON_KEY   public anon key
+ *   CRON_SECRET         secret Vercel injects as Bearer token automatically
+ *   VITE_API_URL        API gateway URL (optional fallback)
  */
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // Reject non-GET methods
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -22,28 +27,59 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
   }
 
-  const apiUrl = process.env.VITE_API_URL || 'http://localhost:3001';
+  const timestamp = new Date().toISOString();
+  const results: Record<string, unknown> = { timestamp };
 
-  try {
-    const response = await fetch(`${apiUrl}/health/supabase`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-      signal: AbortSignal.timeout(15000),
-    });
+  // --- 1. Direct Supabase REST ping ---
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
-    const data = await response.json() as Record<string, unknown>;
-
-    return res.status(200).json({
-      ok: true,
-      timestamp: new Date().toISOString(),
-      supabase: data,
-    });
-  } catch (err) {
-    const message = err instanceof Error ? err.message : String(err);
-    return res.status(500).json({
-      ok: false,
-      timestamp: new Date().toISOString(),
-      error: message,
-    });
+  if (supabaseUrl && supabaseAnonKey) {
+    try {
+      // Hit the PostgREST root — no table needed, just proves the DB is awake
+      const supaRes = await fetch(`${supabaseUrl}/rest/v1/`, {
+        method: 'GET',
+        headers: {
+          apikey: supabaseAnonKey,
+          Authorization: `Bearer ${supabaseAnonKey}`,
+        },
+        signal: AbortSignal.timeout(10000),
+      });
+      results.supabase_direct = { ok: supaRes.ok, status: supaRes.status };
+    } catch (err) {
+      results.supabase_direct = {
+        ok: false,
+        error: err instanceof Error ? err.message : String(err),
+      };
+    }
+  } else {
+    results.supabase_direct = { ok: false, error: 'SUPABASE_URL or SUPABASE_ANON_KEY not set' };
   }
+
+  // --- 2. API gateway health check (secondary — also wakes downstream services) ---
+  const apiUrl = process.env.VITE_API_URL;
+  if (apiUrl) {
+    try {
+      const gwRes = await fetch(`${apiUrl}/health/supabase`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        signal: AbortSignal.timeout(15000),
+      });
+      results.api_gateway = {
+        ok: gwRes.ok,
+        status: gwRes.status,
+        data: await gwRes.json().catch(() => null),
+      };
+    } catch (err) {
+      results.api_gateway = {
+        ok: false,
+        error: err instanceof Error ? err.message : String(err),
+      };
+    }
+  }
+
+  const overallOk =
+    (results.supabase_direct as { ok: boolean }).ok === true;
+
+  return res.status(overallOk ? 200 : 500).json({ ok: overallOk, ...results });
 }

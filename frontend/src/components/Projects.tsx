@@ -7,6 +7,13 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: 'cloud-1',
+    tags: ['Ansible', 'Nginx', 'DevOps', 'Cloud'],
+    description:
+      'Deployed and managed a scalable web infrastructure on Scaleway cloud, using Ansible for automated provisioning and configuration. Set up Nginx as a reverse proxy with infrastructure-as-code practices.',
+    github: 'https://github.com/Donghan5/cloud-1',
+  },
+  {
     title: 'Weather app',
     tags: ['React', 'TypeScript', 'TailwindCSS', 'OpenWeatherMap API'],
     description:
