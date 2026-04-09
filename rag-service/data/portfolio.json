@@ -1,7 +1,7 @@
 [
   {
     "category": "personal",
-    "content": "Donghan Kim is a Computer Science student at 42 Paris, pursuing a Master's degree (RNCP Level 7) in Computer Science. He is passionate about AI/ML and enjoys solving complex problems, learning new technologies, and building robust, scalable systems that bridge the gap between development and operations."
+    "content": "Donghan Kim is a Computer Science student at 42 Paris, pursuing a Master's degree (RNCP Level 7) in Computer Science, specializing in the System, Network, Cybersecurity & OS track. He is passionate about AI/ML and enjoys solving complex problems, learning new technologies, and building robust, scalable systems that bridge the gap between development and operations."
   },
   {
     "category": "contact",
@@ -17,7 +17,7 @@
   },
   {
     "category": "skills_devops",
-    "content": "Donghan Kim has DevOps skills including Docker containerization, Kubernetes orchestration, CI/CD pipelines, Nginx configuration, and Linux system administration."
+    "content": "Donghan Kim has DevOps skills including Docker containerization, Kubernetes orchestration, CI/CD pipelines, Nginx configuration, Linux system administration, and automated infrastructure provisioning with Ansible on cloud platforms (Scaleway)."
   },
   {
     "category": "skills_ai",
@@ -25,7 +25,7 @@
   },
   {
     "category": "experience",
-    "content": "Donghan Kim is currently a CS student at 42 Paris (2024 - Present), pursuing RNCP Level 7 (Master's equivalent) in Computer Science. He developed foundational skills through project-based learning, including low-level programming in C/C++, system administration (Born2beRoot), and deploying containerized applications with Docker (Inception)."
+    "content": "Donghan Kim is currently a CS student at 42 Paris (2024 - Present), pursuing RNCP Level 7 (Master's equivalent) in the System, Network, Cybersecurity & OS track. He developed foundational skills through project-based learning, including low-level programming in C/C++, system administration (Born2beRoot), deploying containerized applications with Docker (Inception), and automated cloud infrastructure provisioning with Ansible (cloud-1)."
   },
   {
     "category": "experience",
@@ -33,7 +33,11 @@
   },
   {
     "category": "project_summary",
-    "content": "Donghan Kim's projects include: chatapp (real-time chat with React, Node.js, Kafka, K8s), E-commerce API (Go, Nest.js, PostgreSQL, Docker), Weather app (React, TypeScript, OpenWeatherMap), weather_api (Go, Nest.js, Redis), ft_transcendence (full-stack multiplayer Pong), multilayer-perceptron (neural network from scratch), ft_linear_regression (ML from scratch), miniRT (ray tracing in C), webserv (HTTP server in C++), minishell (UNIX shell in C), Philosophers (multithreading in C), Inception (Docker infrastructure), and more."
+    "content": "Donghan Kim's projects include: cloud-1 (automated cloud infrastructure with Ansible on Scaleway), chatapp (real-time chat with React, Node.js, Kafka, K8s), E-commerce API (Go, Nest.js, PostgreSQL, Docker), Weather app (React, TypeScript, OpenWeatherMap), weather_api (Go, Nest.js, Redis), ft_transcendence (full-stack multiplayer Pong), multilayer-perceptron (neural network from scratch), ft_linear_regression (ML from scratch), miniRT (ray tracing in C), webserv (HTTP server in C++), minishell (UNIX shell in C), Philosophers (multithreading in C), Inception (Docker infrastructure), and more."
+  },
+  {
+    "category": "project",
+    "content": "cloud-1: Deployed and managed a scalable web infrastructure on Scaleway cloud using Ansible for automated provisioning and configuration management. Set up Nginx as a reverse proxy with infrastructure-as-code practices, demonstrating hands-on automation experience in cloud environments. Tech stack: Ansible, Nginx, DevOps, Cloud, Scaleway. GitHub: https://github.com/Donghan5/cloud-1"
   },
   {
     "category": "project",
