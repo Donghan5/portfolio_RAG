@@ -247,16 +247,16 @@ export default function CommandPalette() {
       <button
         onClick={() => setIsOpen((prev) => !prev)}
         style={{ bottom: 'calc(1rem + env(safe-area-inset-bottom, 0px))' }}
-        className={`fixed right-4 z-50 w-14 h-14 rounded-full shadow-lg
+        className={`fixed right-4 z-50 w-12 h-12 rounded-2xl shadow-lg
           flex items-center justify-center
           transition-all duration-300 cursor-pointer border-none
           ${isOpen
-            ? 'bg-primary text-bg scale-95'
-            : 'bg-bg-surface/90 backdrop-blur-xl border border-primary/30 text-primary hover:bg-primary/10'
+            ? 'bg-primary/90 text-bg scale-95 shadow-[0_0_20px_rgba(167,139,250,0.4)]'
+            : 'bg-bg-surface/90 backdrop-blur-xl border border-primary/25 text-primary hover:bg-primary/10 hover:border-primary/40'
           }`}
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
-        <i className={`fas transition-all duration-300 text-lg ${isOpen ? 'fa-times' : 'fa-comments'}`} />
+        <i className={`fas transition-all duration-300 text-base ${isOpen ? 'fa-times' : 'fa-comments'}`} />
       </button>
     </>
   );

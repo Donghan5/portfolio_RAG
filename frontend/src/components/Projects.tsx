@@ -159,25 +159,25 @@ function ProjectCard({ project }: { project: Project }) {
       href={project.github}
       target="_blank"
       rel="noreferrer"
-      className="group block bg-bg-card/30 border border-border rounded-xl p-6 transition-all duration-300 hover:border-primary/20 hover:bg-bg-card/50 no-underline h-full"
+      className="group block bg-bg-card/35 border border-border rounded-2xl p-5 transition-all duration-300 hover:border-primary/25 hover:bg-bg-card/55 hover:shadow-[0_0_24px_rgba(167,139,250,0.07)] no-underline h-full"
     >
       <div className="flex items-start justify-between mb-3">
-        <h3 className="text-text-main text-[15px] font-medium group-hover:text-primary transition-colors duration-300">
+        <h3 className="text-text-main text-[14px] font-medium group-hover:text-primary transition-colors duration-300 leading-snug">
           {project.title}
         </h3>
-        <i className="fas fa-arrow-up-right-from-square text-text-subtle text-[10px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-1.5" />
+        <i className="fas fa-arrow-up-right-from-square text-primary/30 text-[9px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-1 shrink-0 ml-2" />
       </div>
       <div className="flex flex-wrap gap-1.5 mb-3">
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="font-mono text-[10px] text-text-subtle px-1.5 py-0.5 rounded bg-border/40"
+            className="font-mono text-[10px] text-text-subtle px-2 py-0.5 rounded-md bg-border/50 border border-border/80 group-hover:border-border-bright/60 transition-colors duration-300"
           >
             {tag}
           </span>
         ))}
       </div>
-      <p className="text-text-muted text-[13px] leading-[1.7]">
+      <p className="text-text-muted text-[12px] leading-[1.75]">
         {project.description}
       </p>
     </a>
@@ -186,14 +186,14 @@ function ProjectCard({ project }: { project: Project }) {
 
 export default function Projects() {
   return (
-    <div className="min-h-screen flex items-center justify-center pt-16 px-4 relative z-10">
-      <div className="w-full max-w-4xl max-h-[75vh] overflow-y-auto scrollbar-hide bg-bg-surface/60 backdrop-blur-xl border border-border-bright/40 rounded-2xl px-8 py-8 shadow-[0_0_60px_rgba(0,0,0,0.4)]">
-        <h2 className="font-mono text-xs tracking-widest uppercase text-primary/60 mb-2 text-center">
+    <div className="min-h-screen flex items-center justify-center pt-24 pb-12 px-4 relative z-10">
+      <div className="w-full max-w-5xl">
+        <h2 className="font-mono text-[11px] tracking-widest uppercase text-primary/50 mb-3 text-center">
           Projects
         </h2>
-        <div className="h-px bg-border mb-8" />
+        <div className="divider-gradient mb-10" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {projects.map((project) => (
             <ProjectCard key={project.title} project={project} />
           ))}
