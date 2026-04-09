@@ -131,51 +131,49 @@ export default function CommandPalette() {
             : 'opacity-0 translate-y-4 pointer-events-none'
           }`}
       >
-        <div className="flex flex-col h-full mx-2 md:mx-0 bg-bg-surface/90 backdrop-blur-xl border border-primary/30 rounded-2xl overflow-hidden glow-border-active">
+        {/* Dark terminal panel on light page */}
+        <div className="flex flex-col h-full mx-2 md:mx-0 chat-surface overflow-hidden glow-border-active" style={{ borderRadius: '2px' }}>
           {/* Header */}
-          <div className="flex items-center justify-between px-5 py-3 border-b border-border/50 shrink-0">
+          <div className="flex items-center justify-between px-5 py-3 border-b border-[#2e2e2a] shrink-0">
             <div className="flex items-center gap-2">
-              <i className="fas fa-terminal text-primary text-sm opacity-60" />
-              <span className="text-text-subtle text-[11px] font-mono">Ask AI about Donghan</span>
+              <span className="font-mono text-[10px] text-[#e63320] tracking-[0.15em] uppercase">Terminal</span>
+              <span className="font-mono text-[10px] text-[#4a4640]">·</span>
+              <span className="font-mono text-[11px] text-[#6a6660]">Ask AI about Donghan</span>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-text-subtle hover:text-text-muted transition-colors cursor-pointer bg-transparent border-none text-sm leading-none"
+              className="text-[#4a4640] hover:text-[#e8e4dc] transition-colors cursor-pointer bg-transparent border-none text-sm leading-none"
             >
               <i className="fas fa-times" />
             </button>
           </div>
 
-          {/* Messages area - scrollable */}
-          <div className="flex-1 overflow-y-auto overscroll-contain p-5 space-y-4">
+          {/* Messages area */}
+          <div className="flex-1 overflow-y-auto overscroll-contain p-5 space-y-4 scrollbar-hide">
             {messages.length === 0 && (
-              <div className="flex flex-col items-center justify-center h-full text-center gap-3 py-8">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <i className="fas fa-sparkles text-primary text-sm" />
-                </div>
-                <p className="text-text-subtle text-[13px] font-mono leading-relaxed">
+              <div className="flex flex-col items-start justify-center h-full gap-3 py-8">
+                <p className="font-mono text-[11px] text-[#e63320]">$ donghan --query</p>
+                <p className="font-mono text-[12px] text-[#6a6660] leading-relaxed">
                   Ask me anything about Donghan's<br />experience, projects, or skills.
                 </p>
-                <kbd className="hidden md:inline-flex items-center gap-1 px-2 py-1 rounded-md bg-border/50 text-text-subtle text-xs font-mono border border-border-bright/30">
-                  ⌘K
-                </kbd>
+                <p className="font-mono text-[10px] text-[#3a3a36] tracking-[0.08em]">
+                  Press <span className="text-[#6a6660]">⌘K</span> to open / close
+                </p>
               </div>
             )}
             {messages.map((msg, i) => (
-              <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                {msg.role === 'assistant' && (
-                  <div className={`w-6 h-6 rounded-md flex items-center justify-center mr-3 mt-0.5 shrink-0 ${msg.error ? 'bg-red-500/10' : 'bg-primary/10'}`}>
-                    <i className={`fas ${msg.error ? 'fa-exclamation-triangle text-red-400' : 'fa-sparkles text-primary'} text-[10px]`} />
-                  </div>
+              <div key={i} className="flex flex-col gap-1">
+                {msg.role === 'user' && (
+                  <p className="font-mono text-[10px] text-[#e63320]">$ query</p>
                 )}
-                <div className="flex flex-col max-w-[85%]">
+                <div className="flex flex-col max-w-[92%]">
                   <div
-                    className={`text-[14px] leading-relaxed ${
+                    className={`font-mono text-[13px] leading-relaxed ${
                       msg.role === 'user'
-                        ? 'text-text-muted font-mono text-[13px] bg-border/30 px-3 py-2 rounded-xl'
+                        ? 'text-[#c8c4bc]'
                         : msg.error
                           ? 'text-red-400/80'
-                          : 'text-text-main'
+                          : 'text-[#e8e4dc]'
                     }`}
                   >
                     {msg.content}
@@ -184,32 +182,32 @@ export default function CommandPalette() {
                     <button
                       onClick={() => handleRetry(i)}
                       disabled={isLoading}
-                      className="mt-2 text-[12px] font-mono text-primary/70 hover:text-primary transition-colors cursor-pointer bg-transparent border border-primary/20 rounded-md px-2 py-1 w-fit disabled:opacity-40"
+                      className="mt-2 font-mono text-[11px] text-[#e63320]/70 hover:text-[#e63320] transition-colors cursor-pointer bg-transparent border border-[#e63320]/20 px-2 py-1 w-fit disabled:opacity-40"
+                      style={{ borderRadius: '2px' }}
                     >
-                      <i className="fas fa-redo text-[10px] mr-1" /> Retry
+                      <i className="fas fa-redo text-[10px] mr-1" /> retry
                     </button>
                   )}
                 </div>
               </div>
             ))}
             {isLoading && (
-              <div className="flex items-start">
-                <div className="w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center mr-3 shrink-0">
-                  <i className="fas fa-sparkles text-primary text-[10px]" />
-                </div>
-                <div className="flex gap-1.5 pt-2">
-                  <span className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce [animation-delay:0ms]" />
-                  <span className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce [animation-delay:150ms]" />
-                  <span className="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce [animation-delay:300ms]" />
+              <div className="flex items-center gap-2">
+                <p className="font-mono text-[11px] text-[#4a4640]">processing</p>
+                <div className="flex gap-1">
+                  <span className="w-1 h-1 bg-[#e63320]/50 animate-bounce [animation-delay:0ms]" />
+                  <span className="w-1 h-1 bg-[#e63320]/50 animate-bounce [animation-delay:150ms]" />
+                  <span className="w-1 h-1 bg-[#e63320]/50 animate-bounce [animation-delay:300ms]" />
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input — always at bottom */}
-          <div className="border-t border-border/50 shrink-0">
-            <div className="flex items-center gap-3 px-5 py-4">
+          {/* Input */}
+          <div className="border-t border-[#2e2e2a] shrink-0">
+            <div className="flex items-center gap-2 px-5 py-4">
+              <span className="font-mono text-[11px] text-[#e63320] shrink-0">$</span>
               <input
                 ref={inputRef}
                 type="text"
@@ -217,25 +215,25 @@ export default function CommandPalette() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 disabled={isLoading}
-                placeholder={isLoading ? 'Thinking...' : 'Type your question...'}
-                className="flex-1 bg-transparent text-text-main text-base md:text-[15px] outline-none placeholder:text-text-subtle font-light tracking-wide disabled:opacity-50"
+                placeholder={isLoading ? 'thinking...' : 'type your question...'}
+                className="flex-1 bg-transparent text-[#e8e4dc] text-[14px] outline-none placeholder:text-[#3a3a36] font-mono disabled:opacity-50"
               />
               <button
                 onClick={handleSend}
                 disabled={isLoading || !input.trim()}
-                className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center hover:bg-primary/20 transition-colors duration-200 cursor-pointer border-none disabled:opacity-40"
+                className="w-7 h-7 flex items-center justify-center text-[#e63320]/60 hover:text-[#e63320] transition-colors duration-200 cursor-pointer bg-transparent border-none disabled:opacity-30"
               >
                 <i className="fas fa-arrow-up text-xs" />
               </button>
             </div>
             <div className="flex items-center justify-between px-5 pb-3">
-              <span className="text-text-subtle text-[11px] font-mono">Powered by Llama 3</span>
+              <span className="font-mono text-[10px] text-[#3a3a36]">Powered by Llama 3</span>
               {messages.length > 0 && (
                 <button
                   onClick={() => setMessages([])}
-                  className="text-text-subtle text-[11px] font-mono hover:text-text-muted transition-colors cursor-pointer bg-transparent border-none"
+                  className="font-mono text-[10px] text-[#3a3a36] hover:text-[#6a6660] transition-colors cursor-pointer bg-transparent border-none"
                 >
-                  Clear
+                  clear
                 </button>
               )}
             </div>
@@ -243,20 +241,20 @@ export default function CommandPalette() {
         </div>
       </div>
 
-      {/* Floating toggle button */}
+      {/* Floating toggle button — dark on light page */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        style={{ bottom: 'calc(1rem + env(safe-area-inset-bottom, 0px))' }}
-        className={`fixed right-4 z-50 w-12 h-12 rounded-2xl shadow-lg
+        style={{ bottom: 'calc(1rem + env(safe-area-inset-bottom, 0px)', borderRadius: '2px' }}
+        className={`fixed right-4 z-50 w-11 h-11
           flex items-center justify-center
           transition-all duration-300 cursor-pointer border-none
           ${isOpen
-            ? 'bg-primary/90 text-bg scale-95 shadow-[0_0_20px_rgba(167,139,250,0.4)]'
-            : 'bg-bg-surface/90 backdrop-blur-xl border border-primary/25 text-primary hover:bg-primary/10 hover:border-primary/40'
+            ? 'bg-[#e63320] text-white scale-95 shadow-[0_4px_20px_rgba(230,51,32,0.4)]'
+            : 'bg-[#111110] border border-[#2e2e2a] text-[#e63320] hover:bg-[#1a1a18] shadow-[0_4px_20px_rgba(0,0,0,0.3)]'
           }`}
         aria-label={isOpen ? 'Close chat' : 'Open chat'}
       >
-        <i className={`fas transition-all duration-300 text-base ${isOpen ? 'fa-times' : 'fa-comments'}`} />
+        <i className={`fas transition-all duration-300 text-sm ${isOpen ? 'fa-times' : 'fa-terminal'}`} />
       </button>
     </>
   );

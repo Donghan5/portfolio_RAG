@@ -17,12 +17,12 @@ const projects: Project[] = [
     title: 'Weather app',
     tags: ['React', 'TypeScript', 'TailwindCSS', 'OpenWeatherMap API'],
     description:
-      'A weather application built with React and TypeScript, using the OpenWeatherMap API to fetch real-time weather data. Features include current weather, 5-day forecast, and search functionality for specific locations.',
+      'A weather application built with React and TypeScript, using the OpenWeatherMap API to fetch real-time weather data. Features include current weather, 5-day forecast, and search functionality.',
     github: 'https://github.com/Donghan5/weather_app',
   },
   {
     title: 'E-commerce API',
-    tags: ['Go', 'TypeScript(nest.js)', 'PostgreSQL', 'Docker'],
+    tags: ['Go', 'TypeScript (nest.js)', 'PostgreSQL', 'Docker'],
     description:
       'A RESTful API for an e-commerce platform built with Typescript and Go using the Gin framework. Features include user authentication, product management, order processing, and payment integration.',
     github: 'https://github.com/Donghan5/ecommerce_api',
@@ -153,51 +153,81 @@ const projects: Project[] = [
   },
 ];
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectRow({ project, index }: { project: Project; index: number }) {
   return (
     <a
       href={project.github}
       target="_blank"
       rel="noreferrer"
-      className="group block bg-bg-card/35 border border-border rounded-2xl p-5 transition-all duration-300 hover:border-primary/25 hover:bg-bg-card/55 hover:shadow-[0_0_24px_rgba(167,139,250,0.07)] no-underline h-full"
+      className="group block no-underline py-6 transition-colors duration-200 hover:bg-bg-card/60"
+      style={{ borderBottom: '1px solid var(--color-border)' }}
     >
-      <div className="flex items-start justify-between mb-3">
-        <h3 className="text-text-main text-[14px] font-medium group-hover:text-primary transition-colors duration-300 leading-snug">
-          {project.title}
-        </h3>
-        <i className="fas fa-arrow-up-right-from-square text-primary/30 text-[9px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-1 shrink-0 ml-2" />
+      <div className="grid grid-cols-1 md:grid-cols-[32px_1fr_auto] gap-4 md:gap-6 items-start">
+        {/* Index */}
+        <span className="font-mono text-[10px] text-text-subtle/50 pt-0.5 hidden md:block">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+
+        {/* Content */}
+        <div>
+          <div className="flex items-center gap-3 mb-2">
+            <h3
+              className="font-display font-bold text-[16px] text-text-main group-hover:text-primary transition-colors duration-200"
+              style={{ fontFamily: 'Syne, sans-serif' }}
+            >
+              {project.title}
+            </h3>
+            <i className="fas fa-arrow-up-right-from-square text-[9px] text-text-subtle/0 group-hover:text-primary/50 transition-all duration-200 translate-x-[-4px] group-hover:translate-x-0" />
+          </div>
+          <p className="font-mono text-[12px] text-text-muted leading-[1.8]">
+            {project.description}
+          </p>
+        </div>
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 md:justify-end md:max-w-[180px]">
+          {project.tags.map((tag) => (
+            <span key={tag} className="tag">
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {project.tags.map((tag) => (
-          <span
-            key={tag}
-            className="font-mono text-[10px] text-text-subtle px-2 py-0.5 rounded-md bg-border/50 border border-border/80 group-hover:border-border-bright/60 transition-colors duration-300"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-      <p className="text-text-muted text-[12px] leading-[1.75]">
-        {project.description}
-      </p>
     </a>
   );
 }
 
 export default function Projects() {
   return (
-    <div className="min-h-screen flex items-center justify-center pt-24 pb-12 px-4 relative z-10">
-      <div className="w-full max-w-5xl">
-        <h2 className="font-mono text-[11px] tracking-widest uppercase text-primary/50 mb-3 text-center">
-          Projects
-        </h2>
-        <div className="divider-gradient mb-10" />
+    <div className="min-h-screen pt-12 relative z-10">
+      <div className="max-w-5xl mx-auto px-6 py-16 md:py-24">
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
-          ))}
+        {/* Section header */}
+        <div className="flex items-baseline justify-between mb-3">
+          <h2
+            className="font-display font-bold text-[11px] tracking-[0.25em] uppercase text-text-subtle"
+            style={{ fontFamily: 'Syne, sans-serif' }}
+          >
+            Projects
+          </h2>
+          <span className="font-mono text-[10px] text-text-subtle/50 tracking-[0.12em]">
+            § 03 · {projects.length} entries
+          </span>
         </div>
+        <div className="rule-red mb-10" />
+
+        {/* Column labels */}
+        <div className="grid-cols-[32px_1fr_auto] gap-6 items-center mb-2 hidden md:grid">
+          <span />
+          <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-text-subtle/50">Project</span>
+          <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-text-subtle/50 text-right">Stack</span>
+        </div>
+        <div className="rule mb-0" />
+
+        {/* Project rows */}
+        {projects.map((project, i) => (
+          <ProjectRow key={project.title} project={project} index={i} />
+        ))}
       </div>
     </div>
   );
