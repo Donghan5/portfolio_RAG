@@ -9,24 +9,29 @@ export default function HomePage() {
     <section className="min-h-screen pt-12 flex flex-col justify-center relative z-10">
       <div className="max-w-5xl mx-auto px-6 w-full py-16 md:py-24">
 
-        {/* Top label row */}
-        <div className="flex items-center justify-between mb-6">
-          <span className="font-mono text-[10px] text-text-subtle tracking-[0.22em] uppercase">
-            Portfolio · 2025
-          </span>
-          <div className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary" style={{ animation: 'blink 2s step-end infinite' }} />
-            <span className="font-mono text-[10px] text-primary tracking-[0.15em] uppercase">Available</span>
+        {/* Status row */}
+        <div className="hero-1 flex items-center justify-between mb-7">
+          <div className="flex items-center gap-2">
+            <span
+              className="w-1.5 h-1.5 rounded-full bg-primary shrink-0"
+              style={{ animation: 'blink 2.4s step-end infinite' }}
+            />
+            <span className="font-mono text-[10px] text-primary tracking-[0.18em] uppercase">
+              Available for opportunities
+            </span>
           </div>
+          <span className="font-mono text-[10px] text-text-subtle tracking-[0.15em] uppercase">
+            Paris · 2026
+          </span>
         </div>
 
-        {/* Rule */}
-        <div className="rule mb-8" />
+        {/* Top rule */}
+        <div className="hero-2 rule mb-9" />
 
-        {/* Hero name */}
-        <div className="mb-8 overflow-hidden">
+        {/* Hero name — massive editorial typography */}
+        <div className="hero-3 mb-9 overflow-hidden">
           <h1
-            className="font-display text-[clamp(4.5rem,13vw,9.5rem)] font-extrabold leading-[0.88] tracking-[-0.03em] text-text-main"
+            className="font-display text-[clamp(5rem,14vw,10.5rem)] font-extrabold leading-[0.87] tracking-[-0.03em] text-text-main"
             style={{ fontFamily: 'Syne, sans-serif' }}
           >
             DONGHAN
@@ -35,31 +40,27 @@ export default function HomePage() {
           </h1>
         </div>
 
-        {/* Rule */}
-        <div className="rule mb-8" />
+        {/* Bottom rule */}
+        <div className="hero-4 rule mb-9" />
 
-        {/* Two-column info row */}
-        <div className="flex flex-col sm:flex-row sm:justify-between gap-6 mb-12">
-          <div className="space-y-1">
-            <p className="font-mono text-[13px] text-text-muted">
+        {/* Two-column info */}
+        <div className="hero-5 flex flex-col sm:flex-row sm:justify-between gap-6 mb-12">
+          <div className="space-y-1.5">
+            <p className="font-mono text-[13px] text-text-muted tracking-[0.02em]">
               CS Student · 42 Paris
             </p>
-            <p className="font-mono text-[13px] text-text-muted">
+            <p className="font-mono text-[13px] text-text-muted tracking-[0.02em]">
               Software Engineer · AI / ML
             </p>
           </div>
-          <div className="sm:text-right space-y-1">
-            <p className="font-mono text-[12px] text-text-subtle">
-              Paris, France
-            </p>
-            <p className="font-mono text-[12px] text-text-subtle">
-              donghank@student.42.fr
-            </p>
+          <div className="sm:text-right space-y-1.5">
+            <p className="font-mono text-[12px] text-text-subtle">Paris, France</p>
+            <p className="font-mono text-[12px] text-text-subtle">donghank@student.42.fr</p>
           </div>
         </div>
 
-        {/* Social + hint row */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        {/* Social links + keyboard hint */}
+        <div className="hero-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-center gap-6">
             {links.map((link) => (
               <a
@@ -74,7 +75,7 @@ export default function HomePage() {
               </a>
             ))}
           </div>
-          <p className="font-mono text-[11px] text-text-subtle/60">
+          <p className="font-mono text-[11px] text-text-subtle/50">
             <kbd className="px-1.5 py-0.5 border border-border text-text-subtle text-[10px] font-mono bg-bg-card">
               Ctrl K
             </kbd>
@@ -83,11 +84,11 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Bottom decorative rule with label */}
-      <div className="max-w-5xl mx-auto px-6 w-full">
+      {/* Scroll hint */}
+      <div className="hero-6 max-w-5xl mx-auto px-6 w-full pb-10">
         <div className="flex items-center gap-4">
           <div className="rule flex-1" />
-          <span className="font-mono text-[10px] text-text-subtle/50 tracking-[0.18em] uppercase shrink-0">
+          <span className="font-mono text-[10px] text-text-subtle/40 tracking-[0.18em] uppercase shrink-0">
             Scroll to explore
           </span>
           <div className="rule flex-1" />

@@ -50,7 +50,7 @@ const projects: Project[] = [
   {
     title: 'multilayer-perceptron',
     tags: ['Python', 'Numpy', 'Pandas'],
-    description: 'Implemented Multilayer Perceptron (MLP).',
+    description: 'Implemented Multilayer Perceptron (MLP) neural network from scratch.',
     github: 'https://github.com/Donghan5/multilayer_perceptron',
   },
   {
@@ -159,38 +159,43 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
       href={project.github}
       target="_blank"
       rel="noreferrer"
-      className="group block no-underline py-6 transition-colors duration-200 hover:bg-bg-card/60"
-      style={{ borderBottom: '1px solid var(--color-border)' }}
+      className="project-row group block no-underline"
     >
-      <div className="grid grid-cols-1 md:grid-cols-[32px_1fr_auto] gap-4 md:gap-6 items-start">
-        {/* Index */}
-        <span className="font-mono text-[10px] text-text-subtle/50 pt-0.5 hidden md:block">
+      {/* Always visible row */}
+      <div className="flex items-center gap-4 py-4 border-b border-border transition-colors duration-200 group-hover:border-primary/20">
+        <span className="font-mono text-[10px] text-text-subtle/40 shrink-0 w-6 text-right select-none">
           {String(index + 1).padStart(2, '0')}
         </span>
+        <h3
+          className="font-display font-bold text-[15px] text-text-main group-hover:text-primary transition-colors duration-200 flex-1 leading-snug"
+          style={{ fontFamily: 'Syne, sans-serif' }}
+        >
+          {project.title}
+        </h3>
+        {/* Tags: fade in on hover, desktop only */}
+        <div className="hidden md:flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0">
+          {project.tags.slice(0, 3).map((tag) => (
+            <span key={tag} className="tag">{tag}</span>
+          ))}
+          {project.tags.length > 3 && (
+            <span className="tag">+{project.tags.length - 3}</span>
+          )}
+        </div>
+        <i className="fas fa-arrow-up-right-from-square text-[9px] opacity-0 group-hover:opacity-60 text-primary transition-opacity duration-200 shrink-0" />
+      </div>
 
-        {/* Content */}
-        <div>
-          <div className="flex items-center gap-3 mb-2">
-            <h3
-              className="font-display font-bold text-[16px] text-text-main group-hover:text-primary transition-colors duration-200"
-              style={{ fontFamily: 'Syne, sans-serif' }}
-            >
-              {project.title}
-            </h3>
-            <i className="fas fa-arrow-up-right-from-square text-[9px] text-text-subtle/0 group-hover:text-primary/50 transition-all duration-200 translate-x-[-4px] group-hover:translate-x-0" />
-          </div>
-          <p className="font-mono text-[12px] text-text-muted leading-[1.8]">
+      {/* Description: revealed on hover via grid-template-rows animation */}
+      <div className="project-reveal">
+        <div className="project-reveal-inner">
+          <p className="font-mono text-[12px] text-text-muted leading-relaxed pl-10 pt-3 pb-4">
             {project.description}
           </p>
-        </div>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-1.5 md:justify-end md:max-w-[180px]">
-          {project.tags.map((tag) => (
-            <span key={tag} className="tag">
-              {tag}
-            </span>
-          ))}
+          {/* Tags on mobile in reveal panel */}
+          <div className="flex md:hidden flex-wrap gap-1.5 pl-10 pb-4">
+            {project.tags.map((tag) => (
+              <span key={tag} className="tag">{tag}</span>
+            ))}
+          </div>
         </div>
       </div>
     </a>
@@ -214,13 +219,12 @@ export default function Projects() {
             § 03 · {projects.length} entries
           </span>
         </div>
-        <div className="rule-red mb-10" />
+        <div className="rule-red mb-6" />
 
         {/* Column labels */}
-        <div className="grid-cols-[32px_1fr_auto] gap-6 items-center mb-2 hidden md:grid">
-          <span />
-          <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-text-subtle/50">Project</span>
-          <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-text-subtle/50 text-right">Stack</span>
+        <div className="hidden md:flex items-center gap-4 mb-2 pl-10">
+          <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-text-subtle/50 flex-1">Project</span>
+          <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-text-subtle/50">Stack · hover to reveal</span>
         </div>
         <div className="rule mb-0" />
 
@@ -228,6 +232,8 @@ export default function Projects() {
         {projects.map((project, i) => (
           <ProjectRow key={project.title} project={project} index={i} />
         ))}
+
+        <div className="rule mt-0" />
       </div>
     </div>
   );

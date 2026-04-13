@@ -2,17 +2,17 @@
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 
 @theme {
-  --color-bg: #f4f0e8;
-  --color-bg-card: #ece7dd;
-  --color-bg-card-hover: #e5ded3;
-  --color-bg-surface: #edeae2;
+  --color-bg: #0c0c0a;
+  --color-bg-card: #131311;
+  --color-bg-card-hover: #181816;
+  --color-bg-surface: #161614;
   --color-primary: #e63320;
   --color-primary-dim: #bf2a1a;
-  --color-text-main: #0f0e0c;
-  --color-text-muted: #4a4540;
-  --color-text-subtle: #9c9890;
-  --color-border: #c8c3ba;
-  --color-border-bright: #b0aaa1;
+  --color-text-main: #f0ece4;
+  --color-text-muted: #a09c96;
+  --color-text-subtle: #6a6662;
+  --color-border: #262624;
+  --color-border-bright: #323230;
 
   --font-display: 'Syne', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
@@ -27,7 +27,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 52px;
+  scroll-padding-top: 48px;
 }
 
 body {
@@ -38,31 +38,63 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Fine graph-paper dot grid */
+/* Subtle dot grid on dark bg */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(circle, var(--color-border) 0.6px, transparent 0.6px);
-  background-size: 22px 22px;
-  opacity: 0.3;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.055) 0.6px, transparent 0.6px);
+  background-size: 24px 24px;
   pointer-events: none;
   z-index: 0;
 }
 
-/* Cursor blink animation */
+/* ─── Animations ────────────────────────────────── */
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes section-enter {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(230, 51, 32, 0.12), 0 24px 48px rgba(0,0,0,0.7); }
+  50%       { box-shadow: 0 0 0 1px rgba(230, 51, 32, 0.28), 0 24px 64px rgba(0,0,0,0.8); }
+}
+
+/* Hero entrance — staggered */
+.hero-1 { animation: slide-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.00s both; }
+.hero-2 { animation: slide-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.10s both; }
+.hero-3 { animation: slide-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.20s both; }
+.hero-4 { animation: slide-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.34s both; }
+.hero-5 { animation: slide-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both; }
+.hero-6 { animation: slide-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.62s both; }
+
+/* Section scroll reveal */
+#about, #experience, #projects {
+  animation: section-enter 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-play-state: paused;
+}
+#about.visible, #experience.visible, #projects.visible {
+  animation-play-state: running;
+}
+
+/* ─── Typography helpers ─────────────────────────── */
 .cursor-blink::after {
   content: '_';
   color: var(--color-primary);
   animation: blink 1s step-end infinite;
 }
 
-/* Section rule */
+/* ─── Layout helpers ─────────────────────────────── */
 .rule {
   height: 1px;
   background-color: var(--color-border);
@@ -72,12 +104,11 @@ body::before {
 .rule-red {
   height: 2px;
   background-color: var(--color-primary);
+  width: 100%;
 }
 
-/* Hover underline slide */
-.hover-underline {
-  position: relative;
-}
+/* ─── Hover underline ────────────────────────────── */
+.hover-underline { position: relative; }
 .hover-underline::after {
   content: '';
   position: absolute;
@@ -88,11 +119,9 @@ body::before {
   background-color: var(--color-primary);
   transition: width 0.25s ease;
 }
-.hover-underline:hover::after {
-  width: 100%;
-}
+.hover-underline:hover::after { width: 100%; }
 
-/* Tag style */
+/* ─── Tag chip ───────────────────────────────────── */
 .tag {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -103,24 +132,32 @@ body::before {
   letter-spacing: 0.02em;
 }
 
-/* Chat window — dark terminal on light page */
+/* ─── Chat terminal ──────────────────────────────── */
 .chat-surface {
-  background: #111110;
-  border: 1px solid #2e2e2a;
+  background: #0a0a09;
+  border: 1px solid #222220;
   color: #e8e4dc;
-}
-
-/* Glow-pulse for chat border */
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 0 1px rgba(230, 51, 32, 0.15), 0 24px 48px rgba(0,0,0,0.4); }
-  50% { box-shadow: 0 0 0 1px rgba(230, 51, 32, 0.3), 0 24px 64px rgba(0,0,0,0.5); }
 }
 
 .glow-border-active {
   animation: glow-pulse 4s ease-in-out infinite;
 }
 
-/* Scrollbar */
+/* ─── Project hover-reveal ───────────────────────── */
+/* Uses grid-template-rows animation (smooth, no max-height clipping) */
+.project-reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 380ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-row:hover .project-reveal {
+  grid-template-rows: 1fr;
+}
+.project-reveal-inner {
+  overflow: hidden;
+}
+
+/* ─── Scrollbar ──────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--color-border-bright); border-radius: 2px; }

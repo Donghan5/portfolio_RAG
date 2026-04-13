@@ -1,56 +1,73 @@
-import { NavLink } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 const navItems = [
-  { label: 'Home', to: '/' },
-  { label: 'About', to: '/about' },
-  { label: 'Experience', to: '/experience' },
-  { label: 'Projects', to: '/projects' },
+  { label: 'Home', id: 'home' },
+  { label: 'About', id: 'about' },
+  { label: 'Experience', id: 'experience' },
+  { label: 'Projects', id: 'projects' },
 ];
 
 export default function Navbar() {
+  const [active, setActive] = useState('home');
   const [mobileOpen, setMobileOpen] = useState(false);
-  const navRef = useRef<HTMLElement>(null);
+  const [progress, setProgress] = useState(0);
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    setMobileOpen(false);
+  };
 
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(e.target as Node)) {
-        setMobileOpen(false);
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      setProgress(scrollHeight > clientHeight ? (scrollTop / (scrollHeight - clientHeight)) * 100 : 0);
+
+      const OFFSET = 160;
+      let current = 'home';
+      for (const { id } of navItems) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= OFFSET) {
+          current = id;
+        }
       }
+      setActive(current);
     };
-    if (mobileOpen) document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, [mobileOpen]);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <nav
-      ref={navRef}
-      className="fixed top-0 left-0 right-0 z-[1000] bg-bg/90 backdrop-blur-sm border-b border-border"
-    >
+    <nav className="fixed top-0 left-0 right-0 z-[1000] bg-bg/92 backdrop-blur-md border-b border-border">
+      {/* Scroll progress bar */}
+      <div
+        className="absolute bottom-0 left-0 h-[1.5px] bg-primary transition-[width] duration-100 ease-linear"
+        style={{ width: `${progress}%` }}
+      />
+
       <div className="max-w-5xl mx-auto px-6 h-12 flex items-center justify-between">
         {/* Logo */}
-        <NavLink
-          to="/"
-          className="font-display font-bold text-[15px] tracking-tight text-text-main no-underline hover:text-primary transition-colors duration-200"
+        <button
+          onClick={() => scrollTo('home')}
+          className="font-display font-bold text-[15px] tracking-tight text-text-main hover:text-primary transition-colors duration-200 bg-transparent border-none cursor-pointer p-0"
+          style={{ fontFamily: 'Syne, sans-serif' }}
         >
           DK.
-        </NavLink>
+        </button>
 
         {/* Desktop nav */}
         <ul className="hidden md:flex gap-8 list-none">
           {navItems.map((item) => (
-            <li key={item.to}>
-              <NavLink
-                to={item.to}
-                end={item.to === '/'}
-                className={({ isActive }) =>
-                  `no-underline text-[11px] font-mono tracking-[0.12em] uppercase transition-colors duration-200 hover-underline ${
-                    isActive ? 'text-primary' : 'text-text-subtle hover:text-text-main'
-                  }`
-                }
+            <li key={item.id}>
+              <button
+                onClick={() => scrollTo(item.id)}
+                className={`bg-transparent border-none cursor-pointer text-[11px] font-mono tracking-[0.12em] uppercase transition-colors duration-200 hover-underline p-0 ${
+                  active === item.id ? 'text-primary' : 'text-text-subtle hover:text-text-main'
+                }`}
               >
                 {item.label}
-              </NavLink>
+              </button>
             </li>
           ))}
         </ul>
@@ -59,7 +76,7 @@ export default function Navbar() {
         <button
           onClick={() => setMobileOpen((p) => !p)}
           className="md:hidden w-8 h-8 flex flex-col items-center justify-center gap-[5px] bg-transparent border-none cursor-pointer"
-          aria-label={mobileOpen ? 'Close' : 'Open'}
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
         >
           <span className={`block w-5 h-px bg-text-muted transition-all duration-300 origin-center ${mobileOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
           <span className={`block w-5 h-px bg-text-muted transition-all duration-300 ${mobileOpen ? 'opacity-0 scale-x-0' : ''}`} />
@@ -75,19 +92,15 @@ export default function Navbar() {
       >
         <ul className="list-none py-2 px-6 flex flex-col">
           {navItems.map((item) => (
-            <li key={item.to}>
-              <NavLink
-                to={item.to}
-                end={item.to === '/'}
-                onClick={() => setMobileOpen(false)}
-                className={({ isActive }) =>
-                  `block no-underline text-[11px] font-mono tracking-[0.12em] uppercase py-3 transition-colors duration-200 hover:text-text-main ${
-                    isActive ? 'text-primary' : 'text-text-subtle'
-                  }`
-                }
+            <li key={item.id}>
+              <button
+                onClick={() => scrollTo(item.id)}
+                className={`block w-full text-left text-[11px] font-mono tracking-[0.12em] uppercase py-3 transition-colors duration-200 bg-transparent border-none cursor-pointer hover:text-text-main ${
+                  active === item.id ? 'text-primary' : 'text-text-subtle'
+                }`}
               >
                 {item.label}
-              </NavLink>
+              </button>
             </li>
           ))}
         </ul>

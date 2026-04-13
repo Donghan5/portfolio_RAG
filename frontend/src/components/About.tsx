@@ -4,6 +4,13 @@ const skills = [
   'Deep Learning', 'Kafka', 'Redis', 'Nest.js', 'Node.js', 'Socket.io',
 ];
 
+const vitals = [
+  ['Location', 'Paris, France'],
+  ['School', '42 Paris'],
+  ['Level', 'RNCP Lv.7'],
+  ['Languages', 'KO / FR / EN'],
+] as const;
+
 export default function About() {
   return (
     <div className="min-h-screen pt-12 relative z-10">
@@ -26,21 +33,21 @@ export default function About() {
 
           {/* Left: image + vitals */}
           <div className="space-y-6">
-            <img
-              src="/profile_image.JPG"
-              alt="Donghan Kim"
-              className="w-full aspect-square object-cover grayscale hover:grayscale-0 transition-all duration-700 border border-border"
-              style={{ maxWidth: '200px' }}
-            />
+            <div className="relative">
+              <img
+                src="/profile_image.JPG"
+                alt="Donghan Kim"
+                className="w-full aspect-square object-cover grayscale hover:grayscale-0 transition-all duration-700 border border-border"
+                style={{ maxWidth: '200px' }}
+              />
+              {/* Subtle red accent line on image */}
+              <div className="absolute bottom-0 left-0 w-8 h-[2px] bg-primary" />
+            </div>
+
             <div className="space-y-3 border-t border-border pt-5">
-              {[
-                ['Location', 'Paris, France'],
-                ['School', '42 Paris'],
-                ['Level', 'RNCP Lv.7'],
-                ['Languages', 'KO / FR / EN'],
-              ].map(([k, v]) => (
+              {vitals.map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-4">
-                  <span className="font-mono text-[11px] text-text-subtle/70 tracking-[0.08em]">{k}</span>
+                  <span className="font-mono text-[11px] text-text-subtle tracking-[0.06em]">{k}</span>
                   <span className="font-mono text-[11px] text-text-muted text-right">{v}</span>
                 </div>
               ))}
@@ -65,7 +72,7 @@ export default function About() {
               {skills.map((skill) => (
                 <span
                   key={skill}
-                  className="tag hover:text-primary hover:border-primary/50 transition-colors duration-200 cursor-default"
+                  className="tag hover:text-primary hover:border-primary/40 transition-colors duration-200 cursor-default"
                 >
                   {skill}
                 </span>

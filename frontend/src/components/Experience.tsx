@@ -38,9 +38,9 @@ export default function Experience() {
         <div className="space-y-0">
           {experiences.map((exp, i) => (
             <div key={exp.title}>
-              {/* Entry */}
               <div className="grid grid-cols-1 md:grid-cols-[80px_1fr] gap-6 py-10 group">
-                {/* Index */}
+
+                {/* Index + type */}
                 <div className="flex md:flex-col items-start gap-4 md:gap-2">
                   <span
                     className="font-display font-bold text-[3rem] leading-none text-border select-none transition-colors duration-300 group-hover:text-primary/20"
@@ -65,7 +65,7 @@ export default function Experience() {
                       </h3>
                       <p className="font-mono text-[12px] text-primary mt-1">{exp.role}</p>
                     </div>
-                    <span className="font-mono text-[11px] text-text-subtle tracking-[0.1em] shrink-0">
+                    <span className="font-mono text-[11px] text-text-subtle tracking-[0.08em] shrink-0">
                       {exp.duration}
                     </span>
                   </div>
