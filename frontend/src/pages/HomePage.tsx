@@ -29,11 +29,10 @@ export default function HomePage() {
         <div className="hero-2 rule mb-6" />
 
         {/* Hero name */}
-        {/* marginLeft: '-0.03em' — optical alignment: compensates for Syne's left sidebearing at large sizes */}
         <div className="hero-3 mb-6">
           <h1
-            className="font-display text-[clamp(5rem,14vw,10.5rem)] font-extrabold leading-[0.92] tracking-[-0.03em] text-text-main"
-            style={{ fontFamily: 'Syne, sans-serif', marginLeft: '-0.03em' }}
+            className="font-display text-[clamp(3.5rem,9vw,6.5rem)] font-extrabold leading-[0.95] tracking-[-0.02em] text-text-main"
+            style={{ fontFamily: 'Syne, sans-serif' }}
           >
             DONGHAN
             <br />
