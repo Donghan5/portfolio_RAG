@@ -29,9 +29,9 @@ export default function HomePage() {
         <div className="hero-2 rule mb-9" />
 
         {/* Hero name — massive editorial typography */}
-        <div className="hero-3 mb-9 overflow-hidden">
+        <div className="hero-3 mb-9">
           <h1
-            className="font-display text-[clamp(5rem,14vw,10.5rem)] font-extrabold leading-[0.87] tracking-[-0.03em] text-text-main"
+            className="font-display text-[clamp(5rem,14vw,10.5rem)] font-extrabold leading-[0.92] tracking-[-0.03em] text-text-main"
             style={{ fontFamily: 'Syne, sans-serif' }}
           >
             DONGHAN

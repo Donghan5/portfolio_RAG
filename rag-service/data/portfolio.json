@@ -37,7 +37,11 @@
   },
   {
     "category": "project",
-    "content": "cloud-1: Deployed and managed a scalable web infrastructure on Scaleway cloud using Ansible for automated provisioning and configuration management. Set up Nginx as a reverse proxy with infrastructure-as-code practices, demonstrating hands-on automation experience in cloud environments. Tech stack: Ansible, Nginx, DevOps, Cloud, Scaleway. GitHub: https://github.com/Donghan5/cloud-1"
+    "content": "cloud-1: A cloud infrastructure automation project completed at 42 Paris. Deployed and managed a scalable multi-service web infrastructure on Scaleway cloud using Ansible for fully automated provisioning and configuration management. The infrastructure includes Nginx configured as a reverse proxy, a WordPress CMS, and a MariaDB database — all provisioned from scratch via Ansible playbooks following infrastructure-as-code (IaC) practices. The project also covers SSL/TLS certificate management and secure remote access configuration. Demonstrates end-to-end DevOps workflow: from bare cloud VMs to a production-ready web stack, with repeatable, version-controlled deployment automation. Tech stack: Ansible, Nginx, WordPress, MariaDB, Scaleway, DevOps, IaC, Cloud, SSL. GitHub: https://github.com/Donghan5/cloud-1"
+  },
+  {
+    "category": "project_detail",
+    "content": "cloud-1 technical details: The project uses Ansible inventory and playbooks to provision multiple cloud VMs on Scaleway. Key tasks include installing and configuring Nginx as a reverse proxy, deploying WordPress with PHP-FPM, setting up MariaDB with secure credentials, managing firewall rules (UFW), automating SSL certificate renewal, and ensuring idempotent configuration across servers. The architecture follows a separation of concerns: web/proxy tier (Nginx) and application/database tier. This mirrors real-world DevOps practices for reproducible cloud deployments."
   },
   {
     "category": "project",
