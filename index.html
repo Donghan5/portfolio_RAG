@@ -1,754 +1,986 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donghan Kim | Software Engineer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            /* Palette: Clean Dark Theme */
-            --bg-color: #0f172a;       /* Deep Slate */
-            --bg-card: #1e293b;        /* Lighter Slate */
-            --bg-card-hover: #334155;  
-            --primary-color: #34d399;  /* Soft Emerald */
-            --text-main: #f8fafc;      
-            --text-muted: #94a3b8;     
-            --border-color: #334155;
-            
-            --font-mono: 'JetBrains Mono', monospace;
-            --font-sans: 'Inter', sans-serif;
-            
-            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            --max-width: 1100px;
-            --nav-height: 70px;
-        }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Donghan Kim — Data Scientist in the making</title>
+<link rel="stylesheet" href="colors_and_type.css" />
+<style>
+  html { scroll-behavior: smooth; scroll-padding-top: 64px; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  /* ===== Nav ===== */
+  .nav {
+    max-width: var(--column-wide);
+    margin: 0 auto;
+    padding: 20px 32px;
+    display: flex; align-items: baseline; justify-content: space-between;
+    position: sticky; top: 0;
+    background: rgba(250,249,246,0.92);
+    backdrop-filter: saturate(140%) blur(6px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+  .nav .wordmark {
+    font-family: var(--font-serif); font-weight: 500; font-size: 18px;
+    letter-spacing: -0.01em; color: var(--fg); text-decoration: none;
+  }
+  .nav .wordmark .dot { color: var(--accent); }
+  .nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 32px; }
+  .nav a {
+    font-family: var(--font-sans); font-size: 13px;
+    color: var(--fg-muted); text-decoration: none;
+    letter-spacing: 0.01em;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .nav a:hover { color: var(--fg); }
+  .nav a.active { color: var(--accent); }
 
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: var(--nav-height);
-        }
+  /* ===== Shared section layout ===== */
+  .article {
+    max-width: var(--column-max);
+    margin: 0 auto;
+    padding: 96px 32px 0;
+  }
+  .article-wide {
+    max-width: var(--column-wide);
+    margin: 0 auto;
+    padding: 96px 32px 0;
+  }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: var(--font-sans);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .section-no {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.14em; color: var(--fg-subtle);
+  }
+  .rule-accent { width: 40px; height: 1px; background: var(--accent); margin-bottom: 6px; }
+  .rule { height: 1px; background: var(--border); margin-bottom: 48px; }
 
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--nav-height);
-            background-color: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  .display em { font-weight: 400; font-style: italic; color: var(--accent); }
 
-        .nav-container {
-            width: 100%;
-            max-width: var(--max-width);
-            padding: 0 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  .lede {
+    font-family: var(--font-serif-alt); font-weight: 300;
+    font-size: 22px; line-height: 1.55;
+    color: var(--fg); max-width: 56ch; margin: 0 0 56px;
+  }
 
-        .logo {
-            font-family: var(--font-mono);
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
+  /* ===== Hero ===== */
+  #hero {
+    min-height: 90vh;
+    max-width: var(--column-max);
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  #hero .status {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-bottom: 32px;
+  }
+  #hero .status .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse {
+    0%  { box-shadow: 0 0 0 0 var(--accent-quiet); }
+    70% { box-shadow: 0 0 0 8px transparent; }
+    100%{ box-shadow: 0 0 0 0 transparent; }
+  }
+  #hero .status .label {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);
+  }
+  #hero h1 {
+    font-size: clamp(3rem, 6vw, var(--fs-4xl));
+    margin-bottom: 20px;
+  }
+  #hero .tagline {
+    font-family: var(--font-serif-alt); font-weight: 300;
+    font-size: 22px; line-height: 1.55; color: var(--fg);
+    max-width: 52ch; margin: 0 0 12px;
+  }
+  #hero .role {
+    font-family: var(--font-mono); font-size: 13px;
+    color: var(--fg-muted); letter-spacing: 0.04em;
+    margin-bottom: 40px;
+  }
+  .social-links {
+    display: flex; gap: 28px;
+  }
+  .social-links a {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--fg-muted); text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .social-links a:hover { color: var(--accent); }
+  .scroll-hint {
+    margin-top: 64px;
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--fg-subtle);
+    display: flex; align-items: center; gap: 16px;
+  }
+  .scroll-hint .line { flex: 1; height: 1px; background: var(--border); }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
+  /* ===== About ===== */
+  figure.portrait {
+    float: right; width: 200px;
+    margin: 6px 0 24px 40px; padding: 0;
+  }
+  figure.portrait img {
+    display: block; width: 100%; aspect-ratio: 1/1; object-fit: cover;
+    border: 1px solid var(--border);
+    filter: grayscale(1);
+    transition: filter 700ms var(--ease-out);
+  }
+  figure.portrait:hover img { filter: grayscale(0); }
+  figure.portrait figcaption {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--fg-subtle); margin-top: 10px;
+    display: flex; justify-content: space-between;
+  }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
+  .prose p {
+    font-family: var(--font-sans); font-size: 17px;
+    line-height: 1.7; color: var(--fg); margin: 0 0 24px;
+    text-wrap: pretty;
+  }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose em { font-family: var(--font-serif-alt); font-style: italic; font-size: 18px; }
+  .prose strong { font-weight: 500; color: var(--fg); }
+  .prose a { color: var(--fg); text-decoration: underline; text-decoration-color: var(--border-strong); text-underline-offset: 3px; }
+  .prose a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--primary-color);
-        }
+  .sub { margin-top: 56px; margin-bottom: 48px; }
+  .sub .sub-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 20px; padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .sub .sub-label {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-subtle);
+  }
+  .sub .sub-no {
+    font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle);
+  }
 
-        /* Layout Utilities */
-        .section {
-            padding: 6rem 1.5rem 4rem; /* Top padding for navbar */
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
+  /* Tech stack */
+  .stack { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); }
+  .stack-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 32px; }
+  .stack-grid { display: grid; grid-template-columns: 160px 1fr; gap: 20px 40px; align-items: start; }
+  .stack-row { display: contents; }
+  .stack-label {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--fg-subtle); padding-top: 4px;
+  }
+  .stack-values {
+    font-family: var(--font-sans); font-size: 15px; line-height: 1.7;
+    color: var(--fg); padding-bottom: 20px; border-bottom: 1px solid var(--border);
+  }
+  .stack-row:last-child .stack-values { border-bottom: 0; padding-bottom: 0; }
 
-        .section-container {
-            max-width: var(--max-width);
-            width: 100%;
-            margin: 0 auto;
-        }
+  /* ===== Experience ===== */
+  .entry {
+    padding: 40px 0; border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 140px 1fr; gap: 24px;
+  }
+  .entry:last-of-type { border-bottom: 1px solid var(--border); }
+  .entry .meta {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--fg-subtle); padding-top: 8px; line-height: 1.7;
+  }
+  .entry .meta .type { display: block; color: var(--accent); margin-top: 4px; letter-spacing: 0.18em; }
+  .entry h2 {
+    font-family: var(--font-serif); font-weight: 400;
+    font-size: 26px; line-height: 1.2; letter-spacing: -0.02em;
+    margin: 0 0 4px;
+  }
+  .entry .role {
+    font-family: var(--font-sans); font-size: 14px;
+    color: var(--fg-muted); margin: 0 0 16px;
+  }
+  .entry .role em { color: var(--accent); font-style: normal; font-weight: 500; }
+  .entry p {
+    font-family: var(--font-sans); font-size: 16px;
+    line-height: 1.7; color: var(--fg); margin: 0; text-wrap: pretty;
+  }
+  .entry p + p { margin-top: 16px; }
+  .entry p em { font-family: var(--font-serif-alt); font-style: italic; }
 
-        /* Typography & Common */
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-            color: var(--text-main);
-            line-height: 1.1;
-        }
+  /* ===== Projects ===== */
+  .filters {
+    display: flex; gap: 20px; flex-wrap: wrap;
+    margin-bottom: 16px; padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .filters .fl-label {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--fg-subtle); margin-right: 8px;
+  }
+  .filters button {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em;
+    background: transparent; border: 0; padding: 2px 0;
+    color: var(--fg-muted); cursor: pointer;
+    border-bottom: 1px solid transparent;
+    transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+  }
+  .filters button:hover { color: var(--fg); }
+  .filters button.active { color: var(--fg); border-bottom-color: var(--accent); }
 
-        h1 .highlight {
-            color: var(--primary-color);
-        }
+  .featured {
+    margin: 40px 0 80px; padding: 40px 0;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  }
+  .featured .tag-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
+  .featured .ft-eyebrow {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent);
+  }
+  .featured .ft-date { font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle); }
+  .featured h2 {
+    font-family: var(--font-serif); font-weight: 400;
+    font-size: 34px; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 16px;
+  }
+  .featured p {
+    font-family: var(--font-sans); font-size: 17px;
+    line-height: 1.7; color: var(--fg); max-width: 62ch; margin: 0 0 20px;
+  }
+  .featured p em { font-family: var(--font-serif-alt); font-style: italic; }
+  .featured .ft-stack {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--fg-muted); letter-spacing: 0.04em;
+  }
+  .featured .ft-stack a {
+    margin-left: 20px; color: var(--fg);
+    text-decoration: underline; text-decoration-color: var(--border-strong);
+    text-underline-offset: 3px;
+    transition: color var(--dur-fast) var(--ease-out), text-decoration-color var(--dur-fast) var(--ease-out);
+  }
+  .featured .ft-stack a:hover { color: var(--accent); text-decoration-color: var(--accent); }
 
-        h2.section-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: var(--text-main);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1rem;
-        }
+  .toc-head {
+    display: grid; grid-template-columns: 36px 1fr auto; gap: 16px;
+    padding: 0 0 10px;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-subtle);
+  }
+  .toc-head .col-3 { text-align: right; }
 
-        h2.section-title i {
-            color: var(--primary-color);
-            font-size: 1.4rem;
-        }
+  .row {
+    display: grid; grid-template-columns: 36px 1fr auto; gap: 16px;
+    align-items: baseline; padding: 16px 0;
+    border-top: 1px solid var(--border);
+    text-decoration: none; color: var(--fg); position: relative;
+    transition: background-color var(--dur-fast) var(--ease-out);
+  }
+  .row:last-child { border-bottom: 1px solid var(--border); }
+  .row .idx { font-family: var(--font-mono); font-size: 11px; color: var(--fg-subtle); }
+  .row .title {
+    font-family: var(--font-serif); font-weight: 400;
+    font-size: 20px; line-height: 1.2; letter-spacing: -0.01em;
+  }
+  .row .title .dash {
+    font-family: var(--font-serif-alt); font-style: italic;
+    color: var(--fg-subtle); font-size: 15px; margin: 0 6px 0 10px; font-weight: 300;
+  }
+  .row .title .desc {
+    font-family: var(--font-sans); font-size: 14px;
+    color: var(--fg-muted); font-weight: 400; letter-spacing: 0;
+  }
+  .row .tags {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--fg-subtle); letter-spacing: 0.02em;
+    text-align: right; white-space: nowrap;
+  }
+  .row .tags .dot { margin: 0 6px; color: var(--border-strong); }
+  .row:hover { background-color: var(--warm-100); }
+  .row:hover .title { color: var(--accent); }
+  .row .arrow {
+    position: absolute; right: -22px; top: 50%;
+    transform: translateY(-50%); opacity: 0;
+    font-family: var(--font-mono); color: var(--accent);
+    transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-base) var(--ease-out);
+  }
+  .row:hover .arrow { opacity: 1; transform: translateY(-50%) translateX(4px); }
 
-        /* Intro Section */
-        #intro {
-            min-height: 90vh; /* Almost full height but allows peek */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding-top: 0;
-        }
+  .note {
+    margin-top: 48px;
+    font-family: var(--font-serif-alt); font-style: italic;
+    font-size: 14px; color: var(--fg-muted);
+    text-align: center; max-width: 50ch; margin-left: auto; margin-right: auto;
+  }
 
-        #intro .subtitle {
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-family: var(--font-mono);
-        }
+  /* ===== Contact ===== */
+  .status-bar {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 10px 16px; border: 1px solid var(--accent);
+    background: var(--accent-quiet); margin-bottom: 64px;
+  }
+  .status-bar .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+    animation: pulse 2.4s ease-out infinite;
+  }
+  .status-bar .label {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);
+  }
 
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-        }
+  .email {
+    display: block;
+    font-family: var(--font-serif); font-weight: 300;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    line-height: 1.15; letter-spacing: -0.02em;
+    color: var(--fg);
+    text-decoration: underline; text-decoration-color: var(--border-strong);
+    text-decoration-thickness: 1px; text-underline-offset: 6px;
+    transition: color var(--dur-fast) var(--ease-out), text-decoration-color var(--dur-fast) var(--ease-out);
+    margin-bottom: 14px; word-break: break-word;
+  }
+  .email:hover { color: var(--accent); text-decoration-color: var(--accent); }
+  .email-note {
+    font-family: var(--font-serif-alt); font-style: italic;
+    font-size: 15px; color: var(--fg-muted); margin: 0 0 72px;
+  }
 
-        .social-links a {
-            font-size: 1.6rem;
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
+  .channels {
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 160px 1fr auto;
+    gap: 14px 40px; align-items: baseline;
+  }
+  .channels > div { display: contents; }
+  .ch-row { display: contents; }
+  .ch-label {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--fg-subtle); padding-top: 22px;
+  }
+  .ch-value {
+    font-family: var(--font-sans); font-size: 16px;
+    color: var(--fg); padding: 20px 0;
+    border-top: 1px solid var(--border);
+  }
+  .ch-value a { color: var(--fg); text-decoration: underline; text-decoration-color: var(--border-strong); text-underline-offset: 3px; }
+  .ch-value a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+  .ch-meta {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.04em; color: var(--fg-subtle);
+    padding: 22px 0 0; border-top: 1px solid var(--border);
+    text-align: right; white-space: nowrap;
+  }
+  .channels > div:first-child .ch-value,
+  .channels > div:first-child .ch-meta { border-top: 0; }
+  .channels > div:first-child .ch-label { padding-top: 0; }
 
-        .social-links a:hover {
-            color: var(--primary-color);
-            transform: translateY(-3px);
-        }
+  .criteria { margin-top: 96px; padding-top: 40px; border-top: 1px solid var(--border); }
+  .criteria-head { margin-bottom: 28px; display: flex; align-items: baseline; justify-content: space-between; }
+  .criteria ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+  .criteria li {
+    display: grid; grid-template-columns: 24px 1fr; gap: 14px;
+    font-family: var(--font-sans); font-size: 16px; line-height: 1.65; color: var(--fg);
+  }
+  .criteria li .marker {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.12em; color: var(--accent); padding-top: 4px;
+  }
+  .criteria li em { font-family: var(--font-serif-alt); font-style: italic; }
 
-        /* About Section */
-        .about-container {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
+  .pullquote {
+    margin-top: 120px; padding-top: 48px;
+    border-top: 1px solid var(--border); text-align: left;
+  }
+  .pullquote blockquote {
+    font-family: var(--font-serif); font-weight: 300; font-style: italic;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.3; letter-spacing: -0.015em;
+    color: var(--fg); margin: 0 0 16px; max-width: 26ch;
+  }
+  .pullquote .attrib {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-subtle);
+  }
+  .pullquote .accent-text { color: var(--accent); }
 
-        .profile-img {
-            width: 100%;
-            aspect-ratio: 1/1;
-            border-radius: 12px;
-            object-fit: cover;
-            background-color: var(--bg-card);
-            border: 2px solid var(--border-color);
-            transition: var(--transition);
-        }
-        
-        .profile-img:hover {
-            border-color: var(--primary-color);
-            transform: scale(1.02);
-        }
+  /* Transition links between sections */
+  .outro {
+    margin-top: 96px; padding-top: 40px;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .outro-line {
+    font-family: var(--font-serif-alt); font-style: italic;
+    font-size: 19px; line-height: 1.5; color: var(--fg);
+    max-width: 44ch; font-weight: 300; margin: 0;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 22px; font-family: var(--font-sans);
+    font-size: 14px; font-weight: 500;
+    color: var(--bg); background: var(--fg); border: 1px solid var(--fg);
+    text-decoration: none;
+    transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+  }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-primary .arrow { transition: transform var(--dur-base) var(--ease-out); display: inline-block; }
+  .btn-primary:hover .arrow { transform: translateX(3px); }
 
-        .about-text {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
+  /* Section bottom spacing */
+  .section-end { padding-bottom: 160px; }
 
-        .skills-header {
-            font-family: var(--font-mono);
-            color: var(--text-main);
-            margin-bottom: 1rem;
-            font-size: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-
-        .skill {
-            background-color: var(--bg-card);
-            color: var(--primary-color);
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-family: var(--font-mono);
-            transition: var(--transition);
-        }
-
-        .skill:hover {
-            background-color: rgba(52, 211, 153, 0.15);
-        }
-
-        /* Experience Section */
-        .experience-item {
-            background-color: var(--bg-card);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-            margin-bottom: 1.5rem;
-        }
-
-        .experience-item:hover {
-            border-color: var(--primary-color);
-        }
-
-        .experience-item h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-main);
-        }
-
-        .experience-duration {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .experience-item p:last-child {
-            color: var(--text-muted);
-        }
-
-        /* Projects Section - Modified for better flow */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
-        }
-
-        .project-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.75rem;
-            display: flex;
-            flex-direction: column;
-            transition: var(--transition);
-            height: 100%; /* Equal height */
-        }
-
-        .project-card:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
-        }
-
-        .project-card h3 {
-            font-size: 1.2rem;
-            color: var(--text-main);
-            margin-bottom: 0.75rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-tag {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--primary-color);
-            background: rgba(52, 211, 153, 0.1);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-        }
-
-        .project-description {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
-
-        .project-link {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--text-main);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: var(--transition);
-            margin-top: auto;
-        }
-
-        .project-link:hover {
-            color: var(--primary-color);
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            :root {
-                --nav-height: 60px;
-            }
-            
-            .section {
-                padding-top: 5rem;
-            }
-
-            .nav-links {
-                display: none; /* Simple toggle can be added later, currently keeping super simple */
-            }
-
-            .about-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .profile-img {
-                width: 180px;
-                margin: 0 auto;
-                display: block;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr; /* Single column on mobile */
-            }
-        }
-    </style>
+  /* ===== Responsive ===== */
+  @media (max-width: 640px) {
+    figure.portrait { float: none; width: 160px; margin: 0 0 32px; }
+    .entry { grid-template-columns: 1fr; gap: 10px; }
+    .stack-grid { grid-template-columns: 1fr; gap: 6px 0; }
+    .stack-label { padding-top: 16px; border-top: 1px solid var(--border); }
+    .stack-row:first-child .stack-label { border-top: 0; padding-top: 4px; }
+    .stack-values { padding-bottom: 16px; }
+    .toc-head, .row { grid-template-columns: 28px 1fr; }
+    .toc-head .col-3, .row .tags { display: none; }
+    .row .title { font-size: 18px; }
+    .row .title .desc { display: block; margin-top: 4px; }
+    .row .title .dash { display: none; }
+    .channels { grid-template-columns: 1fr; gap: 4px; }
+    .ch-label { padding-top: 20px; border-top: 1px solid var(--border); }
+    .ch-value { border-top: 0; padding: 4px 0 0; }
+    .ch-meta { border-top: 0; text-align: left; padding: 2px 0 16px; }
+    .channels > div:first-child .ch-label { padding-top: 0; border-top: 0; }
+  }
+</style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#intro" class="logo">DK.</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-            </ul>
+<body class="theme-orange">
+
+  <!-- ===== Nav ===== -->
+  <header class="nav">
+    <a href="#hero" class="wordmark">DK<span class="dot">.</span></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         § 00 · Hero
+         ============================================================ -->
+    <section id="hero">
+      <div class="status">
+        <span class="dot"></span>
+        <span class="label">Open to opportunities &middot; H2 2027</span>
+      </div>
+
+      <h1>Donghan <em>Kim</em></h1>
+
+      <p class="tagline">
+        I turn hypotheses into numbers &mdash; and code the whole pipeline that gets them there.
+      </p>
+      <p class="role">
+        Data Scientist in the making &middot; Full-stack &amp; DevOps engineer &middot; 42 Paris
+      </p>
+
+      <div class="social-links">
+        <a href="https://github.com/Donghan5" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/donghan-kim01" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:donghank@student.42.fr">Email</a>
+      </div>
+
+      <div class="scroll-hint">
+        <span class="line"></span>
+        <span>Scroll to explore</span>
+        <span class="line"></span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         § 01 · About
+         ============================================================ -->
+    <article class="article section-end" id="about">
+      <div class="section-head">
+        <span class="eyebrow">About</span>
+        <span class="section-no">&sect; 01</span>
+      </div>
+      <div class="rule-accent"></div>
+      <div class="rule"></div>
+
+      <h1 class="display">An engineer who learned to think in <em>hypotheses.</em></h1>
+
+      <p class="lede">
+        I got pulled into data science because forming a hypothesis and watching numbers prove
+        it right or wrong turned out to be the most honest kind of thinking I've found in tech.
+      </p>
+
+      <div class="prose">
+        <figure class="portrait">
+          <img src="profile_image.JPG" alt="Donghan Kim, portrait" />
+          <figcaption>
+            <span>Donghan Kim</span>
+            <span>Paris &middot; 2026</span>
+          </figcaption>
+        </figure>
+
+        <div class="sub" style="margin-top:0">
+          <div class="sub-head">
+            <span class="sub-label">The path</span>
+            <span class="sub-no">&sect; 01.1</span>
+          </div>
+          <p>
+            I'm in the final stretch of <strong>42 Paris</strong> &mdash; RNCP Level 7, AI &amp;
+            Data branch. The first two years were intentionally wide. I wrote a memory allocator
+            in C, built a black-hole renderer with SDL2 and Schwarzschild geodesics, deployed
+            Kubernetes clusters on Scaleway, and shipped full-stack apps in React and NestJS.
+          </p>
+          <p>
+            The point wasn't collecting skills. It was learning what happens <em>between</em> an
+            idea and a working system &mdash; every brittle layer in between. Now I'm bringing
+            that whole stack to data work.
+          </p>
         </div>
-    </nav>
 
-    <main>
-        <section class="section" id="intro">
-            <div class="section-container">
-                <h1>Donghan <span class="highlight">Kim</span></h1>
-                <p class="subtitle">CS student at 42 Paris | Software Engineer</p>
-                <div class="social-links">
-                    <a href="https://github.com/Donghan5" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/donghan-kim-b88b55227" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:donghank@student.42.fr" title="Email"><i class="fas fa-envelope"></i></a>
-                </div>
-            </div>
-        </section>
+        <div class="sub">
+          <div class="sub-head">
+            <span class="sub-label">What I'm focused on</span>
+            <span class="sub-no">&sect; 01.2</span>
+          </div>
+          <p>
+            <strong>Machine-learning modeling</strong> &mdash; implementing from scratch before
+            reaching for libraries. NumPy MLPs with backprop derived by hand, tabular
+            Q-learning agents built before I'd touched a deep RL framework. The library is
+            easier once you've paid the tuition.
+          </p>
+          <p>
+            <strong>Causal inference</strong> &mdash; because &ldquo;X correlates with Y&rdquo;
+            is where most analysis stops, and where the interesting question begins.
+          </p>
+          <p>
+            <strong>End-to-end ownership</strong> &mdash; I'm comfortable the whole way from
+            pipeline to training to deployment to monitoring. A model is only as useful as the
+            system it runs in.
+          </p>
+        </div>
+      </div>
 
-        <section class="section" id="about">
-            <div class="section-container">
-                <h2 class="section-title"><i class="fas fa-user"></i>About Me</h2>
-                <div class="about-container">
-                    <img src="profile_image.JPG" alt="Donghan Kim" class="profile-img" onerror="this.src='https://placehold.co/200x200/1e293b/94a3b8?text=DK'; this.onerror=null;">
-                    <div>
-                        <p class="about-text">
-                            I am a CS student at 42 Paris, pursuing a Master's degree (RNCP Level 7) in Computer Science. Passionate about all things AI/ML, I enjoy solving complex problems, learning new technologies, and building robust, scalable systems that bridge the gap between development and operations.
-                        </p>
-                        <h3 class="skills-header">Tech Stack</h3>
-                        <div class="skills">
-                            <span class="skill">C</span>
-                            <span class="skill">C++</span>
-                            <span class="skill">Python</span>
-                            <span class="skill">Go</span>
-                            <span class="skill">TypeScript</span>
-                            <span class="skill">React</span>
-                            <span class="skill">Bash</span>
-                            <span class="skill">Linux</span>
-                            <span class="skill">Docker</span>
-                            <span class="skill">Git</span>
-                            <span class="skill">TailwindCSS</span>
-                            <span class="skill">Machine Learning</span>
-                            <span class="skill">Deep Learning</span>
-                            <span class="skill">Kafka</span>
-                            <span class="skill">Redis</span>
-                            <span class="skill">Nest.js</span>
-                            <span class="skill">Node.js</span>
-                            <span class="skill">Socket.io</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <!-- Tech Stack -->
+      <section class="stack">
+        <div class="stack-head">
+          <span class="eyebrow">Tech Stack</span>
+          <span class="section-no">&sect; 01.3</span>
+        </div>
+        <div class="stack-grid">
+          <div class="stack-row">
+            <span class="stack-label">Languages</span>
+            <span class="stack-values">Python &middot; TypeScript &middot; C / C++ &middot; Go &middot; Bash</span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">ML &amp; Data</span>
+            <span class="stack-values">NumPy &middot; PyTorch &middot; scikit-learn &middot; pandas &middot; FastEmbed &middot; pgvector</span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">Tools &amp; Infra</span>
+            <span class="stack-values">Docker &middot; Kubernetes &middot; Linux &middot; Git &middot; Kafka &middot; Redis &middot; Supabase</span>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">Web</span>
+            <span class="stack-values">React &middot; NestJS &middot; FastAPI &middot; Node.js &middot; TailwindCSS &middot; Socket.io</span>
+          </div>
+        </div>
+      </section>
 
-        <section class="section" id="experience">
-            <div class="section-container">
-                <h2 class="section-title"><i class="fas fa-briefcase"></i>Experience</h2>
-                <div class="experience-item">
-                    <h3>42 Paris - CS Student</h3>
-                    <p class="experience-duration"><i class="far fa-calendar-alt"></i> 2024 - Present</p>
-                    <p>
-                        Pursuing RNCP Level 7 (Master's equivalent) in Computer Science. Developed foundational skills through project-based learning, including low-level programming in C/C++, system administration (Born2beRoot), and deploying containerized applications with Docker (Inception). 
-                    </p>
-                </div>
-                <div class="experience-item">
-                    <h3>Sergeant - Republic of Korea Army</h3>
-                    <p class="experience-duration"><i class="far fa-calendar-alt"></i> 2020 - 2022</p>
-                    <p>
-                        Served as a Sergeant in the Republic of Korea Army, where I was responsible for training and leading a team of soldiers in the field. I was also responsible for maintaining the equipment and facilities of the unit, as well as ensuring the safety and security of the soldiers under my command. Participated in operations of demining.
-                    </p>
-                </div>
-            </div>
-        </section>
+      <div class="outro">
+        <p class="outro-line">
+          There's a lot I haven't written about here &mdash; the projects are where it shows.
+        </p>
+        <a href="#projects" class="btn-primary">
+          Read selected work
+          <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </article>
 
-        <section class="section" id="projects">
-            <div class="section-container">
-                <h2 class="section-title"><i class="fas fa-code"></i>Projects</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <h3>Weather app</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">React</span>
-                            <span class="project-tag">TypeScript</span>
-                            <span class="project-tag">TailwindCSS</span>
-                            <span class="project-tag">OpenWeatherMap API</span>
-                        </div>
-                        <p class="project-description">A weather application built with React and TypeScript, using the OpenWeatherMap API to fetch real-time weather data. Features include current weather, 5-day forecast, and search functionality for specific locations.</p>
-                        <a href="https://github.com/Donghan5/weather_app" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+    <!-- ============================================================
+         § 02 · Experience
+         ============================================================ -->
+    <article class="article section-end" id="experience">
+      <div class="section-head">
+        <span class="eyebrow">Experience</span>
+        <span class="section-no">&sect; 02</span>
+      </div>
+      <div class="rule-accent"></div>
+      <div class="rule"></div>
 
-                    <div class="project-card">
-                        <h3>E-commerce API</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">Go</span>
-                            <span class="project-tag">TypeScript(nest.js)</span>
-                            <span class="project-tag">PostgreSQL</span>
-                            <span class="project-tag">Docker</span>
-                        </div>
-                        <p class="project-description">A RESTful API for an e-commerce platform built with Typescript using and Go using the Gin framework. Features include user authentication, product management, order processing, and payment integration. Utilizes PostgreSQL for data storage and Docker for containerization.</p>
-                        <a href="https://github.com/Donghan5/ecommerce_api" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
-                    <div class="project-card">
-                        <h3>weather_api</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">Go</span>
-                            <span class="project-tag">Typescript (nest.js)</span>
-                            <span class="project-tag">Redis</span>
-                        </div>
-                        <p class="project-description">A weather API service that provides current weather data and forecasts. Implement 2 servers which are made with Go and Typescript (Nest.js), using Redis for caching.</p>
-                        <a href="https://github.com/Donghan5/weather_api" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
-                    <div class="project-card">
-                        <h3>chatapp</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">React</span>
-                            <span class="project-tag">Typescript</span>
-                            <span class="project-tag">Node.js</span>
-                            <span class="project-tag">PostgreSQL</span>
-                            <span class="project-tag">Kafka</span>
-                            <span class="project-tag">K8s</span>
-                        </div>
-                        <p class="project-description">A full-stack chat application with real-time messaging, user authentication, and group chats. Deployed using Kubernetes with a CI/CD pipeline.</p>
-                        <a href="https://github.com/Donghan5/chatapp" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+      <h1 class="display">Two chapters, both about <em>ownership.</em></h1>
+      <p class="lede">
+        The short version: I ran a team before I ran a build pipeline, and both taught me the
+        same lesson &mdash; <em>responsibility scales with how close you stay to the thing.</em>
+      </p>
 
-                    <div class="project-card">
-                        <h3>ft_linear_regression</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">Python</span>
-                            <span class="project-tag">Numpy</span>
-                        </div>
-                        <p class="project-description">Implemented basic linear regression from scratch.</p>
-                        <a href="https://github.com/Donghan5/ft_linear_regression" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+      <div class="entry">
+        <div class="meta">
+          2024 &mdash; Present
+          <span class="type">Education</span>
+        </div>
+        <div>
+          <h2>42 Paris</h2>
+          <p class="role"><em>CS Student</em> &middot; RNCP Lv.7, AI &amp; Data branch</p>
+          <p>
+            Pursuing the Master's-equivalent track at 42 Paris. Project-based from day one:
+            I wrote low-level C for memory allocators and string libraries, administered Linux
+            systems from scratch in <em>Born2beRoot</em>, and deployed multi-container
+            production setups with Docker and Nginx in <em>Inception</em>.
+          </p>
+          <p>
+            Halfway through, I pivoted to the AI &amp; Data specialization. Linear regression
+            from scratch, MLPs in NumPy, then up the stack into Kafka pipelines and pgvector.
+            The progression was deliberate: build it, then read about it.
+          </p>
+        </div>
+      </div>
 
-                    <div class="project-card">
-                        <h3>multilayer-perceptron</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">Python</span>
-                            <span class="project-tag">Numpy</span>
-                            <span class="project-tag">Pandas</span>
-                        </div>
-                        <p class="project-description">Implemented Multilayer Perceptron (MLP).</p>
-                        <a href="https://github.com/Donghan5/multilayer_perceptron" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+      <div class="entry">
+        <div class="meta">
+          2020 &mdash; 2022
+          <span class="type">Service</span>
+        </div>
+        <div>
+          <h2>Republic of Korea Army</h2>
+          <p class="role"><em>Sergeant</em> &middot; mandatory service</p>
+          <p>
+            Led and trained a team of soldiers as a sergeant. Responsible for equipment
+            readiness, personnel safety, and the boring-on-paper work that, when it fails,
+            is the only thing anyone remembers. Participated in demining operations.
+          </p>
+          <p>
+            Not a coding job &mdash; but it's where I learned that a plan survives first contact
+            only if the person writing it also has to execute it. I carry that into every system
+            I ship now.
+          </p>
+        </div>
+      </div>
 
-                    <div class="project-card">
-                        <h3>learning_kafka</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">Kafka</span>
-                            <span class="project-tag">Data Engineering</span>
-                            <span class="project-tag">Python</span>
-                        </div>
-                        <p class="project-description">Understanding of Kafka concepts and data-pipeline through hands-on projects, with a goal of understanding fundamental principles.</p>
-                        <a href="https://github.com/Donghan5/learning_kafka" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
-                    
-                    <div class="project-card">
-                        <h3>Understanding of ML</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">Python</span>
-                            <span class="project-tag">C++</span>
-                            <span class="project-tag">C</span>
-                            <span class="project-tag">ML</span>
-                        </div>
-                        <p class="project-description">Understanding of Machine Learning concepts and algorithms through hands-on projects, with a goal of implementing Transformers.</p>
-                        <a href="https://github.com/Donghan5/Understanding_of_ML" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+      <div class="outro">
+        <p class="outro-line">
+          The evidence lives in the code, not the CV.
+        </p>
+        <a href="#projects" class="btn-primary">
+          See selected work
+          <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </article>
 
-                    <div class="project-card">
-                        <h3>libasm</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">Assembly</span>
-                            <span class="project-tag">Low-Level</span>
-                        </div>
-                        <p class="project-description">A low-level programming library written in Assembly, focusing on Unix system calls and interfacing.</p>
-                        <a href="https://github.com/Donghan5/libasm" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+    <!-- ============================================================
+         § 03 · Projects
+         ============================================================ -->
+    <article class="article-wide section-end" id="projects">
+      <div class="section-head">
+        <span class="eyebrow">Selected work</span>
+        <span class="section-no">&sect; 03 &middot; 21 entries</span>
+      </div>
+      <div class="rule-accent"></div>
+      <div class="rule"></div>
 
-                    <div class="project-card">
-                        <h3>ft_transcendence</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">TypeScript</span>
-                            <span class="project-tag">Full-Stack</span>
-                            <span class="project-tag">Web App</span>
-                        </div>
-                        <p class="project-description">Developed a full-stack web application featuring real-time multiplayer Pong, chat, and user profiles.</p>
-                        <a href="https://github.com/Donghan5/ft_transcendence" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+      <h1 class="display">What I've actually <em>built.</em></h1>
+      <p class="lede">
+        A mixed archive &mdash; data-oriented projects, infra work from 42, and the low-level
+        C I cut my teeth on. The first one's the one I'd most want to talk about.
+      </p>
 
-                    <div class="project-card">
-                        <h3>Inception</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">Docker</span>
-                            <span class="project-tag">System Admin</span>
-                            <span class="project-tag">Nginx</span>
-                        </div>
-                        <p class="project-description">Set up a multi-container infrastructure using Docker and docker-compose, including services like Nginx, WordPress, and MariaDB.</p>
-                        <a href="https://github.com/Donghan5/inception" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+      <div class="filters" id="filters">
+        <span class="fl-label">Filter</span>
+        <button data-tag="all" class="active">All</button>
+        <button data-tag="Data">Data &amp; ML</button>
+        <button data-tag="Infra">Infra &amp; DevOps</button>
+        <button data-tag="Web">Full-stack</button>
+        <button data-tag="Low">Low-level</button>
+      </div>
 
-                    <div class="project-card">
-                        <h3>webserv</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">C++</span>
-                            <span class="project-tag">Networking</span>
-                            <span class="project-tag">HTTP</span>
-                        </div>
-                        <p class="project-description">Developed a simple HTTP server in C++ that handles GET and POST requests, demonstrating understanding of web protocols.</p>
-                        <a href="https://github.com/Donghan5/webserv" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+      <!-- Featured -->
+      <section class="featured" data-tags="Data Web Infra">
+        <div class="tag-row">
+          <span class="ft-eyebrow">Featured &middot; In production</span>
+          <span class="ft-date">2025 &mdash; Present</span>
+        </div>
+        <h2>Portfolio with RAG chat</h2>
+        <p>
+          This site is itself a project &mdash; a React frontend on Vercel, a FastAPI backend
+          on Render running <em>FastEmbed</em> (ONNX) for embeddings, Supabase pgvector for
+          retrieval, and Groq's Llama 3 70B for generation. Ask the chat widget anything about
+          me and the RAG pipeline handles the query end to end.
+        </p>
+        <div class="ft-stack">
+          React &middot; FastAPI &middot; pgvector &middot; Groq &middot; Docker
+          <a href="https://github.com/Donghan5/portfolio_RAG" target="_blank" rel="noreferrer">Read architecture &rarr;</a>
+          <a href="https://donghank.website" target="_blank" rel="noreferrer">Live &rarr;</a>
+        </div>
+      </section>
 
-                    <div class="project-card">
-                        <h3>CPP Modules</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">C++</span>
-                            <span class="project-tag">OOP</span>
-                        </div>
-                        <p class="project-description">Completed a series of C++ modules (00-09) to master object-oriented programming concepts and practices.</p>
-                        <a href="https://github.com/Donghan5/CPP_Modules" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+      <!-- Index -->
+      <div class="toc-head">
+        <span>No.</span>
+        <span>Project &middot; description</span>
+        <span class="col-3">Stack</span>
+      </div>
 
-                    <div class="project-card">
-                        <h3>miniRT</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">C</span>
-                            <span class="project-tag">Graphics</span>
-                            <span class="project-tag">Ray Tracing</span>
-                        </div>
-                        <p class="project-description">Implemented a ray tracing engine in C to render 3D scenes with various geometric objects and lighting effects.</p>
-                        <a href="https://github.com/Donghan5/miniRT" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+      <div id="list">
+        <a class="row" href="https://github.com/Donghan5/multilayer_perceptron" target="_blank" rel="noreferrer" data-tags="Data">
+          <span class="idx">01</span>
+          <span class="title">multilayer-perceptron<span class="dash">&mdash;</span><span class="desc">MLP from scratch in NumPy. Backprop derived by hand before touching PyTorch.</span></span>
+          <span class="tags">Python<span class="dot">&middot;</span>NumPy</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/ft_linear_regression" target="_blank" rel="noreferrer" data-tags="Data">
+          <span class="idx">02</span>
+          <span class="title">ft_linear_regression<span class="dash">&mdash;</span><span class="desc">Linear regression with gradient descent, from scratch.</span></span>
+          <span class="tags">Python<span class="dot">&middot;</span>NumPy</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/Understanding_of_ML" target="_blank" rel="noreferrer" data-tags="Data">
+          <span class="idx">03</span>
+          <span class="title">Understanding of ML<span class="dash">&mdash;</span><span class="desc">Working through the canon, goal state is implementing Transformers end to end.</span></span>
+          <span class="tags">Python<span class="dot">&middot;</span>C++<span class="dot">&middot;</span>ML</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/learning_kafka" target="_blank" rel="noreferrer" data-tags="Data Infra">
+          <span class="idx">04</span>
+          <span class="title">learning_kafka<span class="dash">&mdash;</span><span class="desc">Hands-on with Kafka topics, consumers, and data-pipeline fundamentals.</span></span>
+          <span class="tags">Kafka<span class="dot">&middot;</span>Python</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/cloud-1" target="_blank" rel="noreferrer" data-tags="Infra">
+          <span class="idx">05</span>
+          <span class="title">cloud-1<span class="dash">&mdash;</span><span class="desc">Scaleway infra with Ansible provisioning and an Nginx reverse proxy, IaC throughout.</span></span>
+          <span class="tags">Ansible<span class="dot">&middot;</span>Nginx<span class="dot">&middot;</span>DevOps</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/chatapp" target="_blank" rel="noreferrer" data-tags="Web Infra">
+          <span class="idx">06</span>
+          <span class="title">chatapp<span class="dash">&mdash;</span><span class="desc">Full-stack chat with real-time messaging, deployed on Kubernetes with CI/CD.</span></span>
+          <span class="tags">React<span class="dot">&middot;</span>Node<span class="dot">&middot;</span>K8s</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/ecommerce_api" target="_blank" rel="noreferrer" data-tags="Web">
+          <span class="idx">07</span>
+          <span class="title">E-commerce API<span class="dash">&mdash;</span><span class="desc">REST API with auth, products, orders, payments. Go + NestJS, PostgreSQL, Docker.</span></span>
+          <span class="tags">Go<span class="dot">&middot;</span>NestJS<span class="dot">&middot;</span>PG</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/weather_api" target="_blank" rel="noreferrer" data-tags="Web">
+          <span class="idx">08</span>
+          <span class="title">weather_api<span class="dash">&mdash;</span><span class="desc">Two-server weather service, Go + NestJS, Redis for caching.</span></span>
+          <span class="tags">Go<span class="dot">&middot;</span>NestJS<span class="dot">&middot;</span>Redis</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/ft_transcendence" target="_blank" rel="noreferrer" data-tags="Web">
+          <span class="idx">09</span>
+          <span class="title">ft_transcendence<span class="dash">&mdash;</span><span class="desc">Real-time multiplayer Pong, chat, and profiles. Full stack.</span></span>
+          <span class="tags">TypeScript<span class="dot">&middot;</span>Web</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/weather_app" target="_blank" rel="noreferrer" data-tags="Web">
+          <span class="idx">10</span>
+          <span class="title">Weather app<span class="dash">&mdash;</span><span class="desc">React + TS frontend for OpenWeatherMap, 5-day forecast and search.</span></span>
+          <span class="tags">React<span class="dot">&middot;</span>TS<span class="dot">&middot;</span>Tailwind</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/inception" target="_blank" rel="noreferrer" data-tags="Infra">
+          <span class="idx">11</span>
+          <span class="title">Inception<span class="dash">&mdash;</span><span class="desc">Multi-container stack with docker-compose: Nginx, WordPress, MariaDB.</span></span>
+          <span class="tags">Docker<span class="dot">&middot;</span>Nginx</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/webserv" target="_blank" rel="noreferrer" data-tags="Low Infra">
+          <span class="idx">12</span>
+          <span class="title">webserv<span class="dash">&mdash;</span><span class="desc">HTTP server in C++ handling GET and POST, socket-level.</span></span>
+          <span class="tags">C++<span class="dot">&middot;</span>HTTP</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/miniRT" target="_blank" rel="noreferrer" data-tags="Low">
+          <span class="idx">13</span>
+          <span class="title">miniRT<span class="dash">&mdash;</span><span class="desc">Ray tracer in C, geometry and lighting from first principles.</span></span>
+          <span class="tags">C<span class="dot">&middot;</span>Graphics</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/minishell" target="_blank" rel="noreferrer" data-tags="Low">
+          <span class="idx">14</span>
+          <span class="title">minishell<span class="dash">&mdash;</span><span class="desc">UNIX shell with parsing, execution, basic job control.</span></span>
+          <span class="tags">C<span class="dot">&middot;</span>Systems</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/philosopher" target="_blank" rel="noreferrer" data-tags="Low">
+          <span class="idx">15</span>
+          <span class="title">Philosophers<span class="dash">&mdash;</span><span class="desc">Dining philosophers in C with threads and mutexes, deadlock-free.</span></span>
+          <span class="tags">C<span class="dot">&middot;</span>Threads</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/CPP_Modules" target="_blank" rel="noreferrer" data-tags="Low">
+          <span class="idx">16</span>
+          <span class="title">CPP Modules<span class="dash">&mdash;</span><span class="desc">00&ndash;09 &mdash; a full lap through C++ object orientation.</span></span>
+          <span class="tags">C++<span class="dot">&middot;</span>OOP</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/push_swap" target="_blank" rel="noreferrer" data-tags="Low">
+          <span class="idx">17</span>
+          <span class="title">push_swap<span class="dash">&mdash;</span><span class="desc">Minimum-operation stack-sort puzzle in C.</span></span>
+          <span class="tags">C<span class="dot">&middot;</span>Algorithms</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/libasm" target="_blank" rel="noreferrer" data-tags="Low">
+          <span class="idx">18</span>
+          <span class="title">libasm<span class="dash">&mdash;</span><span class="desc">Assembly library for Unix syscalls and low-level interfacing.</span></span>
+          <span class="tags">Assembly</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/ft_printf" target="_blank" rel="noreferrer" data-tags="Low">
+          <span class="idx">19</span>
+          <span class="title">ft_printf<span class="dash">&mdash;</span><span class="desc">Custom printf with variable args and format specifiers.</span></span>
+          <span class="tags">C<span class="dot">&middot;</span>Library</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/get_next_line" target="_blank" rel="noreferrer" data-tags="Low">
+          <span class="idx">20</span>
+          <span class="title">get_next_line<span class="dash">&mdash;</span><span class="desc">Read-a-line function with dynamic buffering across fds.</span></span>
+          <span class="tags">C<span class="dot">&middot;</span>I/O</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a class="row" href="https://github.com/Donghan5/Libft" target="_blank" rel="noreferrer" data-tags="Low">
+          <span class="idx">21</span>
+          <span class="title">Libft<span class="dash">&mdash;</span><span class="desc">The custom C standard-library replacement every 42 student ships first.</span></span>
+          <span class="tags">C<span class="dot">&middot;</span>Library</span>
+          <span class="arrow">&rarr;</span>
+        </a>
+      </div>
 
-                    <div class="project-card">
-                        <h3>minishell</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">C</span>
-                            <span class="project-tag">System Programming</span>
-                            <span class="project-tag">Shell</span>
-                        </div>
-                        <p class="project-description">Developed a simple UNIX shell implementation with command parsing, execution, and basic job control features.</p>
-                        <a href="https://github.com/Donghan5/minishell" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+      <p class="note">
+        A fuller list lives on <a href="https://github.com/Donghan5" target="_blank" rel="noreferrer" style="color:var(--fg); text-decoration-color:var(--border-strong);">github.com/Donghan5</a>. These are the ones I'd actually defend.
+      </p>
+    </article>
 
-                    <div class="project-card">
-                        <h3>Philosophers</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">C</span>
-                            <span class="project-tag">Multithreading</span>
-                            <span class="project-tag">Concurrency</span>
-                        </div>
-                        <p class="project-description">Solved the dining philosophers problem using C threads and mutexes to prevent deadlocks and ensure fair resource access.</p>
-                        <a href="https://github.com/Donghan5/philosopher" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
-                    
-                    <div class="project-card">
-                        <h3>push_swap</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">C</span>
-                            <span class="project-tag">Algorithm</span>
-                            <span class="project-tag">Sorting</span>
-                        </div>
-                        <p class="project-description">Created an efficient algorithm to sort a stack of numbers with limited operations, optimizing for the fewest moves.</p>
-                        <a href="https://github.com/Donghan5/push_swap" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+    <!-- ============================================================
+         § 04 · Contact
+         ============================================================ -->
+    <article class="article section-end" id="contact">
+      <div class="section-head">
+        <span class="eyebrow">Contact</span>
+        <span class="section-no">&sect; 04</span>
+      </div>
+      <div class="rule-accent"></div>
+      <div class="rule"></div>
 
-                    <div class="project-card">
-                        <h3>ft_printf</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">C</span>
-                            <span class="project-tag">Library</span>
-                            <span class="project-tag">Formatting</span>
-                        </div>
-                        <p class="project-description">Implemented a custom printf function in C to handle formatted output with variable argument lists.</p>
-                        <a href="https://github.com/Donghan5/ft_printf" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+      <div class="status-bar">
+        <span class="dot"></span>
+        <span class="label">Open to Data Scientist internships &middot; H2 2027</span>
+      </div>
 
-                    <div class="project-card">
-                        <h3>get_next_line</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">C</span>
-                            <span class="project-tag">File I/O</span>
-                            <span class="project-tag">Buffering</span>
-                        </div>
-                        <p class="project-description">Implemented a function to read a line from a file descriptor, handling multiple files and dynamic memory allocation.</p>
-                        <a href="https://github.com/Donghan5/get_next_line" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
-                    
-                    <div class="project-card">
-                        <h3>Libft</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">C</span>
-                            <span class="project-tag">Library</span>
-                            <span class="project-tag">Utilities</span>
-                        </div>
-                        <p class="project-description">Developed a custom C library with essential functions to enhance programming efficiency and code reusability.</p>
-                        <a href="https://github.com/Donghan5/Libft" target="_blank" class="project-link">
-                            <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right" style="font-size: 0.8em;"></i>
-                        </a>
-                    </div>
+      <h1 class="display">If you're working on something where <em>engineering rigor</em> and <em>curiosity</em> both matter &mdash; let's talk.</h1>
+      <p class="lede" style="margin-bottom:56px">
+        Easiest path is email. I answer within a day, usually less. No gatekeeping forms,
+        no "let's hop on a quick call" as a first step &mdash; a few sentences about the
+        problem is plenty.
+      </p>
 
-                </div>
-            </div>
-        </section>
-    </main>
+      <a class="email" href="mailto:donghank@student.42.fr">donghank@student.42.fr</a>
+      <p class="email-note">Copy to clipboard, or start drafting &mdash; I'll see it either way.</p>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.section');
-            const navLinks = document.querySelectorAll(".nav-links a");
+      <section class="channels">
+        <div class="ch-row">
+          <span class="ch-label">GitHub</span>
+          <span class="ch-value"><a href="https://github.com/Donghan5" target="_blank" rel="noreferrer">github.com/Donghan5</a></span>
+          <span class="ch-meta">Code &middot; the real CV</span>
+        </div>
+        <div class="ch-row">
+          <span class="ch-label">LinkedIn</span>
+          <span class="ch-value"><a href="https://www.linkedin.com/in/donghan-kim01" target="_blank" rel="noreferrer">linkedin.com/in/donghan-kim01</a></span>
+          <span class="ch-meta">Formal &middot; PDF CV on request</span>
+        </div>
+        <div class="ch-row">
+          <span class="ch-label">Location</span>
+          <span class="ch-value">Paris, France</span>
+          <span class="ch-meta">CET &middot; UTC+1</span>
+        </div>
+        <div class="ch-row">
+          <span class="ch-label">Languages</span>
+          <span class="ch-value">Korean &middot; French &middot; English</span>
+          <span class="ch-meta">Working fluency in all three</span>
+        </div>
+      </section>
 
-            const observerOptions = {
-                root: null, // viewport
-                threshold: 0.2, // 20% visible
-                rootMargin: "-70px 0px 0px 0px" // offset for navbar
-            };
+      <section class="criteria">
+        <div class="criteria-head">
+          <span class="eyebrow">What I'm looking for</span>
+          <span class="section-no">&sect; 04.1</span>
+        </div>
+        <ul>
+          <li>
+            <span class="marker">01</span>
+            <span>A <em>Data Scientist internship</em> for H2 2027 (roughly July&ndash;December). Paris, elsewhere in Europe, or remote-friendly &mdash; all fine.</span>
+          </li>
+          <li>
+            <span class="marker">02</span>
+            <span>A team where <em>I'll actually ship</em> &mdash; models in production, not slide decks. I want to learn the parts of the job that don't fit in a notebook.</span>
+          </li>
+          <li>
+            <span class="marker">03</span>
+            <span>A problem someone cares about. I'd rather work on a <em>small hard</em> question than a big vague one.</span>
+          </li>
+        </ul>
+      </section>
 
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.getAttribute('id');
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === `#${id}`) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }, observerOptions);
+      <section class="pullquote">
+        <blockquote>
+          &ldquo;I form hypotheses and use numbers to prove them <span class="accent-text">right or wrong.</span>&rdquo;
+        </blockquote>
+        <span class="attrib">&mdash; The working thesis &middot; 2026</span>
+      </section>
+    </article>
 
-            sections.forEach(section => {
-                sectionObserver.observe(section);
+  </main>
+
+  <!-- ===== Scripts ===== -->
+  <script>
+    // Active nav link on scroll
+    (function () {
+      var sections = document.querySelectorAll('article[id], section[id]');
+      var navLinks = document.querySelectorAll('.nav a[href^="#"]');
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.getAttribute('id');
+            navLinks.forEach(function (link) {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
             });
+          }
         });
-    </script>
+      }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
+      sections.forEach(function (s) { observer.observe(s); });
+    })();
+
+    // Project filter
+    (function () {
+      var buttons = document.querySelectorAll('#filters button');
+      var rows = document.querySelectorAll('.row, .featured');
+      buttons.forEach(function (b) {
+        b.addEventListener('click', function () {
+          buttons.forEach(function (x) { x.classList.remove('active'); });
+          b.classList.add('active');
+          var tag = b.dataset.tag;
+          rows.forEach(function (r) {
+            var tags = (r.dataset.tags || '').split(' ');
+            r.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
+          });
+        });
+      });
+    })();
+  </script>
+
 </body>
 </html>
