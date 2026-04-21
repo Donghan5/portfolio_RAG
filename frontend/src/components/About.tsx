@@ -8,8 +8,37 @@ const vitals = [
   ['Location', 'Paris, France'],
   ['School', '42 Paris'],
   ['Level', 'RNCP Lv.7'],
+  ['Branch', 'AI / Data'],
   ['Languages', 'KO / FR / EN'],
 ] as const;
+
+const sections = [
+  {
+    label: 'The path',
+    content:
+      "I'm in the final stretch of 42 Paris (RNCP Level 7, AI/Data branch). The first two years were intentionally wide: I wrote a memory allocator in C, built a black hole renderer with SDL2 and Schwarzschild geodesics, deployed Kubernetes clusters on Scaleway, and shipped full-stack apps in React and NestJS.\n\nThe point wasn't collecting skills. It was learning what happens between an idea and a working system — every brittle layer in between. Now I'm bringing that whole stack to data work.",
+  },
+  {
+    label: 'What I\'m focused on',
+    content:
+      '• Machine learning modeling — implementing from scratch (NumPy MLPs, Q-learning agents) before reaching for libraries\n• Causal inference — because "X correlates with Y" is where most analysis stops, and where the interesting question begins\n• End-to-end ownership — comfortable from data pipeline → training → deployment → monitoring',
+  },
+  {
+    label: 'Currently building',
+    content:
+      'A personal project asking: why do some football clubs with century-long histories never win? Starting with EDA, evolving into causal inference and time-series — built around a question I genuinely care about.',
+  },
+  {
+    label: 'Beyond code',
+    content:
+      'My interests have always been 문어발 (octopus-spread) — Nietzsche and Camus, special relativity, robotics, AI. I think the best data scientists are the ones who can frame a question well, not just the ones who can fit a model. Wide curiosity is part of the job.',
+  },
+  {
+    label: 'Right now',
+    content:
+      "Looking for a Data Scientist internship for H2 2027, in Paris, Europe, or remote-friendly. If you're working on something where engineering rigor and curiosity both matter, I'd love to talk.",
+  },
+];
 
 export default function About() {
   return (
@@ -54,14 +83,27 @@ export default function About() {
             </div>
           </div>
 
-          {/* Right: bio + skills */}
+          {/* Right: bio + sections */}
           <div>
+            {/* Intro */}
             <p className="font-mono text-[13px] text-text-muted leading-[2] mb-10">
-              I am a CS student at 42 Paris, pursuing a Master's degree (RNCP Level 7) in
-              Computer Science. Passionate about all things AI/ML, I enjoy solving complex
-              problems, learning new technologies, and building robust, scalable systems that
-              bridge the gap between development and operations.
+              I'm Donghan — an engineer who got pulled into data science because forming a
+              hypothesis and watching numbers prove it right or wrong turned out to be the most
+              honest kind of thinking I've found in tech.
             </p>
+
+            {/* Subsections */}
+            {sections.map((section) => (
+              <div key={section.label} className="mb-8">
+                <div className="rule mb-6" />
+                <p className="font-mono text-[10px] tracking-[0.22em] uppercase text-text-subtle/70 mb-4">
+                  {section.label}
+                </p>
+                <p className="font-mono text-[13px] text-text-muted leading-[2] whitespace-pre-line">
+                  {section.content}
+                </p>
+              </div>
+            ))}
 
             <div className="rule mb-8" />
 

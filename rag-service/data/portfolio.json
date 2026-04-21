@@ -1,7 +1,19 @@
 [
   {
     "category": "personal",
-    "content": "Donghan Kim is a Computer Science student at 42 Paris, pursuing a Master's degree (RNCP Level 7) in Computer Science, specializing in the System, Network, Cybersecurity & OS track. He is passionate about AI/ML and enjoys solving complex problems, learning new technologies, and building robust, scalable systems that bridge the gap between development and operations."
+    "content": "Donghan Kim (Donghan) is an engineer who got pulled into data science because forming a hypothesis and watching numbers prove it right or wrong turned out to be the most honest kind of thinking he's found in tech. He is in the final stretch of 42 Paris (RNCP Level 7, AI/Data branch). The first two years were intentionally wide: he wrote a memory allocator in C, built a black hole renderer with SDL2 and Schwarzschild geodesics, deployed Kubernetes clusters on Scaleway, and shipped full-stack apps in React and NestJS. The point wasn't collecting skills — it was learning what happens between an idea and a working system, every brittle layer in between. Now he's bringing that whole stack to data work."
+  },
+  {
+    "category": "personal_focus",
+    "content": "Donghan's current focus areas: (1) Machine learning modeling — implementing from scratch (NumPy MLPs, Q-learning agents) before reaching for libraries. (2) Causal inference — because 'X correlates with Y' is where most analysis stops, and where the interesting question begins. (3) End-to-end ownership — comfortable from data pipeline to training to deployment to monitoring."
+  },
+  {
+    "category": "personal_current",
+    "content": "Donghan is currently building a personal project asking: why do some football clubs with century-long histories never win? Starting with EDA, evolving into causal inference and time-series — built around a question he genuinely cares about. He is looking for a Data Scientist internship for H2 2027, in Paris, Europe, or remote-friendly."
+  },
+  {
+    "category": "personal_beyond",
+    "content": "Beyond code, Donghan's interests have always been 문어발 (octopus-spread) — Nietzsche and Camus, special relativity, robotics, AI. He believes the best data scientists are the ones who can frame a question well, not just the ones who can fit a model. Wide curiosity is part of the job."
   },
   {
     "category": "contact",

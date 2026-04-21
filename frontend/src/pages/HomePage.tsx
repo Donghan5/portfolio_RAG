@@ -31,7 +31,7 @@ export default function HomePage() {
         {/* Hero name */}
         <div className="hero-3 mb-6">
           <h1
-            className="font-display text-[clamp(3.5rem,9vw,6.5rem)] font-extrabold leading-[0.95] tracking-[-0.02em] text-text-main"
+            className="font-display text-[clamp(2.8rem,7vw,5.2rem)] font-extrabold leading-[0.95] tracking-[-0.02em] text-text-main"
             style={{ fontFamily: 'Syne, sans-serif' }}
           >
             DONGHAN
@@ -47,10 +47,10 @@ export default function HomePage() {
         <div className="hero-5 flex flex-col sm:flex-row sm:justify-between gap-5 mb-10">
           <div className="space-y-1.5">
             <p className="font-mono text-[13px] text-text-muted tracking-[0.02em]">
-              CS Student · 42 Paris
+              I turn hypotheses into numbers — and code the whole pipeline that gets them there.
             </p>
             <p className="font-mono text-[13px] text-text-muted tracking-[0.02em]">
-              Software Engineer · AI / ML
+              Data Scientist in the making · Full-stack & DevOps engineer · 42 Paris
             </p>
           </div>
           <div className="sm:text-right space-y-1.5">
