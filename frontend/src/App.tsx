@@ -5,10 +5,11 @@ import Hero from './pages/HomePage';
 import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
+import Contact from './components/Contact';
 
 export default function App() {
   useEffect(() => {
-    const targets = ['about', 'experience', 'projects']
+    const targets = ['about', 'experience', 'projects', 'contact']
       .map((id) => document.getElementById(id))
       .filter(Boolean) as HTMLElement[];
 
@@ -43,6 +44,9 @@ export default function App() {
         </div>
         <div id="projects">
           <Projects />
+        </div>
+        <div id="contact">
+          <Contact />
         </div>
       </main>
       <CommandPalette />

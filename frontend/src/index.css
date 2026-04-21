@@ -2,21 +2,24 @@
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 
 @theme {
-  --color-bg: #0c0c0a;
-  --color-bg-card: #131311;
-  --color-bg-card-hover: #181816;
-  --color-bg-surface: #161614;
-  --color-primary: #e63320;
-  --color-primary-dim: #bf2a1a;
-  --color-text-main: #f0ece4;
-  --color-text-muted: #a09c96;
-  --color-text-subtle: #6a6662;
-  --color-border: #262624;
-  --color-border-bright: #323230;
+  /* Warm light palette */
+  --color-bg: #FAF9F6;
+  --color-bg-card: #FFFFFF;
+  --color-bg-card-hover: #F5F3EE;
+  --color-bg-surface: #F2F0EB;
+  --color-primary: #CC5500;
+  --color-primary-dim: #a84600;
+  --color-text-main: #1A1A1A;
+  --color-text-muted: #6B6B6B;
+  --color-text-subtle: #8F8A80;
+  --color-border: #E8E5DE;
+  --color-border-bright: #C9C5BB;
 
-  --font-display: 'Syne', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
-  --font-sans: 'IBM Plex Mono', monospace;
+  --font-serif: 'Fraunces', 'Newsreader', Georgia, serif;
+  --font-serif-alt: 'Newsreader', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Fraunces', Georgia, serif;
 }
 
 * {
@@ -27,32 +30,23 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 48px;
+  scroll-padding-top: 64px;
 }
 
 body {
   background-color: var(--color-bg);
   color: var(--color-text-main);
-  font-family: var(--font-mono);
-  line-height: 1.6;
+  font-family: var(--font-sans);
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-}
-
-/* Subtle dot grid on dark bg */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.055) 0.6px, transparent 0.6px);
-  background-size: 24px 24px;
-  pointer-events: none;
-  z-index: 0;
+  text-rendering: optimizeLegibility;
 }
 
 /* ─── Animations ────────────────────────────────── */
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+@keyframes pulse-dot {
+  0%  { box-shadow: 0 0 0 0 rgba(204, 85, 0, 0.2); }
+  70% { box-shadow: 0 0 0 8px transparent; }
+  100%{ box-shadow: 0 0 0 0 transparent; }
 }
 
 @keyframes slide-up {
@@ -66,8 +60,8 @@ body::before {
 }
 
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 0 0 1px rgba(230, 51, 32, 0.12), 0 24px 48px rgba(0,0,0,0.7); }
-  50%       { box-shadow: 0 0 0 1px rgba(230, 51, 32, 0.28), 0 24px 64px rgba(0,0,0,0.8); }
+  0%, 100% { box-shadow: 0 0 0 1px rgba(204, 85, 0, 0.12), 0 24px 48px rgba(0,0,0,0.15); }
+  50%       { box-shadow: 0 0 0 1px rgba(204, 85, 0, 0.28), 0 24px 64px rgba(0,0,0,0.2); }
 }
 
 /* Hero entrance — staggered */
@@ -79,19 +73,12 @@ body::before {
 .hero-6 { animation: slide-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.62s both; }
 
 /* Section scroll reveal */
-#about, #experience, #projects {
+#about, #experience, #projects, #contact {
   animation: section-enter 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
   animation-play-state: paused;
 }
-#about.visible, #experience.visible, #projects.visible {
+#about.visible, #experience.visible, #projects.visible, #contact.visible {
   animation-play-state: running;
-}
-
-/* ─── Typography helpers ─────────────────────────── */
-.cursor-blink::after {
-  content: '_';
-  color: var(--color-primary);
-  animation: blink 1s step-end infinite;
 }
 
 /* ─── Layout helpers ─────────────────────────────── */
@@ -101,10 +88,10 @@ body::before {
   width: 100%;
 }
 
-.rule-red {
-  height: 2px;
+.rule-accent {
+  height: 1px;
   background-color: var(--color-primary);
-  width: 100%;
+  width: 40px;
 }
 
 /* ─── Hover underline ────────────────────────────── */
@@ -132,7 +119,7 @@ body::before {
   letter-spacing: 0.02em;
 }
 
-/* ─── Chat terminal ──────────────────────────────── */
+/* ─── Chat terminal (stays dark for contrast) ────── */
 .chat-surface {
   background: #0a0a09;
   border: 1px solid #222220;
@@ -144,7 +131,6 @@ body::before {
 }
 
 /* ─── Project hover-reveal ───────────────────────── */
-/* Uses grid-template-rows animation (smooth, no max-height clipping) */
 .project-reveal {
   display: grid;
   grid-template-rows: 0fr;

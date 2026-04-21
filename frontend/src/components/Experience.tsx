@@ -1,85 +1,67 @@
 const experiences = [
   {
+    period: '2024 \u2014 Present',
+    type: 'Education',
     title: '42 Paris',
     role: 'CS Student',
-    duration: '2024 — Present',
-    type: 'Education',
-    description:
-      "Pursuing RNCP Level 7 (Master's equivalent) in Computer Science. Developed foundational skills through project-based learning, including low-level programming in C/C++, system administration (Born2beRoot), and deploying containerized applications with Docker (Inception).",
+    roleDetail: 'RNCP Lv.7, AI & Data branch',
+    paragraphs: [
+      "Pursuing the Master's-equivalent track at 42 Paris. Project-based from day one: I wrote low-level C for memory allocators and string libraries, administered Linux systems from scratch in Born2beRoot, and deployed multi-container production setups with Docker and Nginx in Inception.",
+      'Halfway through, I pivoted to the AI & Data specialization. Linear regression from scratch, MLPs in NumPy, then up the stack into Kafka pipelines and pgvector. The progression was deliberate: build it, then read about it.',
+    ],
   },
   {
+    period: '2020 \u2014 2022',
+    type: 'Service',
     title: 'Republic of Korea Army',
     role: 'Sergeant',
-    duration: '2020 — 2022',
-    type: 'Service',
-    description:
-      'Served as a Sergeant responsible for training and leading a team of soldiers. Maintained equipment and facilities, ensured safety and security of personnel. Participated in demining operations.',
+    roleDetail: 'mandatory service',
+    paragraphs: [
+      'Led and trained a team of soldiers as a sergeant. Responsible for equipment readiness, personnel safety, and the boring-on-paper work that, when it fails, is the only thing anyone remembers. Participated in demining operations.',
+      "Not a coding job \u2014 but it's where I learned that a plan survives first contact only if the person writing it also has to execute it. I carry that into every system I ship now.",
+    ],
   },
 ];
 
 export default function Experience() {
   return (
-    <div className="min-h-screen pt-12 relative z-10">
-      <div className="max-w-5xl mx-auto px-6 py-16 md:py-24">
+    <div className="relative z-10">
+      <div className="max-w-[720px] mx-auto px-8 py-24">
 
-        {/* Section header */}
-        <div className="flex items-baseline justify-between mb-3">
-          <h2
-            className="font-display font-bold text-[11px] tracking-[0.25em] uppercase text-text-subtle"
-            style={{ fontFamily: 'Syne, sans-serif' }}
-          >
-            Experience
-          </h2>
-          <span className="font-mono text-[10px] text-text-subtle/50 tracking-[0.12em]">§ 02</span>
+        <div className="flex items-baseline justify-between mb-2.5">
+          <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">Experience</span>
+          <span className="font-mono text-[11px] tracking-[0.14em] text-text-subtle">&sect; 02</span>
         </div>
-        <div className="rule-red mb-12" />
+        <div className="rule-accent mb-1.5" />
+        <div className="rule mb-14" />
 
-        {/* Entries */}
-        <div className="space-y-0">
-          {experiences.map((exp, i) => (
-            <div key={exp.title}>
-              <div className="grid grid-cols-1 md:grid-cols-[80px_1fr] gap-6 py-10 group">
+        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
+          Two chapters, both about <em className="font-normal italic text-primary">ownership.</em>
+        </h2>
+        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[52ch] mb-18">
+          The short version: I ran a team before I ran a build pipeline, and both taught me the
+          same lesson &mdash; <em className="italic">responsibility scales with how close you stay to the thing.</em>
+        </p>
 
-                {/* Index + type */}
-                <div className="flex md:flex-col items-start gap-4 md:gap-2">
-                  <span
-                    className="font-display font-bold text-[3rem] leading-none text-border select-none transition-colors duration-300 group-hover:text-primary/20"
-                    style={{ fontFamily: 'Syne, sans-serif' }}
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-text-subtle/60 mt-1 hidden md:block">
-                    {exp.type}
-                  </span>
-                </div>
-
-                {/* Content */}
-                <div>
-                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-4">
-                    <div>
-                      <h3
-                        className="font-display font-bold text-[22px] tracking-tight text-text-main leading-tight"
-                        style={{ fontFamily: 'Syne, sans-serif' }}
-                      >
-                        {exp.title}
-                      </h3>
-                      <p className="font-mono text-[12px] text-primary mt-1">{exp.role}</p>
-                    </div>
-                    <span className="font-mono text-[11px] text-text-subtle tracking-[0.08em] shrink-0">
-                      {exp.duration}
-                    </span>
-                  </div>
-                  <p className="font-mono text-[13px] text-text-muted leading-[1.9]">
-                    {exp.description}
-                  </p>
-                </div>
-              </div>
-              {i < experiences.length - 1 && <div className="rule" />}
+        {experiences.map((exp) => (
+          <div key={exp.title} className="grid grid-cols-[140px_1fr] gap-6 py-10 border-t border-border last:border-b max-md:grid-cols-1 max-md:gap-2.5">
+            <div className="font-mono text-[11px] tracking-[0.14em] uppercase text-text-subtle pt-2 leading-[1.7]">
+              {exp.period}
+              <span className="block text-primary mt-1 tracking-[0.18em]">{exp.type}</span>
             </div>
-          ))}
-        </div>
-
-        <div className="rule mt-0" />
+            <div>
+              <h3 className="font-serif font-normal text-[26px] leading-[1.2] tracking-[-0.02em] text-text-main mb-1">{exp.title}</h3>
+              <p className="font-sans text-[14px] text-text-muted mb-4">
+                <span className="text-primary font-medium">{exp.role}</span> &middot; {exp.roleDetail}
+              </p>
+              {exp.paragraphs.map((p, i) => (
+                <p key={i} className="font-sans text-[16px] leading-[1.7] text-text-main mb-4 last:mb-0">
+                  {p}
+                </p>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
