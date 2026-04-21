@@ -1,4 +1,10 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import type { IncomingMessage, ServerResponse } from 'node:http';
+
+type VercelRequest = IncomingMessage & { method?: string; headers: Record<string, string | undefined> };
+type VercelResponse = ServerResponse & {
+  status: (code: number) => VercelResponse;
+  json: (body: unknown) => void;
+};
 
 /**
  * Vercel Cron Job — keeps Supabase Free tier alive every 3 days.
