@@ -26,19 +26,19 @@ const experiences = [
 export default function Experience() {
   return (
     <div className="relative z-10">
-      <div className="max-w-[720px] mx-auto px-8 py-24">
+      <div className="max-w-[720px] mx-auto px-8 py-[6.6rem]">
 
         <div className="flex items-baseline justify-between mb-2.5">
           <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">Experience</span>
           <span className="font-mono text-[11px] tracking-[0.14em] text-text-subtle">&sect; 02</span>
         </div>
-        <div className="rule-accent mb-1.5" />
+        <div className="rule-accent mx-auto mb-1.5" />
         <div className="rule mb-14" />
 
-        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
+        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6 text-center">
           Two chapters, both about <em className="font-normal italic text-primary">ownership.</em>
         </h2>
-        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[52ch] mb-18">
+        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[52ch] mx-auto mb-18 text-center">
           The short version: I ran a team before I ran a build pipeline, and both taught me the
           same lesson &mdash; <em className="italic">responsibility scales with how close you stay to the thing.</em>
         </p>

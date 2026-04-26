@@ -14,34 +14,36 @@ const criteria = [
 export default function Contact() {
   return (
     <div className="relative z-10">
-      <div className="max-w-[720px] mx-auto px-8 py-24 pb-40">
+      <div className="max-w-[720px] mx-auto px-8 py-[6.6rem] pb-40">
 
         <div className="flex items-baseline justify-between mb-2.5">
           <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">Contact</span>
           <span className="font-mono text-[11px] tracking-[0.14em] text-text-subtle">&sect; 04</span>
         </div>
-        <div className="rule-accent mb-1.5" />
+        <div className="rule-accent mx-auto mb-1.5" />
         <div className="rule mb-14" />
 
         {/* Status */}
-        <div className="inline-flex items-center gap-2.5 px-4 py-2.5 border border-primary bg-primary/8 mb-16">
-          <span className="w-1.5 h-1.5 rounded-full bg-primary" style={{ animation: 'pulse-dot 2.4s ease-out infinite' }} />
-          <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-primary">
-            Open to Data Scientist internships &middot; H2 2027
-          </span>
+        <div className="flex justify-center mb-16">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2.5 border border-primary bg-primary/8">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" style={{ animation: 'pulse-dot 2.4s ease-out infinite' }} />
+            <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-primary">
+              Open to Data Scientist internships &middot; H2 2027
+            </span>
+          </div>
         </div>
 
-        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
+        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6 text-center">
           If you're working on something where <em className="font-normal italic text-primary">engineering rigor</em> and <em className="font-normal italic text-primary">curiosity</em> both matter &mdash; let's talk.
         </h2>
-        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[52ch] mb-14">
+        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[52ch] mx-auto mb-14 text-center">
           Easiest path is email. I answer within a day, usually less.
         </p>
 
-        <a href="mailto:donghank@student.42.fr" className="block font-serif font-light text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] tracking-[-0.02em] text-text-main underline decoration-border-bright decoration-1 underline-offset-6 hover:text-primary hover:decoration-primary transition-colors duration-200 mb-3.5 break-words">
+        <a href="mailto:donghank@student.42.fr" className="block font-serif font-light text-[clamp(1.75rem,4vw,2.5rem)] leading-[1.15] tracking-[-0.02em] text-text-main underline decoration-border-bright decoration-1 underline-offset-6 hover:text-primary hover:decoration-primary transition-colors duration-200 mb-3.5 break-words text-center">
           donghank@student.42.fr
         </a>
-        <p className="font-serif-alt italic text-[15px] text-text-muted mb-18">
+        <p className="font-serif-alt italic text-[15px] text-text-muted mb-18 text-center">
           Copy to clipboard, or start drafting &mdash; I'll see it either way.
         </p>
 
@@ -78,10 +80,10 @@ export default function Contact() {
 
         {/* Pull quote */}
         <div className="mt-30 pt-12 border-t border-border">
-          <blockquote className="font-serif font-light italic text-[clamp(1.5rem,3vw,2rem)] leading-[1.3] tracking-[-0.015em] text-text-main mb-4 max-w-[26ch]">
+          <blockquote className="font-serif font-light italic text-[clamp(1.5rem,3vw,2rem)] leading-[1.3] tracking-[-0.015em] text-text-main mb-4 max-w-[26ch] mx-auto text-center">
             &ldquo;I form hypotheses and use numbers to prove them <span className="text-primary">right or wrong.</span>&rdquo;
           </blockquote>
-          <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">&mdash; The working thesis &middot; 2026</span>
+          <span className="block font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle text-center">&mdash; The working thesis &middot; 2026</span>
         </div>
       </div>
     </div>

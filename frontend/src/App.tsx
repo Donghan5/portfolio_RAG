@@ -32,20 +32,20 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <main>
-        <div id="home">
+      <main className="max-w-[1200px] mx-auto w-full">
+        <div id="home" className="w-full">
           <Hero />
         </div>
-        <div id="about">
+        <div id="about" className="w-full">
           <About />
         </div>
-        <div id="experience">
+        <div id="experience" className="w-full">
           <Experience />
         </div>
-        <div id="projects">
+        <div id="projects" className="w-full">
           <Projects />
         </div>
-        <div id="contact">
+        <div id="contact" className="w-full">
           <Contact />
         </div>
       </main>

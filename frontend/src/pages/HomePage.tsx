@@ -7,9 +7,9 @@ const links = [
 export default function HomePage() {
   return (
     <section className="min-h-screen pt-14 flex flex-col justify-center relative z-10">
-      <div className="max-w-[720px] mx-auto px-8 w-full py-16 md:py-20">
+      <div className="max-w-[720px] mx-auto px-8 w-full py-16 md:py-20 text-center">
 
-        <div className="hero-1 flex items-center gap-2.5 mb-8">
+        <div className="hero-1 flex items-center justify-center gap-2.5 mb-8">
           <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" style={{ animation: 'pulse-dot 2.4s ease-out infinite' }} />
           <span className="font-mono text-[11px] text-primary tracking-[0.18em] uppercase">
             Open to opportunities &middot; H2 2027
@@ -24,14 +24,14 @@ export default function HomePage() {
           </h1>
         </div>
 
-        <p className="hero-4 font-serif-alt font-light text-[22px] leading-[1.55] text-text-main max-w-[52ch] mb-3">
+        <p className="hero-4 font-serif-alt font-light text-[22px] leading-[1.55] text-text-main mx-auto max-w-[52ch] mb-3">
           I turn hypotheses into numbers &mdash; and code the whole pipeline that gets them there.
         </p>
         <p className="hero-5 font-mono text-[13px] text-text-muted tracking-[0.04em] mb-10">
           Data Scientist in the making &middot; Full-stack &amp; DevOps engineer &middot; 42 Paris
         </p>
 
-        <div className="hero-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 mb-10">
+        <div className="hero-6 flex flex-col sm:flex-row items-center justify-center gap-5 mb-10">
           <div className="flex items-center gap-7">
             {links.map((link) => (
               <a

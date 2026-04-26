@@ -8,22 +8,22 @@ const stackRows = [
 export default function About() {
   return (
     <div className="relative z-10">
-      <div className="max-w-[720px] mx-auto px-8 py-24">
+      <div className="max-w-[720px] mx-auto px-8 py-[6.6rem]">
 
         {/* Section header */}
         <div className="flex items-baseline justify-between mb-2.5">
           <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">About</span>
           <span className="font-mono text-[11px] tracking-[0.14em] text-text-subtle">&sect; 01</span>
         </div>
-        <div className="rule-accent mb-1.5" />
+        <div className="rule-accent mx-auto mb-1.5" />
         <div className="rule mb-12" />
 
         {/* Display heading */}
-        <h2 className="font-display font-light text-[clamp(2.2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
+        <h2 className="font-display font-light text-[clamp(2.2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6 text-center">
           An engineer who learned to think in <em className="font-normal italic text-primary">hypotheses.</em>
         </h2>
 
-        <p className="font-serif-alt font-light text-[22px] leading-[1.55] text-text-main max-w-[56ch] mb-14">
+        <p className="font-serif-alt font-light text-[22px] leading-[1.55] text-text-main max-w-[56ch] mx-auto mb-14 text-center">
           I got pulled into data science because forming a hypothesis and watching numbers prove
           it right or wrong turned out to be the most honest kind of thinking I've found in tech.
         </p>
