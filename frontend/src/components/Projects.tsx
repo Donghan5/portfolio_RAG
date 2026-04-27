@@ -49,7 +49,7 @@ export default function Projects() {
 
   return (
     <div className="relative z-10">
-      <div className="max-w-[880px] mx-auto px-8 py-[6.6rem]">
+      <div className="max-w-[880px] mx-auto px-8 py-[7.3rem] text-center">
 
         <div className="flex items-baseline justify-between mb-2.5">
           <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">Selected work</span>
@@ -58,15 +58,16 @@ export default function Projects() {
         <div className="rule-accent mx-auto mb-1.5" />
         <div className="rule mb-14" />
 
-        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6 text-center">
+        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
           What I've actually <em className="font-normal italic text-primary">built.</em>
         </h2>
-        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[56ch] mx-auto mb-12 text-center">
-          A mixed archive &mdash; data-oriented projects, infra work from 42, and the low-level C I cut my teeth on.
+        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[56ch] mx-auto mb-12">
+          A mixed archive &mdash; data-oriented projects, infra work from 42,
+          and the low-level C I cut my teeth on.
         </p>
 
         {/* Filters */}
-        <div className="flex gap-5 flex-wrap mb-4 pb-5 border-b border-border">
+        <div className="flex gap-5 flex-wrap justify-center mb-4 pb-5 border-b border-border">
           <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle mr-2">Filter</span>
           {filters.map((f) => (
             <button
@@ -83,13 +84,15 @@ export default function Projects() {
 
         {/* Featured */}
         <div className="my-10 py-10 border-t border-b border-border">
-          <div className="flex items-baseline justify-between mb-3.5">
+          <div className="flex items-baseline justify-center gap-6 mb-3.5">
             <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-primary">Featured &middot; In production</span>
             <span className="font-mono text-[11px] text-text-subtle">2025 &mdash; Present</span>
           </div>
           <h3 className="font-serif font-normal text-[34px] leading-[1.1] tracking-[-0.02em] mb-4">Portfolio with RAG chat</h3>
-          <p className="font-sans text-[17px] leading-[1.7] text-text-main max-w-[62ch] mb-5">
-            This site is itself a project &mdash; a React frontend on Vercel, a FastAPI backend on Render running <em className="font-serif-alt italic">FastEmbed</em> (ONNX) for embeddings, Supabase pgvector for retrieval, and Groq's Llama 3 70B for generation.
+          <p className="font-sans text-[17px] leading-[1.7] text-text-main max-w-[52ch] mx-auto mb-5">
+            This site is itself a project &mdash; React on Vercel,
+            FastAPI on Render with <em className="font-serif-alt italic">FastEmbed</em> (ONNX),
+            Supabase pgvector for retrieval, Groq Llama 3 70B for generation.
           </p>
           <div className="font-mono text-[12px] text-text-muted tracking-[0.04em]">
             React &middot; FastAPI &middot; pgvector &middot; Groq &middot; Docker
@@ -101,7 +104,7 @@ export default function Projects() {
         <div className="grid grid-cols-[36px_1fr_auto] gap-4 pb-2.5 font-mono text-[10px] tracking-[0.18em] uppercase text-text-subtle max-md:grid-cols-[28px_1fr] max-md:[&>.col-tags]:hidden">
           <span>No.</span>
           <span>Project &middot; description</span>
-          <span className="col-tags text-right">Stack</span>
+          <span className="col-tags">Stack</span>
         </div>
 
         {/* Project rows */}
@@ -119,12 +122,12 @@ export default function Projects() {
               <span className="font-serif-alt italic text-text-subtle text-[15px] font-light mx-1.5 max-md:hidden">&mdash;</span>
               <span className="font-sans text-[14px] text-text-muted font-normal tracking-normal max-md:block max-md:mt-1">{p.desc}</span>
             </span>
-            <span className="font-mono text-[11px] text-text-subtle tracking-[0.02em] text-right whitespace-nowrap max-md:hidden">{p.tags}</span>
+            <span className="font-mono text-[11px] text-text-subtle tracking-[0.02em] whitespace-nowrap max-md:hidden">{p.tags}</span>
             <span className="absolute right-[-22px] top-1/2 -translate-y-1/2 opacity-0 font-mono text-primary transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-1">&rarr;</span>
           </a>
         ))}
 
-        <p className="mt-12 font-serif-alt italic text-[14px] text-text-muted text-center max-w-[50ch] mx-auto">
+        <p className="mt-12 font-serif-alt italic text-[14px] text-text-muted max-w-[50ch] mx-auto">
           A fuller list lives on <a href="https://github.com/Donghan5" target="_blank" rel="noreferrer" className="text-text-main decoration-border-bright">github.com/Donghan5</a>. These are the ones I'd actually defend.
         </p>
       </div>
