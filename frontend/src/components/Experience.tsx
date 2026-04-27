@@ -26,19 +26,19 @@ const experiences = [
 export default function Experience() {
   return (
     <div className="relative z-10">
-      <div className="max-w-[720px] mx-auto px-8 py-[7.3rem] text-center">
+      <div className="max-w-[720px] mx-auto px-8 py-24 md:py-28 text-center">
 
         <div className="flex items-baseline justify-center gap-4 mb-2.5">
           <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">Experience</span>
           <span className="font-mono text-[11px] tracking-[0.14em] text-text-subtle">&sect; 02</span>
         </div>
-        <div className="rule-accent mx-auto mb-1.5" />
+        <div className="rule-accent mb-1.5" />
         <div className="rule mb-14" />
 
-        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
+        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,2.75rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
           Two chapters, both about <em className="font-normal italic text-primary">ownership.</em>
         </h2>
-        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[52ch] mx-auto mb-18">
+        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[50ch] mx-auto mb-18">
           The short version: I ran a team before I ran a build pipeline,
           and both taught me the same lesson &mdash;
           <em className="italic">responsibility scales with proximity.</em>
@@ -59,7 +59,7 @@ export default function Experience() {
               <span className="text-primary font-medium">{exp.role}</span> &middot; {exp.roleDetail}
             </p>
             {exp.paragraphs.map((p, i) => (
-              <p key={i} className="font-sans text-[16px] leading-[1.7] text-text-main mb-4 last:mb-0 max-w-[50ch] mx-auto">
+              <p key={i} className="font-sans text-[16px] leading-[1.7] text-text-main mb-4 last:mb-0 max-w-[48ch] mx-auto">
                 {p}
               </p>
             ))}

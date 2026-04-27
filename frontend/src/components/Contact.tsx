@@ -14,13 +14,13 @@ const criteria = [
 export default function Contact() {
   return (
     <div className="relative z-10">
-      <div className="max-w-[720px] mx-auto px-8 py-[7.3rem] pb-44 text-center">
+      <div className="max-w-[720px] mx-auto px-8 pt-24 md:pt-28 pb-32 md:pb-40 text-center">
 
         <div className="flex items-baseline justify-center gap-4 mb-2.5">
           <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">Contact</span>
           <span className="font-mono text-[11px] tracking-[0.14em] text-text-subtle">&sect; 04</span>
         </div>
-        <div className="rule-accent mx-auto mb-1.5" />
+        <div className="rule-accent mb-1.5" />
         <div className="rule mb-14" />
 
         {/* Status */}
@@ -33,10 +33,10 @@ export default function Contact() {
           </div>
         </div>
 
-        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
+        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,2.75rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
           If you're working on something where <em className="font-normal italic text-primary">engineering rigor</em> and <em className="font-normal italic text-primary">curiosity</em> both matter &mdash; let's talk.
         </h2>
-        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[52ch] mx-auto mb-14">
+        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[50ch] mx-auto mb-14">
           Easiest path is email. I answer within a day, usually less.
         </p>
 
