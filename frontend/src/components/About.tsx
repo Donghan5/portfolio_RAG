@@ -11,7 +11,7 @@ export default function About() {
       <div className="max-w-[720px] mx-auto px-8 py-[7.3rem] text-center">
 
         {/* Section header */}
-        <div className="flex items-baseline justify-between mb-2.5">
+        <div className="flex items-baseline justify-center gap-4 mb-2.5">
           <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">About</span>
           <span className="font-mono text-[11px] tracking-[0.14em] text-text-subtle">&sect; 01</span>
         </div>
@@ -32,15 +32,16 @@ export default function About() {
         {/* Portrait */}
         <figure className="w-[200px] mx-auto mb-14 max-md:w-[160px]">
           <img src="/profile_image.JPG" alt="Donghan Kim" className="block w-full aspect-square object-cover border border-border grayscale hover:grayscale-0 transition-[filter] duration-700" />
-          <figcaption className="flex justify-between font-mono text-[10px] tracking-[0.14em] uppercase text-text-subtle mt-2.5">
+          <figcaption className="flex justify-center gap-3 font-mono text-[10px] tracking-[0.14em] uppercase text-text-subtle mt-2.5">
             <span>Donghan Kim</span>
+            <span>&middot;</span>
             <span>Paris &middot; 2026</span>
           </figcaption>
         </figure>
 
         {/* The path */}
         <div className="mb-14">
-          <div className="flex items-baseline justify-between mb-5 pt-6 border-t border-border">
+          <div className="flex items-baseline justify-center gap-4 mb-5 pt-6 border-t border-border">
             <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-text-subtle">The path</span>
             <span className="font-mono text-[11px] text-text-subtle">&sect; 01.1</span>
           </div>
@@ -57,7 +58,7 @@ export default function About() {
 
         {/* What I'm focused on */}
         <div className="mb-14">
-          <div className="flex items-baseline justify-between mb-5 pt-6 border-t border-border">
+          <div className="flex items-baseline justify-center gap-4 mb-5 pt-6 border-t border-border">
             <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-text-subtle">What I'm focused on</span>
             <span className="font-mono text-[11px] text-text-subtle">&sect; 01.2</span>
           </div>
@@ -80,7 +81,7 @@ export default function About() {
 
         {/* Tech stack */}
         <div className="mt-20 pt-10 border-t border-border">
-          <div className="flex items-baseline justify-between mb-8">
+          <div className="flex items-baseline justify-center gap-4 mb-8">
             <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">Tech Stack</span>
             <span className="font-mono text-[11px] text-text-subtle">&sect; 01.3</span>
           </div>

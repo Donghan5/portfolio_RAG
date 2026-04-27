@@ -51,7 +51,7 @@ export default function Projects() {
     <div className="relative z-10">
       <div className="max-w-[880px] mx-auto px-8 py-[7.3rem] text-center">
 
-        <div className="flex items-baseline justify-between mb-2.5">
+        <div className="flex items-baseline justify-center gap-4 mb-2.5">
           <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">Selected work</span>
           <span className="font-mono text-[11px] tracking-[0.14em] text-text-subtle">&sect; 03 &middot; {projects.length} entries</span>
         </div>
@@ -100,13 +100,6 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Table head */}
-        <div className="grid grid-cols-[36px_1fr_auto] gap-4 pb-2.5 font-mono text-[10px] tracking-[0.18em] uppercase text-text-subtle max-md:grid-cols-[28px_1fr] max-md:[&>.col-tags]:hidden">
-          <span>No.</span>
-          <span>Project &middot; description</span>
-          <span className="col-tags">Stack</span>
-        </div>
-
         {/* Project rows */}
         {filtered.map((p, i) => (
           <a
@@ -114,16 +107,14 @@ export default function Projects() {
             href={p.github}
             target="_blank"
             rel="noreferrer"
-            className="grid grid-cols-[36px_1fr_auto] gap-4 items-baseline py-4 border-t border-border no-underline text-text-main relative transition-colors duration-200 hover:bg-bg-card-hover group max-md:grid-cols-[28px_1fr] last:border-b"
+            className="block py-5 border-t border-border no-underline text-text-main transition-colors duration-200 hover:bg-bg-card-hover group last:border-b"
           >
-            <span className="font-mono text-[11px] text-text-subtle">{String(i + 1).padStart(2, '0')}</span>
-            <span className="font-serif font-normal text-[20px] leading-[1.2] tracking-[-0.01em] group-hover:text-primary transition-colors duration-200 max-md:text-[18px]">
+            <span className="block font-mono text-[11px] text-text-subtle mb-1">{String(i + 1).padStart(2, '0')}</span>
+            <span className="block font-serif font-normal text-[20px] leading-[1.2] tracking-[-0.01em] group-hover:text-primary transition-colors duration-200 mb-1">
               {p.title}
-              <span className="font-serif-alt italic text-text-subtle text-[15px] font-light mx-1.5 max-md:hidden">&mdash;</span>
-              <span className="font-sans text-[14px] text-text-muted font-normal tracking-normal max-md:block max-md:mt-1">{p.desc}</span>
             </span>
-            <span className="font-mono text-[11px] text-text-subtle tracking-[0.02em] whitespace-nowrap max-md:hidden">{p.tags}</span>
-            <span className="absolute right-[-22px] top-1/2 -translate-y-1/2 opacity-0 font-mono text-primary transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-1">&rarr;</span>
+            <span className="block font-sans text-[14px] text-text-muted mb-1">{p.desc}</span>
+            <span className="block font-mono text-[11px] text-text-subtle tracking-[0.02em]">{p.tags}</span>
           </a>
         ))}
 

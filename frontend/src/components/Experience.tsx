@@ -28,7 +28,7 @@ export default function Experience() {
     <div className="relative z-10">
       <div className="max-w-[720px] mx-auto px-8 py-[7.3rem] text-center">
 
-        <div className="flex items-baseline justify-between mb-2.5">
+        <div className="flex items-baseline justify-center gap-4 mb-2.5">
           <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">Experience</span>
           <span className="font-mono text-[11px] tracking-[0.14em] text-text-subtle">&sect; 02</span>
         </div>
