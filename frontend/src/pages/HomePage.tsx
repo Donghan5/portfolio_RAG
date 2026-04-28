@@ -6,8 +6,8 @@ const links = [
 
 export default function HomePage() {
   return (
-    <section className="pt-14 relative z-10 flex flex-col items-center">
-      <div className="max-w-[720px] mx-auto px-8 w-full py-16 md:py-20 text-center">
+    <section className="pt-28 md:pt-36 relative z-10 flex flex-col items-center">
+      <div className="max-w-[720px] mx-auto px-8 w-full pb-16 md:pb-20 text-center">
 
         <div className="hero-1 flex items-center justify-center gap-2.5 mb-8">
           <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" style={{ animation: 'pulse-dot 2.4s ease-out infinite' }} />
