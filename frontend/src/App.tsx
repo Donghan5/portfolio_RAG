@@ -39,13 +39,13 @@ export default function App() {
         <div id="about" className="w-full">
           <About />
         </div>
-        <div id="experience" className="w-full">
+        <div id="experience" className="w-full bg-bg-surface">
           <Experience />
         </div>
         <div id="projects" className="w-full">
           <Projects />
         </div>
-        <div id="contact" className="w-full">
+        <div id="contact" className="w-full bg-bg-surface">
           <Contact />
         </div>
       </main>

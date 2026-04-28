@@ -19,7 +19,7 @@ export default function HomePage() {
         <div className="hero-2 rule mb-10" />
 
         <div className="hero-3 mb-6">
-          <h1 className="font-display font-light text-[clamp(2.8rem,6vw,3.8rem)] leading-[1.05] tracking-[-0.025em] text-text-main">
+          <h1 className="font-display font-light text-[clamp(3.2rem,7vw,4.5rem)] leading-[1.02] tracking-[-0.03em] text-text-main">
             Donghan <em className="font-normal italic text-primary">Kim</em>
           </h1>
         </div>
@@ -31,7 +31,7 @@ export default function HomePage() {
           Data Scientist in the making &middot; Full-stack &amp; DevOps engineer &middot; 42 Paris
         </p>
 
-        <div className="hero-6 flex flex-col sm:flex-row items-center justify-center gap-5 mb-10">
+        <div className="hero-6 flex flex-col sm:flex-row items-center justify-center gap-5">
           <div className="flex items-center gap-7">
             {links.map((link) => (
               <a
@@ -49,14 +49,6 @@ export default function HomePage() {
             <kbd className="px-1.5 py-0.5 border border-border text-text-subtle text-[10px] font-mono bg-bg-card">Ctrl K</kbd>
             {' '}to chat
           </p>
-        </div>
-
-        <div className="hero-6 flex items-center gap-4">
-          <div className="rule flex-1" />
-          <span className="font-mono text-[11px] text-text-subtle/40 tracking-[0.18em] uppercase shrink-0">
-            Scroll to explore
-          </span>
-          <div className="rule flex-1" />
         </div>
       </div>
     </section>
