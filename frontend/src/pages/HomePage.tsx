@@ -6,7 +6,7 @@ const links = [
 
 export default function HomePage() {
   return (
-    <section className="min-h-screen pt-14 flex flex-col justify-center relative z-10">
+    <section className="pt-14 relative z-10">
       <div className="max-w-[720px] mx-auto px-8 w-full py-16 md:py-20 text-center">
 
         <div className="hero-1 flex items-center justify-center gap-2.5 mb-8">

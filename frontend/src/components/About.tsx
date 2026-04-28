@@ -8,7 +8,7 @@ const stackRows = [
 export default function About() {
   return (
     <div className="relative z-10">
-      <div className="max-w-[720px] mx-auto px-8 py-[7.3rem] text-center">
+      <div className="max-w-[720px] mx-auto px-8 pt-6 pb-[7.3rem] text-center">
 
         {/* Section header */}
         <div className="flex items-baseline justify-center gap-4 mb-2.5">
