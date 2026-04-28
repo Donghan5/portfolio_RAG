@@ -61,7 +61,7 @@ export default function Navbar() {
         <ul className="list-none py-2 px-8 flex flex-col">
           {navItems.map((item) => (
             <li key={item.id}>
-              <button onClick={() => scrollTo(item.id)} className={`block w-full text-center text-[13px] font-sans py-3 transition-colors duration-200 bg-transparent border-none cursor-pointer hover:text-text-main ${active === item.id ? 'text-primary' : 'text-text-muted'}`}>
+              <button onClick={() => scrollTo(item.id)} className={`block w-full text-left text-[13px] font-sans py-3 transition-colors duration-200 bg-transparent border-none cursor-pointer hover:text-text-main ${active === item.id ? 'text-primary' : 'text-text-muted'}`}>
                 {item.label}
               </button>
             </li>

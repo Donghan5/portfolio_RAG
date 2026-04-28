@@ -8,22 +8,22 @@ const stackRows = [
 export default function About() {
   return (
     <div className="relative z-10">
-      <div className="max-w-[720px] mx-auto px-8 py-24 md:py-28 text-center">
+      <div className="max-w-[720px] mx-auto px-8 py-[7.3rem] text-center">
 
         {/* Section header */}
         <div className="flex items-baseline justify-center gap-4 mb-2.5">
           <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">About</span>
           <span className="font-mono text-[11px] tracking-[0.14em] text-text-subtle">&sect; 01</span>
         </div>
-        <div className="rule-accent mb-1.5" />
-        <div className="rule mb-14" />
+        <div className="rule-accent mx-auto mb-1.5" />
+        <div className="rule mb-12" />
 
         {/* Display heading */}
-        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,2.75rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
+        <h2 className="font-display font-light text-[clamp(2.2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
           An engineer who learned to think in <em className="font-normal italic text-primary">hypotheses.</em>
         </h2>
 
-        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[50ch] mx-auto mb-14">
+        <p className="font-serif-alt font-light text-[22px] leading-[1.55] text-text-main max-w-[56ch] mx-auto mb-14">
           I got pulled into data science because forming a hypothesis
           and watching numbers prove it right or wrong turned out to be
           the most honest kind of thinking I've found in tech.
@@ -45,11 +45,11 @@ export default function About() {
             <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-text-subtle">The path</span>
             <span className="font-mono text-[11px] text-text-subtle">&sect; 01.1</span>
           </div>
-          <p className="font-sans text-[17px] leading-[1.7] text-text-main mb-6 max-w-[48ch] mx-auto">
+          <p className="font-sans text-[17px] leading-[1.7] text-text-main mb-6 max-w-[52ch] mx-auto">
             Final stretch of <strong className="font-medium">42 Paris</strong> &mdash; RNCP Level 7, AI &amp; Data branch.
             Wide exploration: C allocators, ray tracing, Kubernetes, full-stack React &amp; NestJS.
           </p>
-          <p className="font-sans text-[17px] leading-[1.7] text-text-main max-w-[48ch] mx-auto">
+          <p className="font-sans text-[17px] leading-[1.7] text-text-main max-w-[52ch] mx-auto">
             The goal wasn't collecting skills &mdash; it was learning every brittle layer
             <em className="font-serif-alt italic"> between</em> an idea and a working system.
             Now I bring that full stack to data work.
@@ -62,17 +62,17 @@ export default function About() {
             <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-text-subtle">What I'm focused on</span>
             <span className="font-mono text-[11px] text-text-subtle">&sect; 01.2</span>
           </div>
-          <p className="font-sans text-[17px] leading-[1.7] text-text-main mb-6 max-w-[48ch] mx-auto">
+          <p className="font-sans text-[17px] leading-[1.7] text-text-main mb-6 max-w-[52ch] mx-auto">
             <strong className="font-medium">Machine-learning modeling</strong> &mdash;
             building from scratch before reaching for libraries.
             Hand-derived backprop, Q-learning, then frameworks.
           </p>
-          <p className="font-sans text-[17px] leading-[1.7] text-text-main mb-6 max-w-[48ch] mx-auto">
+          <p className="font-sans text-[17px] leading-[1.7] text-text-main mb-6 max-w-[52ch] mx-auto">
             <strong className="font-medium">Causal inference</strong> &mdash;
             because &ldquo;X correlates with Y&rdquo; is where most analysis stops,
             and where the interesting question begins.
           </p>
-          <p className="font-sans text-[17px] leading-[1.7] text-text-main max-w-[48ch] mx-auto">
+          <p className="font-sans text-[17px] leading-[1.7] text-text-main max-w-[52ch] mx-auto">
             <strong className="font-medium">End-to-end ownership</strong> &mdash;
             pipeline to training to deployment to monitoring.
             A model is only as useful as the system it runs in.

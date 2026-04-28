@@ -49,19 +49,19 @@ export default function Projects() {
 
   return (
     <div className="relative z-10">
-      <div className="max-w-[880px] mx-auto px-8 py-24 md:py-28 text-center">
+      <div className="max-w-[880px] mx-auto px-8 py-[7.3rem] text-center">
 
         <div className="flex items-baseline justify-center gap-4 mb-2.5">
           <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">Selected work</span>
           <span className="font-mono text-[11px] tracking-[0.14em] text-text-subtle">&sect; 03 &middot; {projects.length} entries</span>
         </div>
-        <div className="rule-accent mb-1.5" />
+        <div className="rule-accent mx-auto mb-1.5" />
         <div className="rule mb-14" />
 
-        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,2.75rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
+        <h2 className="font-display font-light text-[clamp(2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
           What I've actually <em className="font-normal italic text-primary">built.</em>
         </h2>
-        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[50ch] mx-auto mb-12">
+        <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[56ch] mx-auto mb-12">
           A mixed archive &mdash; data-oriented projects, infra work from 42,
           and the low-level C I cut my teeth on.
         </p>
@@ -83,13 +83,13 @@ export default function Projects() {
         </div>
 
         {/* Featured */}
-        <div className="my-10 py-10 border border-border bg-bg-surface/40 px-8">
+        <div className="my-10 py-10 border-t border-b border-border">
           <div className="flex items-baseline justify-center gap-6 mb-3.5">
             <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-primary">Featured &middot; In production</span>
             <span className="font-mono text-[11px] text-text-subtle">2025 &mdash; Present</span>
           </div>
           <h3 className="font-serif font-normal text-[34px] leading-[1.1] tracking-[-0.02em] mb-4">Portfolio with RAG chat</h3>
-          <p className="font-sans text-[17px] leading-[1.7] text-text-main max-w-[48ch] mx-auto mb-5">
+          <p className="font-sans text-[17px] leading-[1.7] text-text-main max-w-[52ch] mx-auto mb-5">
             This site is itself a project &mdash; React on Vercel,
             FastAPI on Render with <em className="font-serif-alt italic">FastEmbed</em> (ONNX),
             Supabase pgvector for retrieval, Groq Llama 3 70B for generation.
@@ -107,7 +107,7 @@ export default function Projects() {
             href={p.github}
             target="_blank"
             rel="noreferrer"
-            className="block py-5 px-4 -mx-4 border-t border-border no-underline text-text-main transition-all duration-200 hover:bg-bg-card-hover group last:border-b"
+            className="block py-5 border-t border-border no-underline text-text-main transition-colors duration-200 hover:bg-bg-card-hover group last:border-b"
           >
             <span className="block font-mono text-[11px] text-text-subtle mb-1">{String(i + 1).padStart(2, '0')}</span>
             <span className="block font-serif font-normal text-[20px] leading-[1.2] tracking-[-0.01em] group-hover:text-primary transition-colors duration-200 mb-1">
