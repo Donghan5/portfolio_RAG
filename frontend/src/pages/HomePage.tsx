@@ -6,7 +6,7 @@ const links = [
 
 export default function HomePage() {
   return (
-    <section className="pt-28 md:pt-36 relative z-10 flex flex-col items-center">
+    <section className="pt-36 md:pt-48 relative z-10 flex flex-col items-center">
       <div className="max-w-[720px] mx-auto px-8 w-full pb-16 md:pb-20 text-center">
 
         <div className="hero-1 flex items-center justify-center gap-2.5 mb-8">
