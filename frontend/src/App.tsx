@@ -32,7 +32,7 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <main className="max-w-[1200px] mx-auto w-full">
+      <main className="w-full">
         <div id="home" className="w-full">
           <Hero />
         </div>

@@ -87,11 +87,10 @@ body::after {
 
 /* Section scroll reveal */
 #about, #experience, #projects, #contact {
-  animation: section-enter 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-play-state: paused;
+  opacity: 1;
 }
 #about.visible, #experience.visible, #projects.visible, #contact.visible {
-  animation-play-state: running;
+  animation: section-enter 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* ─── Layout helpers ─────────────────────────────── */

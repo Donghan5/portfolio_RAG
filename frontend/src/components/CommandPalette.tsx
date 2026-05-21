@@ -244,8 +244,8 @@ export default function CommandPalette() {
       {/* Floating toggle button — dark on light page */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        style={{ bottom: 'calc(1rem + env(safe-area-inset-bottom, 0px)', borderRadius: '2px' }}
-        className={`fixed right-4 z-50 w-11 h-11
+        style={{ bottom: 'calc(1.5rem + env(safe-area-inset-bottom, 0px))', borderRadius: '2px' }}
+        className={`fixed right-3 md:right-5 z-50 w-9 h-9 md:w-11 md:h-11
           flex items-center justify-center
           transition-all duration-300 cursor-pointer border-none
           ${isOpen
