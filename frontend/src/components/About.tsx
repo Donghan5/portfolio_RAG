@@ -30,12 +30,12 @@ export default function About() {
           </figure>
           <div className="flex-1 text-center md:text-left">
             <h2 className="font-display font-light text-[clamp(2.2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
-              An engineer who learned to think in <em className="font-normal italic text-primary">hypotheses.</em>
+              An engineer focused on machine-learning <em className="font-normal italic text-primary">systems.</em>
             </h2>
             <p className="font-serif-alt font-light text-[22px] leading-[1.55] text-text-main max-w-[56ch]">
-              I got pulled into data science because forming a hypothesis
-              and watching numbers prove it right or wrong turned out to be
-              the most honest kind of thinking I've found in tech.
+              My current work is strongest where raw data, model mechanics,
+              and production engineering meet: preprocessing, training loops,
+              retrieval pipelines, APIs, and deployment.
             </p>
           </div>
         </div>
@@ -55,7 +55,7 @@ export default function About() {
             <p className="font-sans text-[17px] leading-[1.7] text-text-main">
               The goal wasn't collecting skills &mdash; it was learning every brittle layer
               <em className="font-serif-alt italic"> between</em> an idea and a working system.
-              Now I bring that full stack to data work.
+              Now I bring that full stack to machine-learning systems.
             </p>
           </div>
 
@@ -71,12 +71,12 @@ export default function About() {
               Hand-derived backprop, Q-learning, then frameworks.
             </p>
             <p className="font-sans text-[17px] leading-[1.7] text-text-main mb-6">
-              <strong className="font-medium">Causal inference</strong> &mdash;
-              because &ldquo;X correlates with Y&rdquo; is where most analysis stops,
-              and where the interesting question begins.
+              <strong className="font-medium">Data pipelines</strong> &mdash;
+              turning messy source data into usable features, retrieval context,
+              and training inputs.
             </p>
             <p className="font-sans text-[17px] leading-[1.7] text-text-main">
-              <strong className="font-medium">End-to-end ownership</strong> &mdash;
+              <strong className="font-medium">Production engineering</strong> &mdash;
               pipeline to training to deployment to monitoring.
               A model is only as useful as the system it runs in.
             </p>

@@ -6,9 +6,9 @@ const channels = [
 ];
 
 const criteria = [
-  'Data Scientist internship, H2 2027. Paris, Europe, or remote.',
-  "A team that ships models to production \u2014 not slide decks.",
-  "A problem someone cares about. Small and hard beats big and vague.",
+  'Machine Learning Engineering internship. Paris, Europe, or remote-friendly.',
+  'Data Science-oriented roles welcome when the work involves models, pipelines, or production systems.',
+  'A team that ships useful systems from data, not just notebooks or slide decks.',
 ];
 
 export default function Contact() {
@@ -29,7 +29,7 @@ export default function Contact() {
           <div className="inline-flex items-center gap-2.5 px-4 py-2.5 border border-primary bg-primary/8">
             <span className="w-1.5 h-1.5 rounded-full bg-primary" style={{ animation: 'pulse-dot 2.4s ease-out infinite' }} />
             <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-primary">
-              Open to Data Scientist internships &middot; H2 2027
+              Open to Machine Learning Engineering internships
             </span>
           </div>
         </div>
@@ -38,7 +38,7 @@ export default function Contact() {
         <div className="flex flex-col md:flex-row md:gap-16 items-start mb-20">
           <div className="flex-1 text-center md:text-left mb-12 md:mb-0">
             <h2 className="font-display font-light text-[clamp(2rem,4.5vw,3rem)] leading-[1.05] tracking-[-0.025em] text-text-main mb-6">
-              If you're working on something where <em className="font-normal italic text-primary">engineering rigor</em> and <em className="font-normal italic text-primary">curiosity</em> both matter &mdash; let's talk.
+              If you're building data-driven systems where <em className="font-normal italic text-primary">models</em> and <em className="font-normal italic text-primary">engineering</em> both matter &mdash; let's talk.
             </h2>
             <p className="font-serif-alt font-light text-[20px] leading-[1.55] text-text-main max-w-[52ch] mb-10">
               Easiest path is email. I answer within a day, usually less.
@@ -85,7 +85,7 @@ export default function Contact() {
         {/* Pull quote */}
         <div className="pt-12 border-t border-border text-center">
           <blockquote className="font-serif font-light italic text-[clamp(1.5rem,3vw,2rem)] leading-[1.3] tracking-[-0.015em] text-text-main mb-4 max-w-[26ch] mx-auto">
-            &ldquo;I form hypotheses and use numbers to prove them <span className="text-primary">right or wrong.</span>&rdquo;
+            &ldquo;I like the stretch from raw data to a system that <span className="text-primary">actually runs.</span>&rdquo;
           </blockquote>
           <span className="block font-mono text-[11px] tracking-[0.18em] uppercase text-text-subtle">&mdash; The working thesis &middot; 2026</span>
         </div>
