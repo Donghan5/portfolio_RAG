@@ -1,9 +1,9 @@
 const stack = [
   { icon: 'fa-code', title: 'Languages', items: ['Python', 'TypeScript', 'SQL', 'C / C++', 'Go'] },
   { icon: 'fa-layer-group', title: 'Backend', items: ['FastAPI', 'NestJS', 'REST APIs', 'WebSocket', 'OAuth / JWT'] },
-  { icon: 'fa-shuffle', title: 'Data', items: ['pandas', 'SQLAlchemy', 'ETL', 'Kafka', 'Airflow'] },
+  { icon: 'fa-shuffle', title: 'Data', items: ['pandas', 'ETL', 'Kafka', 'Airflow'] },
   { icon: 'fa-database', title: 'Databases', items: ['PostgreSQL', 'SQLite', 'Redis', 'pgvector', 'Supabase'] },
-  { icon: 'fa-cloud', title: 'DevOps & Tools', items: ['Docker', 'Kubernetes', 'Linux', 'Nginx', 'GitHub'] },
+  { icon: 'fa-cloud', title: 'DevOps & Tools', items: ['Docker', 'Kubernetes', 'Linux', 'Nginx', 'Git'] },
 ];
 
 export default function About() {
