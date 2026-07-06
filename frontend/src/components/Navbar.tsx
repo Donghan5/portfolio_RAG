@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 
 const navItems = [
   { label: 'About', id: 'about' },
-  { label: 'Experience', id: 'experience' },
-  { label: 'Work', id: 'projects' },
+  { label: 'Projects', id: 'projects' },
+  { label: 'Journey', id: 'experience' },
   { label: 'Contact', id: 'contact' },
 ];
 
@@ -38,9 +38,9 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-[1000] bg-bg/92 backdrop-blur-md border-b border-border">
       <div className="absolute bottom-0 left-0 h-[1.5px] bg-primary transition-[width] duration-100 ease-linear" style={{ width: `${progress}%` }} />
-      <div className="max-w-[880px] mx-auto px-8 h-14 flex items-center justify-between">
+      <div className="max-w-[1180px] mx-auto px-6 sm:px-10 h-16 flex items-center justify-between">
         <button onClick={() => scrollTo('home')} className="font-serif font-medium text-[18px] tracking-tight text-text-main hover:text-primary transition-colors duration-200 bg-transparent border-none cursor-pointer p-0">
-          DK<span className="text-primary">.</span>
+          Donghan Kim
         </button>
         <ul className="hidden md:flex gap-8 list-none">
           {navItems.map((item) => (

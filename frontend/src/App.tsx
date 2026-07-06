@@ -9,7 +9,7 @@ import Contact from './components/Contact';
 
 export default function App() {
   useEffect(() => {
-    const targets = ['about', 'experience', 'projects', 'contact']
+    const targets = ['about', 'projects', 'experience', 'contact']
       .map((id) => document.getElementById(id))
       .filter(Boolean) as HTMLElement[];
 
@@ -39,13 +39,13 @@ export default function App() {
         <div id="about" className="w-full">
           <About />
         </div>
-        <div id="experience" className="w-full bg-bg-surface">
-          <Experience />
-        </div>
         <div id="projects" className="w-full">
           <Projects />
         </div>
-        <div id="contact" className="w-full bg-bg-surface">
+        <div id="experience" className="w-full">
+          <Experience />
+        </div>
+        <div id="contact" className="w-full">
           <Contact />
         </div>
       </main>
