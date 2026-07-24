@@ -1,16 +1,10 @@
-import type { IncomingMessage, ServerResponse } from 'node:http';
-
-type VercelRequest = IncomingMessage & { method?: string; headers: Record<string, string | undefined> };
-type VercelResponse = ServerResponse & {
-  status: (code: number) => VercelResponse;
-  json: (body: unknown) => void;
-};
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 /**
- * Vercel Cron Job — keeps Supabase Free tier alive every 3 days.
+ * Vercel Cron Job — generates one lightweight database query every day.
  *
  * Two-layer strategy:
- *  1. Direct Supabase REST ping (primary) — bypasses any sleeping intermediate service.
+ *  1. Direct Supabase table read (primary) — guarantees a database query.
  *  2. API gateway health check (secondary) — wakes up downstream services as a bonus.
  *
  * Required env vars in Vercel project settings:
@@ -42,16 +36,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (supabaseUrl && supabaseAnonKey) {
     try {
-      // Hit the PostgREST root — no table needed, just proves the DB is awake
-      const supaRes = await fetch(`${supabaseUrl}/rest/v1/`, {
+      // Read at most one id. This creates database activity without accumulating dummy rows.
+      const keepAliveUrl = new URL('/rest/v1/documents', supabaseUrl);
+      keepAliveUrl.searchParams.set('select', 'id');
+      keepAliveUrl.searchParams.set('limit', '1');
+
+      const supaRes = await fetch(keepAliveUrl, {
         method: 'GET',
         headers: {
           apikey: supabaseAnonKey,
           Authorization: `Bearer ${supabaseAnonKey}`,
+          'Cache-Control': 'no-cache',
         },
         signal: AbortSignal.timeout(10000),
       });
-      results.supabase_direct = { ok: supaRes.ok, status: supaRes.status };
+      results.supabase_direct = {
+        ok: supaRes.ok,
+        status: supaRes.status,
+        error: supaRes.ok ? undefined : await supaRes.text(),
+      };
     } catch (err) {
       results.supabase_direct = {
         ok: false,
