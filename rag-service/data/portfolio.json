@@ -1,15 +1,15 @@
 [
   {
     "category": "personal",
-    "content": "Donghan Kim (Donghan) is a Machine Learning Engineer focused on data-driven systems. His current portfolio has stronger evidence for ML engineering, model fundamentals, data preprocessing, retrieval workflows, and deployment-oriented systems than for statistical experimentation or business-facing data analysis. He is in the final stretch of 42 Paris (RNCP Level 7, AI/Data branch). The first two years were intentionally wide: low-level C, systems work, Kubernetes, Docker, React, NestJS, and data-oriented ML projects. Now he is bringing that engineering base to applied ML systems."
+    "content": "Donghan Kim (Donghan) is a Software Engineer, Machine Learning Engineer, and Forward Deployment Engineer focused on dependable systems and applied ML. He works across low-level C/C++ systems, Python and TypeScript services, model training and evaluation, retrieval workflows, Docker, Kubernetes, and cloud deployment. He is completing the AI/Data branch at 42 Paris (RNCP Level 7)."
   },
   {
     "category": "personal_focus",
-    "content": "Donghan's current focus areas: (1) Model fundamentals — from-scratch implementations, training mechanics, and evaluation fundamentals. (2) Pipelines — signal preprocessing, feature construction, and retrieval workflows. (3) Systems — APIs, deployment, Docker, Kubernetes, and production-oriented engineering."
+    "content": "Donghan's current focus areas: (1) software engineering — systems, APIs, networking, and reliable service design; (2) machine learning — model fundamentals, signal preprocessing, evaluation, and retrieval; (3) forward deployment — integration, cloud infrastructure, Docker, Kubernetes, and operating systems in real environments."
   },
   {
     "category": "personal_current",
-    "content": "Donghan is open to Machine Learning Engineering internships. Data Science-oriented roles are welcome when the work is connected to models, pipelines, feature construction, retrieval, or production systems. He is based around Paris and is open to Paris, Europe, or remote-friendly opportunities."
+    "content": "Donghan is open to Software Engineering, Machine Learning Engineering, and Forward Deployment Engineering opportunities. He is based in Paris and is open to opportunities in Paris, Europe, or remote-friendly teams."
   },
   {
     "category": "personal_beyond",

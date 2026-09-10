@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 const navItems = [
   { label: 'About', id: 'about' },
   { label: 'Projects', id: 'projects' },
-  { label: 'Journey', id: 'experience' },
+  { label: 'Background', id: 'experience' },
   { label: 'Contact', id: 'contact' },
 ];
 

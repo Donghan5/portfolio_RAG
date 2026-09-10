@@ -11,6 +11,7 @@ export default function CommandPalette() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [serviceStatus, setServiceStatus] = useState<'checking' | 'ready' | 'unavailable'>('checking');
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -18,11 +19,18 @@ export default function CommandPalette() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Warm up the backend on mount to avoid cold-start timeouts on Render Free tier
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  // Check the configured deployment up front so unavailable service is visible before a query is sent.
   useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-    fetch(`${apiUrl}/health`, { method: 'GET' }).catch(() => {});
-  }, []);
+    if (!apiUrl) {
+      setServiceStatus('unavailable');
+      return;
+    }
+    fetch(`${apiUrl}/health`, { method: 'GET', signal: AbortSignal.timeout(10000) })
+      .then((response) => setServiceStatus(response.ok ? 'ready' : 'unavailable'))
+      .catch(() => setServiceStatus('unavailable'));
+  }, [apiUrl]);
 
   // Focus input when chat opens
   useEffect(() => {
@@ -47,6 +55,10 @@ export default function CommandPalette() {
   }, [isOpen]);
 
   const sendMessage = useCallback(async (text: string) => {
+    if (!apiUrl) {
+      setMessages((prev) => [...prev, { role: 'assistant', content: 'The AI service is not configured for this deployment yet.', error: true }]);
+      return;
+    }
     setIsLoading(true);
 
     try {
@@ -54,7 +66,7 @@ export default function CommandPalette() {
       const timeout = setTimeout(() => controller.abort(), 60000);
 
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/api/chat`,
+        `${apiUrl}/api/chat`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -76,6 +88,7 @@ export default function CommandPalette() {
 
       const data = await response.json();
       setMessages((prev) => [...prev, { role: 'assistant', content: data.reply }]);
+      setServiceStatus('ready');
     } catch (err) {
       let errorMsg: string;
       if (err instanceof DOMException && err.name === 'AbortError') {
@@ -88,10 +101,11 @@ export default function CommandPalette() {
         errorMsg = 'Something went wrong. Please try again.';
       }
       setMessages((prev) => [...prev, { role: 'assistant', content: errorMsg, error: true }]);
+      setServiceStatus('unavailable');
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [apiUrl]);
 
   const handleSend = useCallback(async () => {
     const trimmed = input.trim();
@@ -156,9 +170,7 @@ export default function CommandPalette() {
                 <p className="font-mono text-[12px] text-[#6a6660] leading-relaxed">
                   Ask me anything about Donghan's<br />experience, projects, or skills.
                 </p>
-                <p className="font-mono text-[10px] text-[#3a3a36] tracking-[0.08em]">
-                  Press <span className="text-[#6a6660]">⌘K</span> to open / close
-                </p>
+                <p className={`font-mono text-[10px] tracking-[0.08em] ${serviceStatus === 'ready' ? 'text-[#6ea698]' : 'text-[#a88378]'}`}>{serviceStatus === 'ready' ? 'Service online' : serviceStatus === 'checking' ? 'Checking service' : 'Service temporarily unavailable'}</p>
               </div>
             )}
             {messages.map((msg, i) => (
@@ -227,7 +239,7 @@ export default function CommandPalette() {
               </button>
             </div>
             <div className="flex items-center justify-between px-5 pb-3">
-              <span className="font-mono text-[10px] text-[#3a3a36]">Powered by Llama 3</span>
+              <span className="font-mono text-[10px] text-[#3a3a36]">{serviceStatus === 'ready' ? 'RAG service online' : 'RAG service status unavailable'}</span>
               {messages.length > 0 && (
                 <button
                   onClick={() => setMessages([])}
